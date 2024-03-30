@@ -1,32 +1,41 @@
+"use client";
+import { useState } from "react";
+import Radio from "./features/common/stories/Radio";
+
 export default function Home() {
+  const [selectedJobId, setSelectedJobId] = useState("");
+
+  const handleSelectedJobIdChange = (id: string) => {
+    setSelectedJobId(id);
+  };
+
+  const jobOptions = [
+    { id: "job__fe", label: "Front-end" },
+    { id: "job__be", label: "Back-end" },
+  ];
+
   return (
-    <div>
-      <div className="h-[250px] w-[250px] bg-primary"></div>
-      <div className="mb-4 mt-4 h-[250px] w-[250px] bg-secondary"></div>
-      <div className="bg-info h-[250px] w-[250px]"></div>
-      <div className="h-[250px] w-[250px] bg-success"></div>
-      <div className="bg-warning h-[250px] w-[250px]"></div>
-      <div className="h-[250px] w-[250px] bg-error"></div>
-      <div className="bg-black1 h-[250px] w-[250px]"></div>
-      <div className="bg-black2 h-[250px] w-[250px]"></div>
-      <div className="bg-black3 h-[250px] w-[250px]"></div>
-      <div className="h-[250px] w-[250px] bg-white"></div>
-      <div className="bg-gray1 h-[250px] w-[250px]"></div>
-      <div className="bg-gray2 h-[250px] w-[250px]"></div>
-      <div className="bg-gray3 h-[250px] w-[250px]"></div>
+    <fieldset className="relative overflow-hidden rounded-[5px] border-[1px] border-primary bg-white px-2 shadow">
+      <legend className="absolute w-full px-2 py-2 text-large sm:text-small md:text-medium">
+        분석하고 싶은 직업을 선택해주세요
+      </legend>
 
-      <h1 className="text-h1">Heading 1</h1>
-      <h2 className="text-h2">Heading 2</h2>
-      <h3 className="text-h3">Heading 3</h3>
-      <h4 className="text-h4">Heading 4</h4>
-      <h5 className="text-h5">Heading 5</h5>
-      <h6 className="text-h6">Heading 6</h6>
-
-      <p className="text-large">Large Text Bold</p>
-      <p className="text-medium">Medium Text Regular</p>
-      <p className="text-normal">Normal Text Bold</p>
-      <p className="text-small">Small Text Regular</p>
-      <p className="text-[40px]">Small Text Regular</p>
-    </div>
+      <ul className="mt-4 py-14">
+        {jobOptions.map((job) => (
+          <li className="mb-4" key={job.id}>
+            <Radio
+              id={job.id}
+              label={job.label}
+              name="job"
+              color="primary"
+              size="medium"
+              value={job.id}
+              checked={selectedJobId === job.id}
+              onChange={() => handleSelectedJobIdChange(job.id)}
+            />
+          </li>
+        ))}
+      </ul>
+    </fieldset>
   );
 }
