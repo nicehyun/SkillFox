@@ -1,0 +1,781 @@
+{
+  "activity": {},
+  "announcedBuild": {
+    "id": "66090acd09831f001a2b3499",
+    "number": 3,
+    "status": "PUBLISHED",
+    "autoAcceptChanges": false,
+    "app": {
+      "id": "660908d77eb40b2f68c22f81",
+      "turboSnapAvailability": "UNAVAILABLE"
+    },
+    "storybookUrl": "https://660908d77eb40b2f68c22f81-ksfausvnyn.chromatic.com/"
+  },
+  "build": {
+    "id": "66090acd09831f001a2b3499",
+    "number": 3,
+    "status": "PASSED",
+    "autoAcceptChanges": false,
+    "app": {
+      "manageUrl": "https://www.chromatic.com/manage?appId=660908d77eb40b2f68c22f81",
+      "setupUrl": "https://www.chromatic.com/setup?appId=660908d77eb40b2f68c22f81",
+      "account": {
+        "exceededThreshold": false,
+        "paymentRequired": false,
+        "billingUrl": "https://www.chromatic.com/billing?accountId=6609088e09831f001a2b200e"
+      },
+      "repository": {
+        "provider": "github"
+      }
+    },
+    "storybookUrl": "https://660908d77eb40b2f68c22f81-ksfausvnyn.chromatic.com/",
+    "specCount": 8,
+    "componentCount": 8,
+    "testCount": 8,
+    "changeCount": 0,
+    "errorCount": 0,
+    "actualTestCount": 8,
+    "actualCaptureCount": 8,
+    "inheritedCaptureCount": 0,
+    "interactionTestFailuresCount": 0,
+    "webUrl": "https://www.chromatic.com/build?appId=660908d77eb40b2f68c22f81&number=3",
+    "browsers": [
+      {
+        "browser": "chrome"
+      }
+    ],
+    "features": {
+      "uiTests": true,
+      "uiReview": true
+    },
+    "turboSnapEnabled": null,
+    "wasLimited": false,
+    "tests": [
+      {
+        "spec": {
+          "name": "Primary Medium",
+          "component": {
+            "name": "Home/Organisms/JobSelect",
+            "displayName": "JobSelect"
+          }
+        },
+        "parameters": {
+          "viewport": 1200,
+          "viewportIsDefault": true
+        },
+        "mode": {
+          "name": "1200px"
+        }
+      },
+      {
+        "spec": {
+          "name": "Primary",
+          "component": {
+            "name": "Home/organisms/SkillAnalysisStepper",
+            "displayName": "SkillAnalysisStepper"
+          }
+        },
+        "parameters": {
+          "viewport": 1200,
+          "viewportIsDefault": true
+        },
+        "mode": {
+          "name": "1200px"
+        }
+      },
+      {
+        "spec": {
+          "name": "Primary",
+          "component": {
+            "name": "Common/Atoms/Button",
+            "displayName": "Button"
+          }
+        },
+        "parameters": {
+          "viewport": 1200,
+          "viewportIsDefault": true
+        },
+        "mode": {
+          "name": "1200px"
+        }
+      },
+      {
+        "spec": {
+          "name": "Primary Medium",
+          "component": {
+            "name": "Common/Atoms/Radio",
+            "displayName": "Radio"
+          }
+        },
+        "parameters": {
+          "viewport": 1200,
+          "viewportIsDefault": true
+        },
+        "mode": {
+          "name": "1200px"
+        }
+      },
+      {
+        "spec": {
+          "name": "Primary",
+          "component": {
+            "name": "Common/Atoms/StepIndicator",
+            "displayName": "StepIndicator"
+          }
+        },
+        "parameters": {
+          "viewport": 1200,
+          "viewportIsDefault": true
+        },
+        "mode": {
+          "name": "1200px"
+        }
+      },
+      {
+        "spec": {
+          "name": "Primary",
+          "component": {
+            "name": "Common/Molecules/StepContent",
+            "displayName": "StepContent"
+          }
+        },
+        "parameters": {
+          "viewport": 1200,
+          "viewportIsDefault": true
+        },
+        "mode": {
+          "name": "1200px"
+        }
+      },
+      {
+        "spec": {
+          "name": "Primary",
+          "component": {
+            "name": "Common/Organisms/StepNavigation",
+            "displayName": "StepNavigation"
+          }
+        },
+        "parameters": {
+          "viewport": 1200,
+          "viewportIsDefault": true
+        },
+        "mode": {
+          "name": "1200px"
+        }
+      },
+      {
+        "spec": {
+          "name": "Primary",
+          "component": {
+            "name": "Common/Organisms/Stepper",
+            "displayName": "Stepper"
+          }
+        },
+        "parameters": {
+          "viewport": 1200,
+          "viewportIsDefault": true
+        },
+        "mode": {
+          "name": "1200px"
+        }
+      }
+    ],
+    "inProgressCount": 0,
+    "completedAt": 1711868654854
+  },
+  "buildCommand": "npm run build-storybook -- --output-dir /var/folders/m9/wbh8x10963ncxmjzf561w3mc0000gn/T/chromatic--11808-vky4FQm84mKe",
+  "buildLogFile": "/Users/sh/Desktop/skill_fox/build-storybook.log",
+  "configuration": {
+    "configFile": "chromatic.config.json",
+    "projectId": "Project:660908d77eb40b2f68c22f81",
+    "debug": true,
+    "zip": true,
+    "buildScriptName": "build-storybook"
+  },
+  "environment": {},
+  "exitCode": 0,
+  "exitCodeKey": "OK",
+  "extraOptions": {
+    "projectId": "Project:660908d77eb40b2f68c22f81",
+    "autoAcceptChanges": false,
+    "exitOnceUploaded": false,
+    "exitZeroOnChanges": true,
+    "forceRebuild": true,
+    "fromCI": false,
+    "isLocalBuild": true,
+    "skip": false,
+    "interactive": false,
+    "experimental_abortSignal": {}
+  },
+  "fileInfo": {
+    "lengths": [
+      {
+        "pathname": "662.dfd80ddb.iframe.bundle.js",
+        "contentLength": 1294730,
+        "knownAs": "662.dfd80ddb.iframe.bundle.js"
+      },
+      {
+        "pathname": "677.32ccf452.iframe.bundle.js",
+        "contentLength": 946964,
+        "knownAs": "677.32ccf452.iframe.bundle.js"
+      },
+      {
+        "pathname": "874.b7d591c2.iframe.bundle.js",
+        "contentLength": 72193,
+        "knownAs": "874.b7d591c2.iframe.bundle.js"
+      },
+      {
+        "pathname": "favicon.svg",
+        "contentLength": 1292,
+        "knownAs": "favicon.svg"
+      },
+      {
+        "pathname": "features-Home-components-organisms-JobSelect-stories.a4cd2f6e.iframe.bundle.js",
+        "contentLength": 4189,
+        "knownAs": "features-Home-components-organisms-JobSelect-stories.a4cd2f6e.iframe.bundle.js"
+      },
+      {
+        "pathname": "features-Home-components-organisms-SkillAnalysisStepper-stories.3dc4b127.iframe.bundle.js",
+        "contentLength": 7588,
+        "knownAs": "features-Home-components-organisms-SkillAnalysisStepper-stories.3dc4b127.iframe.bundle.js"
+      },
+      {
+        "pathname": "features-common-components-atoms-Button-stories.97b5273f.iframe.bundle.js",
+        "contentLength": 2218,
+        "knownAs": "features-common-components-atoms-Button-stories.97b5273f.iframe.bundle.js"
+      },
+      {
+        "pathname": "features-common-components-atoms-Radio-stories.f99a35d2.iframe.bundle.js",
+        "contentLength": 3622,
+        "knownAs": "features-common-components-atoms-Radio-stories.f99a35d2.iframe.bundle.js"
+      },
+      {
+        "pathname": "features-common-components-atoms-StepIndicator-stories.1ef55de6.iframe.bundle.js",
+        "contentLength": 9442,
+        "knownAs": "features-common-components-atoms-StepIndicator-stories.1ef55de6.iframe.bundle.js"
+      },
+      {
+        "pathname": "features-common-components-molecules-StepContent-stories.89668479.iframe.bundle.js",
+        "contentLength": 3767,
+        "knownAs": "features-common-components-molecules-StepContent-stories.89668479.iframe.bundle.js"
+      },
+      {
+        "pathname": "features-common-components-organisms-StepNavigation-stories.d8bebbef.iframe.bundle.js",
+        "contentLength": 10404,
+        "knownAs": "features-common-components-organisms-StepNavigation-stories.d8bebbef.iframe.bundle.js"
+      },
+      {
+        "pathname": "features-common-components-organisms-Stepper-stories.111703c9.iframe.bundle.js",
+        "contentLength": 13104,
+        "knownAs": "features-common-components-organisms-Stepper-stories.111703c9.iframe.bundle.js"
+      },
+      {
+        "pathname": "iframe.html",
+        "contentLength": 12409,
+        "knownAs": "iframe.html"
+      },
+      {
+        "pathname": "images/logo.png",
+        "contentLength": 209294,
+        "knownAs": "images/logo.png"
+      },
+      {
+        "pathname": "index.html",
+        "contentLength": 4086,
+        "knownAs": "index.html"
+      },
+      {
+        "pathname": "index.json",
+        "contentLength": 2067,
+        "knownAs": "index.json"
+      },
+      {
+        "pathname": "main.d528bb9b.iframe.bundle.js",
+        "contentLength": 23833,
+        "knownAs": "main.d528bb9b.iframe.bundle.js"
+      },
+      {
+        "pathname": "project.json",
+        "contentLength": 1013,
+        "knownAs": "project.json"
+      },
+      {
+        "pathname": "runtime~main.6924d49c.iframe.bundle.js",
+        "contentLength": 4062,
+        "knownAs": "runtime~main.6924d49c.iframe.bundle.js"
+      },
+      {
+        "pathname": "sb-addons/chromatic-com-storybook-9/manager-bundle.js",
+        "contentLength": 559742,
+        "knownAs": "sb-addons/chromatic-com-storybook-9/manager-bundle.js"
+      },
+      {
+        "pathname": "sb-addons/chromatic-com-storybook-9/manager-bundle.js.LEGAL.txt",
+        "contentLength": 1684,
+        "knownAs": "sb-addons/chromatic-com-storybook-9/manager-bundle.js.LEGAL.txt"
+      },
+      {
+        "pathname": "sb-addons/essentials-actions-3/manager-bundle.js",
+        "contentLength": 40558,
+        "knownAs": "sb-addons/essentials-actions-3/manager-bundle.js"
+      },
+      {
+        "pathname": "sb-addons/essentials-actions-3/manager-bundle.js.LEGAL.txt",
+        "contentLength": 0,
+        "knownAs": "sb-addons/essentials-actions-3/manager-bundle.js.LEGAL.txt"
+      },
+      {
+        "pathname": "sb-addons/essentials-backgrounds-4/manager-bundle.js",
+        "contentLength": 13406,
+        "knownAs": "sb-addons/essentials-backgrounds-4/manager-bundle.js"
+      },
+      {
+        "pathname": "sb-addons/essentials-backgrounds-4/manager-bundle.js.LEGAL.txt",
+        "contentLength": 0,
+        "knownAs": "sb-addons/essentials-backgrounds-4/manager-bundle.js.LEGAL.txt"
+      },
+      {
+        "pathname": "sb-addons/essentials-controls-2/manager-bundle.js",
+        "contentLength": 364882,
+        "knownAs": "sb-addons/essentials-controls-2/manager-bundle.js"
+      },
+      {
+        "pathname": "sb-addons/essentials-controls-2/manager-bundle.js.LEGAL.txt",
+        "contentLength": 631,
+        "knownAs": "sb-addons/essentials-controls-2/manager-bundle.js.LEGAL.txt"
+      },
+      {
+        "pathname": "sb-addons/essentials-measure-7/manager-bundle.js",
+        "contentLength": 6138,
+        "knownAs": "sb-addons/essentials-measure-7/manager-bundle.js"
+      },
+      {
+        "pathname": "sb-addons/essentials-measure-7/manager-bundle.js.LEGAL.txt",
+        "contentLength": 0,
+        "knownAs": "sb-addons/essentials-measure-7/manager-bundle.js.LEGAL.txt"
+      },
+      {
+        "pathname": "sb-addons/essentials-outline-8/manager-bundle.js",
+        "contentLength": 6180,
+        "knownAs": "sb-addons/essentials-outline-8/manager-bundle.js"
+      },
+      {
+        "pathname": "sb-addons/essentials-outline-8/manager-bundle.js.LEGAL.txt",
+        "contentLength": 0,
+        "knownAs": "sb-addons/essentials-outline-8/manager-bundle.js.LEGAL.txt"
+      },
+      {
+        "pathname": "sb-addons/essentials-toolbars-6/manager-bundle.js",
+        "contentLength": 5092,
+        "knownAs": "sb-addons/essentials-toolbars-6/manager-bundle.js"
+      },
+      {
+        "pathname": "sb-addons/essentials-toolbars-6/manager-bundle.js.LEGAL.txt",
+        "contentLength": 0,
+        "knownAs": "sb-addons/essentials-toolbars-6/manager-bundle.js.LEGAL.txt"
+      },
+      {
+        "pathname": "sb-addons/essentials-viewport-5/manager-bundle.js",
+        "contentLength": 13662,
+        "knownAs": "sb-addons/essentials-viewport-5/manager-bundle.js"
+      },
+      {
+        "pathname": "sb-addons/essentials-viewport-5/manager-bundle.js.LEGAL.txt",
+        "contentLength": 0,
+        "knownAs": "sb-addons/essentials-viewport-5/manager-bundle.js.LEGAL.txt"
+      },
+      {
+        "pathname": "sb-addons/interactions-10/manager-bundle.js",
+        "contentLength": 224108,
+        "knownAs": "sb-addons/interactions-10/manager-bundle.js"
+      },
+      {
+        "pathname": "sb-addons/interactions-10/manager-bundle.js.LEGAL.txt",
+        "contentLength": 0,
+        "knownAs": "sb-addons/interactions-10/manager-bundle.js.LEGAL.txt"
+      },
+      {
+        "pathname": "sb-addons/links-1/manager-bundle.js",
+        "contentLength": 837,
+        "knownAs": "sb-addons/links-1/manager-bundle.js"
+      },
+      {
+        "pathname": "sb-addons/links-1/manager-bundle.js.LEGAL.txt",
+        "contentLength": 0,
+        "knownAs": "sb-addons/links-1/manager-bundle.js.LEGAL.txt"
+      },
+      {
+        "pathname": "sb-addons/storybook-core-server-presets-0/common-manager-bundle.js",
+        "contentLength": 2847,
+        "knownAs": "sb-addons/storybook-core-server-presets-0/common-manager-bundle.js"
+      },
+      {
+        "pathname": "sb-addons/storybook-core-server-presets-0/common-manager-bundle.js.LEGAL.txt",
+        "contentLength": 0,
+        "knownAs": "sb-addons/storybook-core-server-presets-0/common-manager-bundle.js.LEGAL.txt"
+      },
+      {
+        "pathname": "sb-common-assets/fonts.css",
+        "contentLength": 675,
+        "knownAs": "sb-common-assets/fonts.css"
+      },
+      {
+        "pathname": "sb-common-assets/nunito-sans-bold-italic.woff2",
+        "contentLength": 49460,
+        "knownAs": "sb-common-assets/nunito-sans-bold-italic.woff2"
+      },
+      {
+        "pathname": "sb-common-assets/nunito-sans-bold.woff2",
+        "contentLength": 47144,
+        "knownAs": "sb-common-assets/nunito-sans-bold.woff2"
+      },
+      {
+        "pathname": "sb-common-assets/nunito-sans-italic.woff2",
+        "contentLength": 49620,
+        "knownAs": "sb-common-assets/nunito-sans-italic.woff2"
+      },
+      {
+        "pathname": "sb-common-assets/nunito-sans-regular.woff2",
+        "contentLength": 47072,
+        "knownAs": "sb-common-assets/nunito-sans-regular.woff2"
+      },
+      {
+        "pathname": "sb-manager/WithTooltip-Y7J54OF7-3AIPQNGM.js",
+        "contentLength": 196,
+        "knownAs": "sb-manager/WithTooltip-Y7J54OF7-3AIPQNGM.js"
+      },
+      {
+        "pathname": "sb-manager/chunk-KCJCJECS.js",
+        "contentLength": 581329,
+        "knownAs": "sb-manager/chunk-KCJCJECS.js"
+      },
+      {
+        "pathname": "sb-manager/chunk-TZAR34JC.js",
+        "contentLength": 147212,
+        "knownAs": "sb-manager/chunk-TZAR34JC.js"
+      },
+      {
+        "pathname": "sb-manager/chunk-UOBNU442.js",
+        "contentLength": 718628,
+        "knownAs": "sb-manager/chunk-UOBNU442.js"
+      },
+      {
+        "pathname": "sb-manager/chunk-VCJ56UEM.js",
+        "contentLength": 324303,
+        "knownAs": "sb-manager/chunk-VCJ56UEM.js"
+      },
+      {
+        "pathname": "sb-manager/chunk-VMGB76WP.js",
+        "contentLength": 58229,
+        "knownAs": "sb-manager/chunk-VMGB76WP.js"
+      },
+      {
+        "pathname": "sb-manager/chunk-XP3HGWTR.js",
+        "contentLength": 6839,
+        "knownAs": "sb-manager/chunk-XP3HGWTR.js"
+      },
+      {
+        "pathname": "sb-manager/formatter-B5HCVTEV-7DCBOGO6.js",
+        "contentLength": 224076,
+        "knownAs": "sb-manager/formatter-B5HCVTEV-7DCBOGO6.js"
+      },
+      {
+        "pathname": "sb-manager/globals-module-info.js",
+        "contentLength": 8859,
+        "knownAs": "sb-manager/globals-module-info.js"
+      },
+      {
+        "pathname": "sb-manager/globals-runtime.js",
+        "contentLength": 7305,
+        "knownAs": "sb-manager/globals-runtime.js"
+      },
+      {
+        "pathname": "sb-manager/globals.js",
+        "contentLength": 1529,
+        "knownAs": "sb-manager/globals.js"
+      },
+      {
+        "pathname": "sb-manager/index.js",
+        "contentLength": 246,
+        "knownAs": "sb-manager/index.js"
+      },
+      {
+        "pathname": "sb-manager/runtime.js",
+        "contentLength": 778,
+        "knownAs": "sb-manager/runtime.js"
+      },
+      {
+        "pathname": "sb-manager/syntaxhighlighter-JOJW2KGS-7BF26SBB.js",
+        "contentLength": 318,
+        "knownAs": "sb-manager/syntaxhighlighter-JOJW2KGS-7BF26SBB.js"
+      },
+      {
+        "pathname": "sb-preview/globals.js",
+        "contentLength": 1416,
+        "knownAs": "sb-preview/globals.js"
+      },
+      {
+        "pathname": "sb-preview/runtime.js",
+        "contentLength": 328140,
+        "knownAs": "sb-preview/runtime.js"
+      }
+    ],
+    "paths": [
+      "662.dfd80ddb.iframe.bundle.js",
+      "677.32ccf452.iframe.bundle.js",
+      "874.b7d591c2.iframe.bundle.js",
+      "favicon.svg",
+      "features-Home-components-organisms-JobSelect-stories.a4cd2f6e.iframe.bundle.js",
+      "features-Home-components-organisms-SkillAnalysisStepper-stories.3dc4b127.iframe.bundle.js",
+      "features-common-components-atoms-Button-stories.97b5273f.iframe.bundle.js",
+      "features-common-components-atoms-Radio-stories.f99a35d2.iframe.bundle.js",
+      "features-common-components-atoms-StepIndicator-stories.1ef55de6.iframe.bundle.js",
+      "features-common-components-molecules-StepContent-stories.89668479.iframe.bundle.js",
+      "features-common-components-organisms-StepNavigation-stories.d8bebbef.iframe.bundle.js",
+      "features-common-components-organisms-Stepper-stories.111703c9.iframe.bundle.js",
+      "iframe.html",
+      "images/logo.png",
+      "index.html",
+      "index.json",
+      "main.d528bb9b.iframe.bundle.js",
+      "project.json",
+      "runtime~main.6924d49c.iframe.bundle.js",
+      "sb-addons/chromatic-com-storybook-9/manager-bundle.js",
+      "sb-addons/chromatic-com-storybook-9/manager-bundle.js.LEGAL.txt",
+      "sb-addons/essentials-actions-3/manager-bundle.js",
+      "sb-addons/essentials-actions-3/manager-bundle.js.LEGAL.txt",
+      "sb-addons/essentials-backgrounds-4/manager-bundle.js",
+      "sb-addons/essentials-backgrounds-4/manager-bundle.js.LEGAL.txt",
+      "sb-addons/essentials-controls-2/manager-bundle.js",
+      "sb-addons/essentials-controls-2/manager-bundle.js.LEGAL.txt",
+      "sb-addons/essentials-measure-7/manager-bundle.js",
+      "sb-addons/essentials-measure-7/manager-bundle.js.LEGAL.txt",
+      "sb-addons/essentials-outline-8/manager-bundle.js",
+      "sb-addons/essentials-outline-8/manager-bundle.js.LEGAL.txt",
+      "sb-addons/essentials-toolbars-6/manager-bundle.js",
+      "sb-addons/essentials-toolbars-6/manager-bundle.js.LEGAL.txt",
+      "sb-addons/essentials-viewport-5/manager-bundle.js",
+      "sb-addons/essentials-viewport-5/manager-bundle.js.LEGAL.txt",
+      "sb-addons/interactions-10/manager-bundle.js",
+      "sb-addons/interactions-10/manager-bundle.js.LEGAL.txt",
+      "sb-addons/links-1/manager-bundle.js",
+      "sb-addons/links-1/manager-bundle.js.LEGAL.txt",
+      "sb-addons/storybook-core-server-presets-0/common-manager-bundle.js",
+      "sb-addons/storybook-core-server-presets-0/common-manager-bundle.js.LEGAL.txt",
+      "sb-common-assets/fonts.css",
+      "sb-common-assets/nunito-sans-bold-italic.woff2",
+      "sb-common-assets/nunito-sans-bold.woff2",
+      "sb-common-assets/nunito-sans-italic.woff2",
+      "sb-common-assets/nunito-sans-regular.woff2",
+      "sb-manager/WithTooltip-Y7J54OF7-3AIPQNGM.js",
+      "sb-manager/chunk-KCJCJECS.js",
+      "sb-manager/chunk-TZAR34JC.js",
+      "sb-manager/chunk-UOBNU442.js",
+      "sb-manager/chunk-VCJ56UEM.js",
+      "sb-manager/chunk-VMGB76WP.js",
+      "sb-manager/chunk-XP3HGWTR.js",
+      "sb-manager/formatter-B5HCVTEV-7DCBOGO6.js",
+      "sb-manager/globals-module-info.js",
+      "sb-manager/globals-runtime.js",
+      "sb-manager/globals.js",
+      "sb-manager/index.js",
+      "sb-manager/runtime.js",
+      "sb-manager/syntaxhighlighter-JOJW2KGS-7BF26SBB.js",
+      "sb-preview/globals.js",
+      "sb-preview/runtime.js"
+    ],
+    "total": 6469418,
+    "hashes": {
+      "662.dfd80ddb.iframe.bundle.js": "6188ee3c86986a67",
+      "677.32ccf452.iframe.bundle.js": "cf903a5605801ef7",
+      "874.b7d591c2.iframe.bundle.js": "03c0c7108723f3a1",
+      "favicon.svg": "c838c315c746b6e6",
+      "features-Home-components-organisms-JobSelect-stories.a4cd2f6e.iframe.bundle.js": "5422c56f31800af6",
+      "features-Home-components-organisms-SkillAnalysisStepper-stories.3dc4b127.iframe.bundle.js": "21873d96c9b80a14",
+      "features-common-components-atoms-Button-stories.97b5273f.iframe.bundle.js": "2e0f1134620ee02b",
+      "features-common-components-atoms-Radio-stories.f99a35d2.iframe.bundle.js": "43453efa3ef00692",
+      "features-common-components-atoms-StepIndicator-stories.1ef55de6.iframe.bundle.js": "882573aae3aa2fb9",
+      "features-common-components-molecules-StepContent-stories.89668479.iframe.bundle.js": "7242043eaf193942",
+      "features-common-components-organisms-StepNavigation-stories.d8bebbef.iframe.bundle.js": "d084c148d39aba26",
+      "features-common-components-organisms-Stepper-stories.111703c9.iframe.bundle.js": "510cca0d4f9b6543",
+      "iframe.html": "c801b05575eefc64",
+      "images/logo.png": "c7b9d85bda2fed21",
+      "index.html": "805b5c11814164d7",
+      "index.json": "526caabdaa3bbd5a",
+      "main.d528bb9b.iframe.bundle.js": "81b1aa019ea16c2d",
+      "project.json": "70041f2009969513",
+      "runtime~main.6924d49c.iframe.bundle.js": "8c224b5d89d03e66",
+      "sb-addons/chromatic-com-storybook-9/manager-bundle.js": "55bcf4ebe5d4aff7",
+      "sb-addons/chromatic-com-storybook-9/manager-bundle.js.LEGAL.txt": "ea775d538668aaaa",
+      "sb-addons/essentials-actions-3/manager-bundle.js": "ed3850ed52d213d4",
+      "sb-addons/essentials-actions-3/manager-bundle.js.LEGAL.txt": "ef46db3751d8e999",
+      "sb-addons/essentials-backgrounds-4/manager-bundle.js": "d42d8f73adcb2c4b",
+      "sb-addons/essentials-backgrounds-4/manager-bundle.js.LEGAL.txt": "ef46db3751d8e999",
+      "sb-addons/essentials-controls-2/manager-bundle.js": "f457ee95dc7d24eb",
+      "sb-addons/essentials-controls-2/manager-bundle.js.LEGAL.txt": "8a8b3af0e390b5bc",
+      "sb-addons/essentials-measure-7/manager-bundle.js": "b1db4e0520dde3e1",
+      "sb-addons/essentials-measure-7/manager-bundle.js.LEGAL.txt": "ef46db3751d8e999",
+      "sb-addons/essentials-outline-8/manager-bundle.js": "1d42514969a676bd",
+      "sb-addons/essentials-outline-8/manager-bundle.js.LEGAL.txt": "ef46db3751d8e999",
+      "sb-addons/essentials-toolbars-6/manager-bundle.js": "962d976f9cf6762b",
+      "sb-addons/essentials-toolbars-6/manager-bundle.js.LEGAL.txt": "ef46db3751d8e999",
+      "sb-addons/essentials-viewport-5/manager-bundle.js": "a4f3f7c55513e6a8",
+      "sb-addons/essentials-viewport-5/manager-bundle.js.LEGAL.txt": "ef46db3751d8e999",
+      "sb-addons/interactions-10/manager-bundle.js": "299490e6f938dcf9",
+      "sb-addons/interactions-10/manager-bundle.js.LEGAL.txt": "ef46db3751d8e999",
+      "sb-addons/links-1/manager-bundle.js": "3d836764f86c50ea",
+      "sb-addons/links-1/manager-bundle.js.LEGAL.txt": "ef46db3751d8e999",
+      "sb-addons/storybook-core-server-presets-0/common-manager-bundle.js": "0b38789da7fb99d3",
+      "sb-addons/storybook-core-server-presets-0/common-manager-bundle.js.LEGAL.txt": "ef46db3751d8e999",
+      "sb-common-assets/fonts.css": "5fe607dcb520f0b7",
+      "sb-common-assets/nunito-sans-bold-italic.woff2": "d64464b3594b3fb9",
+      "sb-common-assets/nunito-sans-bold.woff2": "0bd5b61b7fb7f7d5",
+      "sb-common-assets/nunito-sans-italic.woff2": "b7807d9de055e9a0",
+      "sb-common-assets/nunito-sans-regular.woff2": "6687b7be04c2debe",
+      "sb-manager/WithTooltip-Y7J54OF7-3AIPQNGM.js": "c4e0d393d4f6a651",
+      "sb-manager/chunk-KCJCJECS.js": "1d6a1e0e2589dab5",
+      "sb-manager/chunk-TZAR34JC.js": "75a244aecadb044a",
+      "sb-manager/chunk-UOBNU442.js": "54027e8e8b05d6dd",
+      "sb-manager/chunk-VCJ56UEM.js": "2c95611217c7a5fa",
+      "sb-manager/chunk-VMGB76WP.js": "5c3321f350cdb8eb",
+      "sb-manager/chunk-XP3HGWTR.js": "c4434b2c5239ca5b",
+      "sb-manager/formatter-B5HCVTEV-7DCBOGO6.js": "13a51a1a2f69a5a1",
+      "sb-manager/globals-module-info.js": "680c797eefa8e456",
+      "sb-manager/globals-runtime.js": "d2e3a07ea84a50e5",
+      "sb-manager/globals.js": "6f03e9a7e34d0329",
+      "sb-manager/index.js": "f3cfe0f98dd0166d",
+      "sb-manager/runtime.js": "4e124c99320f4b68",
+      "sb-manager/syntaxhighlighter-JOJW2KGS-7BF26SBB.js": "cedba1b01a1ff53a",
+      "sb-preview/globals.js": "88d9682d5fa2647b",
+      "sb-preview/runtime.js": "d8a0ffb58487c582"
+    }
+  },
+  "flags": {
+    "interactive": false
+  },
+  "git": {
+    "version": "2.39.3 (Apple Git-146)",
+    "gitUserEmail": "lshsh5656@naver.com",
+    "uncommittedHash": "e5996409df71fe4f3faf39ea93e568a98a57485c",
+    "commit": "69af5bd52e674116ae4ff4c16f3db1e65c5c795f",
+    "committedAt": 1711793906000,
+    "committerEmail": "lshsh5656@naver.com",
+    "committerName": "ish",
+    "branch": "main",
+    "slug": "nicehyun/skillfox",
+    "fromCI": false,
+    "parentCommits": [
+      "69af5bd52e674116ae4ff4c16f3db1e65c5c795f"
+    ]
+  },
+  "input": [],
+  "isOnboarding": false,
+  "isPublishOnly": false,
+  "options": {
+    "fromCI": false,
+    "inAction": false,
+    "dryRun": false,
+    "debug": true,
+    "autoAcceptChanges": false,
+    "exitZeroOnChanges": true,
+    "exitOnceUploaded": false,
+    "diagnosticsFile": "chromatic-diagnostics.json",
+    "fileHashing": true,
+    "interactive": false,
+    "isLocalBuild": true,
+    "originalArgv": [],
+    "logFile": "chromatic.log",
+    "skip": false,
+    "forceRebuild": true,
+    "zip": true,
+    "buildScriptName": "build-storybook",
+    "storybookLogFile": "build-storybook.log",
+    "branchName": "",
+    "projectId": "Project:660908d77eb40b2f68c22f81",
+    "experimental_abortSignal": {}
+  },
+  "packageJson": {
+    "name": "my-app",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+      "dev": "next dev",
+      "build": "next build",
+      "start": "next start",
+      "lint": "next lint",
+      "storybook": "storybook dev -p 6006",
+      "build-storybook": "storybook build"
+    },
+    "dependencies": {
+      "@reduxjs/toolkit": "^2.2.2",
+      "next": "14.1.4",
+      "react": "^18",
+      "react-dom": "^18",
+      "react-icons": "^5.0.1",
+      "react-redux": "^9.1.0"
+    },
+    "devDependencies": {
+      "@chromatic-com/storybook": "^1.2.25",
+      "@storybook/addon-essentials": "^8.0.4",
+      "@storybook/addon-interactions": "^8.0.4",
+      "@storybook/addon-links": "^8.0.4",
+      "@storybook/blocks": "^8.0.4",
+      "@storybook/nextjs": "^8.0.4",
+      "@storybook/react": "^8.0.4",
+      "@storybook/test": "^8.0.4",
+      "@types/node": "^20",
+      "@types/react": "^18",
+      "@types/react-dom": "^18",
+      "autoprefixer": "^10.0.1",
+      "cypress": "^13.7.1",
+      "eslint": "^8.57.0",
+      "eslint-config-next": "^14.1.3",
+      "eslint-config-prettier": "^9.1.0",
+      "eslint-plugin-import": "^2.29.1",
+      "eslint-plugin-jsx-a11y": "^6.8.0",
+      "eslint-plugin-prettier": "^5.1.3",
+      "eslint-plugin-react": "^7.34.1",
+      "eslint-plugin-react-hooks": "^4.6.0",
+      "eslint-plugin-storybook": "^0.8.0",
+      "eslint-plugin-tailwindcss": "^3.15.1",
+      "postcss": "^8.4.38",
+      "prettier": "^3.2.5",
+      "prettier-plugin-tailwindcss": "^0.5.12",
+      "storybook": "^8.0.4",
+      "tailwindcss": "^3.3.0",
+      "typescript": "^5.4.3"
+    },
+    "eslintConfig": {
+      "extends": [
+        "plugin:storybook/recommended"
+      ]
+    },
+    "readme": "ERROR: No README data found!",
+    "_id": "my-app@0.1.0"
+  },
+  "packagePath": "/Users/sh/Desktop/skill_fox/package.json",
+  "rebuildForBuildId": "660909757eb40b2f68c22f8b",
+  "runtimeMetadata": {
+    "nodePlatform": "darwin",
+    "nodeVersion": "19.4.0",
+    "packageManager": "npm",
+    "packageManagerVersion": "9.2.0"
+  },
+  "sentinelUrls": [
+    "https://chromatic-builds.s3.us-west-2.amazonaws.com/660908d77eb40b2f68c22f81-ksfausvnyn/.chromatic/files-copied.400434229.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAJVVEQEOBEEPXSNNQ%2F20240331%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20240331T070347Z&X-Amz-Expires=1800&X-Amz-Signature=369b7fcbcbf60869b1ad8d319403cbd3f1444a702233372d19fcb75413745981&X-Amz-SignedHeaders=host&x-id=GetObject",
+    "https://chromatic-builds.s3.us-west-2.amazonaws.com/660908d77eb40b2f68c22f81-ksfausvnyn/.chromatic/zip-unpacked.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAJVVEQEOBEEPXSNNQ%2F20240331%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20240331T070347Z&X-Amz-Expires=1980&X-Amz-Signature=9e5215154bad03d4ef825b522effb7eb3434793ef03ecc0fbed9620ccd3cd466&X-Amz-SignedHeaders=host&x-id=GetObject"
+  ],
+  "sessionId": "d58d259e-e992-45fb-b040-d8dde264aeee",
+  "sourceDir": "/var/folders/m9/wbh8x10963ncxmjzf561w3mc0000gn/T/chromatic--11808-vky4FQm84mKe",
+  "startedAt": 1711868640520,
+  "storybook": {
+    "addons": [],
+    "viewLayer": "react",
+    "version": "8.0.4"
+  },
+  "storybookUrl": "https://660908d77eb40b2f68c22f81-ksfausvnyn.chromatic.com/",
+  "task": "snapshot",
+  "uploadedBytes": 744319,
+  "uploadedFiles": 16,
+  "userError": false
+}

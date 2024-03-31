@@ -1,7 +1,7 @@
 import React from "react";
 
 import "./header.css";
-import { Button } from "@/app/features/common/stories/Button";
+import { Button } from "@/app/features/common/components/atoms/Button";
 
 type User = {
   name: string;

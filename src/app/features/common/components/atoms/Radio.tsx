@@ -1,5 +1,4 @@
-export type Color = "primary" | "secondary";
-export type Size = "small" | "medium" | "large";
+import { Color, Size } from "../../types";
 
 export interface IRadioProps {
   id: string;
@@ -45,13 +44,13 @@ const Radio = ({
       checkedBackground: "h-[16px] w-[16px]",
       checkedCircle: "h-[10px] w-[10px]",
     },
-    medium: {
-      label: "h-14 text-medium",
+    normal: {
+      label: "h-14 text-normal",
       checkedBackground: "h-[18px] w-[18px]",
       checkedCircle: "h-[12px] w-[12px]",
     },
-    large: {
-      label: "h-18 text-large",
+    medium: {
+      label: "h-18 text-medium",
       checkedBackground: "h-[20px] w-[20px]",
       checkedCircle: "h-[14px] w-[14px]",
     },
