@@ -1,15 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { Color } from "../types";
+import { IColorProps } from "../types";
 import { bgColorClasses, textColorClasses } from "../utils/classes";
 
-interface ITabsProps {
+interface ITabsProps extends IColorProps {
   tabLabels: string[];
   tabsValue: number;
   onChangeTabs: (newValue: number) => void;
   id: string;
-  color?: Color;
 }
 
 const Tabs = ({

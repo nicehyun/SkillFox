@@ -1,10 +1,10 @@
 import { ReactNode } from "react";
 import StepNavigation from "./StepNavigation";
 import StepContent from "../molecules/StepContent";
-import { Color } from "../../types";
+import { Color, IColorProps } from "../../types";
 import Button from "../atoms/Button";
 
-export interface IStepperProps {
+export interface IStepperProps extends IColorProps {
   stepperType: string;
   activeStep: number;
   stepLabels: string[];
@@ -12,7 +12,6 @@ export interface IStepperProps {
   NextStepButtonContents: string[];
   onClickNextStepButton: () => void;
   isShowFinalContentbutton?: boolean;
-  color?: Color;
 }
 
 export default function Stepper({
@@ -23,7 +22,7 @@ export default function Stepper({
   onClickNextStepButton,
 }: IStepperProps) {
   return (
-    <article className="max-w-[1000px]">
+    <article className="mx-auto max-w-[1000px]">
       <header>
         <StepNavigation
           color={color}

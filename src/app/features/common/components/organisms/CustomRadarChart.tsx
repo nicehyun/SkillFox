@@ -7,65 +7,41 @@ import {
   PolarRadiusAxis,
   Radar,
   RadarChart,
+  ResponsiveContainer,
+  Tooltip,
 } from "recharts";
-import { Color } from "../../types";
+import { ChartData, IColorProps } from "../../types";
 
-interface ICustomRadarChartProps {
+interface ICustomRadarChartProps extends IColorProps {
   id: string;
-  color?: Color;
+  chartData: ChartData[];
+  skill: string;
+  fillColor: string;
 }
 
-const skills = ["next1.js", "next2.js", "next3.js", "next4.js", "next5.js"];
-
-const data = [
-  {
-    subject: "Math",
-    A: 120,
-  },
-  {
-    subject: "Chinese",
-    A: 98,
-  },
-  {
-    subject: "English",
-    A: 86,
-  },
-  {
-    subject: "Geography",
-    A: 99,
-  },
-  {
-    subject: "Physics",
-    A: 85,
-  },
-];
-
-const CustomRadarChart = ({ id }: ICustomRadarChartProps) => {
+const CustomRadarChart = ({
+  id,
+  chartData,
+  skill,
+  fillColor,
+}: ICustomRadarChartProps) => {
   return (
-    <div className="grid grid-cols-3 gap-4 sm:grid-cols-2 md:grid-cols-2">
-      {skills.map((skill, index) => (
-        <RadarChart
-          id={`chart-radar__${id}`}
-          outerRadius={60}
-          width={300}
-          height={200}
-          data={data}
-        >
-          <PolarGrid />
-          <PolarAngleAxis dataKey="subject" tick={{ fontSize: "12px" }} />
-          <PolarRadiusAxis angle={18} domain={[0, 150]} />
-          <Radar
-            name={skill}
-            dataKey="A"
-            stroke="#F2994A"
-            fill="#F2994A"
-            fillOpacity={0.6}
-          />
-
-          <Legend />
-        </RadarChart>
-      ))}
-    </div>
+    <ResponsiveContainer height="100%" width="100%">
+      <RadarChart id={`chart-radar-${id}`} outerRadius={60} data={chartData}>
+        <PolarGrid />
+        <PolarAngleAxis dataKey="name" tick={{ fontSize: "12px" }} />
+        <PolarRadiusAxis angle={18} domain={[0, 150]} />
+        <Radar
+          name={skill}
+          dataKey="value"
+          stroke={fillColor}
+          fill={fillColor}
+          fillOpacity={0.6}
+        />
+        <Tooltip />
+        <Legend />
+      </RadarChart>
+    </ResponsiveContainer>
   );
 };
 

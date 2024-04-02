@@ -1,9 +1,8 @@
-import { Color } from "../../types";
+import { IColorProps } from "../../types";
 import { bgColorClasses } from "../../utils/classes";
 
-export interface IButtonProps {
+export interface IButtonProps extends IColorProps {
   id: string;
-  color?: Color;
   type?: "button" | "submit" | "reset";
   onClick: () => void;
   content: string;

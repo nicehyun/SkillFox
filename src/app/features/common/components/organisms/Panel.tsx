@@ -1,14 +1,13 @@
 import { ReactNode } from "react";
 import { useTabValueHandler } from "../../hooks/useTabValueHandler";
-import { Color } from "../../types";
+import { IColorProps } from "../../types";
 import Tabs from "../Tabs";
 import TabPanel from "../TabPanel";
 
-interface IPanelProps {
+interface IPanelProps extends IColorProps {
   id: string;
   tabLabels: string[];
   tabContents: ReactNode[];
-  color?: Color;
 }
 
 const Panel = ({

@@ -1,12 +1,11 @@
 import { Fragment } from "react";
 import StepIndicator from "../atoms/StepIndicator";
-import { Color } from "../../types";
-import { borderColorClasses, textColorClasses } from "../../utils/classes";
+import { IColorProps } from "../../types";
+import { borderColorClasses } from "../../utils/classes";
 
-export interface IStepNavigationProps {
+export interface IStepNavigationProps extends IColorProps {
   stepLabels: string[];
   activeStep: number;
-  color?: Color;
 }
 
 const StepNavigation = ({

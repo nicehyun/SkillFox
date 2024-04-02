@@ -1,13 +1,10 @@
 "use client";
 
-import { Color } from "@/app/features/common/types";
+import { IColorProps } from "@/app/features/common/types";
 import AnalysisResultLayout from "./AnalysisChartLayout";
 import CustomPieChart from "@/app/features/common/components/organisms/CustomPieChart";
-import ChartRanking from "../molecules/ChartRanking";
 
-interface ISkillFrequencyChartProps {
-  color?: Color;
-}
+interface ISkillFrequencyChartProps extends IColorProps {}
 
 const data = [
   { name: "Skill 1", value: 400 },
@@ -32,11 +29,12 @@ const SkillFrequencyChart = ({
 }: ISkillFrequencyChartProps) => {
   return (
     <>
-      <AnalysisResultLayout title="채용 공고의 기술별 빈도를 분석한 결과입니다.">
-        <CustomPieChart chartData={data} id="frequency" color="secondary" />
+      <AnalysisResultLayout
+        title="채용 공고의 기술별 빈도를 나타낸 결과에요!"
+        className="h-[350px]"
+      >
+        <CustomPieChart chartData={data} id="frequency" color={color} />
       </AnalysisResultLayout>
-
-      <ChartRanking rankingData={data} color={color} />
     </>
   );
 };

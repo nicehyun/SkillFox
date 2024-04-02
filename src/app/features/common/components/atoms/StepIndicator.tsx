@@ -1,12 +1,11 @@
 import { FaCheck } from "react-icons/fa";
-import { Color } from "../../types";
+import { IColorProps } from "../../types";
 import { bgColorClasses } from "../../utils/classes";
 
-export interface IStepIndicatorProps {
+export interface IStepIndicatorProps extends IColorProps {
   isCompleted: boolean;
   isActive: boolean;
   stepNumber: number;
-  color?: Color;
 }
 
 const StepIndicator = ({

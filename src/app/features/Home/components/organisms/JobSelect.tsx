@@ -1,10 +1,10 @@
 import { useState } from "react";
 import Radio from "../../../common/components/atoms/Radio";
-import { Color, Size } from "@/app/features/common/types";
+import { Color, IColorAndSizeProps, Size } from "@/app/features/common/types";
 import { FaRegCircleCheck } from "react-icons/fa6";
 import Icon from "@/app/features/common/components/atoms/Icon";
 
-export interface IJobSelectProps {
+export interface IJobSelectProps extends IColorAndSizeProps {
   color?: Color;
   size?: Size;
 }

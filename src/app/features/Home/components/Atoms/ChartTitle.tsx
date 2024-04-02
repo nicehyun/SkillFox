@@ -7,10 +7,10 @@ interface IChartTitleProps {
 
 const ChartTitle = ({ title }: IChartTitleProps) => {
   return (
-    <h3 className="flex">
+    <h3 className="flexCenter mb-10">
       <Icon icon={<MdInsertChartOutlined />} />
 
-      {title}
+      <span className="flex-grow sm:text-small md:text-small">{title}</span>
     </h3>
   );
 };

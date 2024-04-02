@@ -6,11 +6,13 @@ import { ReactNode, useEffect, useState } from "react";
 interface IAnalysisChartLayoutProps {
   title: string;
   children: ReactNode;
+  className?: string;
 }
 
 const AnalysisChartLayout = ({
   title,
   children,
+  className,
 }: IAnalysisChartLayoutProps) => {
   const [mounted, setMounted] = useState<boolean>(false);
 
@@ -20,8 +22,10 @@ const AnalysisChartLayout = ({
 
   return (
     <>
-      <ChartTitle title={title} />
-      <div className="h-[400px] min-h-[400px]">{mounted && children}</div>
+      <section className={`${className} min-h-[300px]`}>
+        <ChartTitle title={title} />
+        {mounted && children}
+      </section>
     </>
   );
 };

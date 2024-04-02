@@ -1,9 +1,8 @@
-import { Color } from "@/app/features/common/types";
+import { IColorProps } from "@/app/features/common/types";
 import { Sector } from "recharts";
 
-interface IActiveShapeProps {
+interface IActiveShapeProps extends IColorProps {
   props: any;
-  color?: Color;
 }
 
 const ActiveShape = ({ props, color = "primary" }: IActiveShapeProps) => {
@@ -67,12 +66,14 @@ const ActiveShape = ({ props, color = "primary" }: IActiveShapeProps) => {
         y={ey}
         textAnchor={textAnchor}
         fill="#333"
+        fontSize="12"
       >{`PV ${value}`}</text>
       <text
         x={ex + (cos >= 0 ? 1 : -1) * 12}
         y={ey}
         dy={18}
         textAnchor={textAnchor}
+        fontSize="12"
         fill="#999"
       >
         {`Rate : ${(percent * 100).toFixed(2)}%`}

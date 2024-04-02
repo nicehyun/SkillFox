@@ -11,7 +11,9 @@ const Icon = ({ icon, className }: IIconProps) => {
   });
 
   return (
-    <span className={`${className} flexCenter h-[24px] w-[24px] p-[2px]`}>
+    <span
+      className={`${className} flexCenter min-h-[24px] min-w-[24px] p-[2px]`}
+    >
       {cloneIcon}
     </span>
   );

@@ -10,41 +10,57 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import { LineChartData } from "../../types";
+import {
+  chartColor,
+  extractUniqueLineNames,
+  formatChartData,
+  getMaxValueFromChartData,
+} from "../../utils/chart";
 
-interface ICustomLineChartProps {
+export interface ICustomLineChartProps {
   id: string;
-  chartData: {
-    name: string;
-    uv: number;
-    pv: number;
-    amt: number;
-  }[];
+  chartData: LineChartData[];
 }
 
 const CustomLineChart = ({ id, chartData }: ICustomLineChartProps) => {
+  const renderColorfulLegendText = (value: string) => {
+    return (
+      <span className="sm:mr-4 sm:text-small md:mr-4 md:text-small">
+        {value}
+      </span>
+    );
+  };
+
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <ResponsiveContainer height="100%" id={`chart-line-${id}`}>
       <LineChart
-        id={`chart-line__${id}`}
-        data={chartData}
-        margin={{
-          top: 80,
-        }}
+        data={formatChartData(chartData)}
+        margin={{ right: 5, top: 5, bottom: 20 }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis yAxisId="left" />
-        <YAxis yAxisId="right" orientation="right" />
-        <Tooltip />
-        <Legend />
-        <Line
-          yAxisId="left"
-          type="monotone"
-          dataKey="pv"
-          stroke="#8884d8"
-          activeDot={{ r: 8 }}
+        <XAxis
+          dataKey="xAxisLabel"
+          tick={{ fontSize: chartData.length > 3 ? 10 : 12 }}
         />
-        <Line yAxisId="left" type="monotone" dataKey="uv" stroke="#82ca9d" />
+        <YAxis
+          domain={[0, getMaxValueFromChartData(chartData)]}
+          tick={{ fontSize: chartData.length > 3 ? 10 : 12 }}
+        />
+        <Tooltip />
+
+        <Legend formatter={renderColorfulLegendText} />
+
+        {extractUniqueLineNames(chartData).map((lineName, index) => (
+          <Line
+            key={`line-${id}-${lineName}__${index}`}
+            type="monotone"
+            dataKey={lineName}
+            name={lineName}
+            stroke={chartColor[index % chartColor.length]}
+            activeDot={{ r: 8 }}
+          />
+        ))}
       </LineChart>
     </ResponsiveContainer>
   );

@@ -6,7 +6,7 @@ import JobSelect from "./JobSelect";
 import { nextStep, selectHomeStepState } from "@/redux/features/homeSlice";
 import SkillAnalysisResult from "./SkillAnalysisResult";
 import { IColorAndSizeProps } from "@/app/features/common/types";
-import BubbleChartResult from "./SkillCombinationChart";
+import SkillCombinationChart from "./SkillCombinationChart";
 
 const SkillAnalysisStepper = ({ color, size }: IColorAndSizeProps) => {
   const dispatch = useAppDispatch();
@@ -17,7 +17,6 @@ const SkillAnalysisStepper = ({ color, size }: IColorAndSizeProps) => {
   const stepContents = [
     <JobSelect size={size} color={color} />,
     <SkillAnalysisResult />,
-    <BubbleChartResult />,
   ];
 
   const nextStepButtonContents = ["분석 하기", "test"];
