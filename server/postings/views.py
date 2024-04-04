@@ -12,6 +12,7 @@ def get_skill_counts(request):
 
     # Posting 객체에서 코드 추출
     for posting in Posting.objects.all():
+        print(posting.job_code)
         try:
             job_code_data = ast.literal_eval(posting.job_code)
             codes = job_code_data["code"].split(",")
@@ -19,6 +20,7 @@ def get_skill_counts(request):
         except Exception as e:
             return JsonResponse({"error": str(e)}, status=400)
 
+    print(all_codes)
     matching_names = []
 
     # 추출된 코드에 해당하는 Skill 이름 찾기
