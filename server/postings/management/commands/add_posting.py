@@ -88,6 +88,7 @@ class Command(BaseCommand):
                     ],
                     "modification_timestamp": modification_timestamp,
                     "salary": job["salary"]["code"],
+                    "classification": "FE",
                 },
             )
 
