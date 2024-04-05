@@ -108,7 +108,7 @@ const IndustryFrequencyChart = () => {
       });
   }, []);
 
-  console.log(jobTypes);
+  // console.log(jobTypes);
   return (
     <AnalysisResultLayout
       title="기술별 빈도 분석 결과의 상위 5개 기술의 산업별 빈도를 분석한 결과에요! (공통 산업 5개)"

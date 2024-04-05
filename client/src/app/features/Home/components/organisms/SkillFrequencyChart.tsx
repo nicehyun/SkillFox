@@ -56,13 +56,15 @@ const CustomTooltip = ({ active, payload, label }) => {
 const SkillFrequencyChart = ({
   color = "primary",
 }: ISkillFrequencyChartProps) => {
-  const { data, isLoading } = useGetSkillFrequencyQuery();
-
-  // console.log(data);
+  const { data, isLoading, error, isError } = useGetSkillFrequencyQuery();
 
   if (isLoading) {
     return <div>loading ...</div>;
   }
+
+  if (isError) return <div>Error: {error.message}</div>;
+
+  console.log(data);
 
   return (
     <>

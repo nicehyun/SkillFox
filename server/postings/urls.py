@@ -3,7 +3,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path("skill-counts/", views.get_skill_counts, name="count_job_skill"),
+    path("skill-frequency/", views.get_skill_counts, name="skill_frequency"),
     path(
         "industry-frequency/",
         views.get_top_industries_based_on_top_skills,

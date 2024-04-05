@@ -6,10 +6,19 @@ from .models import Industry, JobType, Posting, Skill
 
 
 def get_skill_counts(request):
+
+    # Request에서 classification 값 추출
+    classification = request.GET.get("classification", None)
+
+    # classification 값이 유효한지 검사
+    if classification not in ["FE", "BE"]:
+        return JsonResponse({"error": "Invalid classification value"}, status=400)
+
     all_codes = []
 
     # Posting 객체에서 코드 추출
-    for posting in Posting.objects.all():
+    postings = Posting.objects.filter(job_group=classification)
+    for posting in postings:
         try:
             codes = posting.job_code.split(",")
             all_codes.extend(code.strip() for code in codes if code.strip())
@@ -32,7 +41,7 @@ def get_skill_counts(request):
 
     # 발생 횟수에 따라 정렬된 결과를 formatted_data에 저장
     formatted_data = [
-        {"name": skill, "value": count} for skill, count in skill_counts.most_common()
+        {"name": skill, "value": count} for skill, count in skill_counts.most_common(30)
     ]
 
     return JsonResponse(formatted_data, safe=False)
