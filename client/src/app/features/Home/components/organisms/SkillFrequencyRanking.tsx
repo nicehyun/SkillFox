@@ -19,7 +19,7 @@ const SkillFrequencyRanking = ({
       title="기술별 빈도 결과의 Rank에요! 기술을 클릭하고 NPM 다운로드 그래프를 함께 확인하세요!"
       className="my-10 border-b-[1px] border-t-[1px] border-gray3 py-10"
     >
-      {data && <ChartRanking rankingData={data} color={color} />}
+      {data && <ChartRanking rankingData={data.data} color={color} />}
     </AnalysisChartLayout>
   );
 };

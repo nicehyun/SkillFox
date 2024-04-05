@@ -4,7 +4,7 @@ export async function GET(request: Request) {
   try {
     // TODO : classification 동적으로 받기
     const response = await fetch(
-      `http://127.0.0.1:8000/api/skill-frequency/?classification=FE`,
+      `http://127.0.0.1:8000/api/industry-frequency/?classification=FE`,
       {
         next: { revalidate: 0 },
       },

@@ -6,11 +6,11 @@ type ResponseChartData = {
   count: number;
 };
 
-export const useGetSkillFrequencyQuery = () => {
+export const useGetJobTypeFrequencyQuery = () => {
   return useQuery<ResponseChartData, Error>(
-    ["skillFrequency"],
+    ["jobTypeFrequency"],
     async () => {
-      const response = await fetch(`/api/skillFrequency`, {
+      const response = await fetch(`/api/jobTypeFrequency`, {
         next: { revalidate: 0 },
       });
 

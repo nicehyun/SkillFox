@@ -2,7 +2,12 @@ from datetime import datetime
 
 import requests
 from django.core.management.base import BaseCommand
-from postings.models import Posting
+from postings.models import Industry, Posting
+
+
+def is_valid_industry_code(industry_code):
+    """산업 코드의 유효성을 검사합니다."""
+    return Industry.objects.filter(code=industry_code).exists()
 
 
 class Command(BaseCommand):
@@ -11,11 +16,15 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         base_url = "https://oapi.saramin.co.kr/job-search?"
         access_key = "Yioy75kmahFlSMtL4I8keyWUpdTj1QJGtzF1S42SJNJFWfe3ROb"
-        keywords = "프론트엔드"
-        job_cd = "92"
+        # keywords = "프론트엔드"
+        keywords = "백엔드"
+        # job_cd = "92"
+        job_cd = "84"
         start = 1
         count = 110
         max_iterations = 1  # 최대 반복 횟수
+        # job_group = "FE"
+        job_group = "BE"
 
         # for _ in range(max_iterations):
         while True:
@@ -32,7 +41,6 @@ class Command(BaseCommand):
             # 응답을 JSON 형태로 파싱
             postings = response.json()
 
-            print(postings)
             # 여기서 API 응답으로 count가 0이면 반복문 중단
             if postings["jobs"]["count"] == 0:
                 print("No more data to fetch. Stopping.")
@@ -52,6 +60,13 @@ class Command(BaseCommand):
                     )
                 )
 
+                industry_code = (
+                    job.get("position", {}).get("industry", {}).get("code", None)
+                )
+                if industry_code and not is_valid_industry_code(industry_code):
+                    # 유효하지 않은 industry_code는 처리를 건너뛰기
+                    continue
+
                 Posting.objects.update_or_create(
                     id=job["id"],
                     defaults={
@@ -63,9 +78,7 @@ class Command(BaseCommand):
                         .get("detail", {})
                         .get("name", None),
                         "title": job.get("position", {}).get("title", None),
-                        "industry_id": job.get("position", {})
-                        .get("industry", {})
-                        .get("code", None),
+                        "industry_id": industry_code,
                         "location": job.get("position", {})
                         .get("location", {})
                         .get("name", None),
@@ -84,7 +97,7 @@ class Command(BaseCommand):
                         .get("code", None),
                         "modification_timestamp": modification_timestamp,  # datetime 변환 로직 결과
                         "salary": job.get("salary", {}).get("code", None),
-                        "job_group": "FE",  # 고정 값
+                        "job_group": job_group,
                     },
                 )
 

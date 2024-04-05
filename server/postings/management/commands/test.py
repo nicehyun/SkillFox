@@ -1,53 +1,52 @@
 from collections import Counter
 
 from django.core.management.base import BaseCommand
+from django.db import transaction
 from postings.models import Industry, JobType, Posting, Skill
 
 
 class Command(BaseCommand):
-    help = "Adds data into the skills database"
+    help = "Check JobType relations of a specific Posting instance by ID"
 
-    def handle(self, *args, **kwargs):
-        # 데이터 적재 로직
-        skills_data = [
-            {"code": 1, "name": "정규직"},
-            {"code": 2, "name": "계약직"},
-            {"code": 3, "name": "병역특례"},
-            {"code": 4, "name": "인턴직"},
-            {"code": 5, "name": "아르바이트"},
-            {"code": 6, "name": "파견직"},
-            {"code": 7, "name": "해외취업"},
-            {"code": 8, "name": "위촉직"},
-            {"code": 9, "name": "프리랜서"},
-            {"code": 10, "name": "계약직 (정규직 전환가능)"},
-            {"code": 11, "name": "인턴직 (정규직 전환가능)"},
-            {"code": 12, "name": "교육생"},
-            {"code": 13, "name": "별정직"},
-            {"code": 14, "name": "파트"},
-            {"code": 15, "name": "전임"},
-            {"code": 16, "name": "기간제"},
-            {"code": 17, "name": "무기계약직"},
-            {"code": 18, "name": "전문계약직"},
-            {"code": 19, "name": "전문연구요원"},
-            {"code": 20, "name": "산업기능요원"},
-            {"code": 21, "name": "현역"},
-            {"code": 22, "name": "보충역"},
-        ]
+    def add_arguments(self, parser):
+        parser.add_argument(
+            "posting_id", type=int, help="The ID of the Posting to check"
+        )
 
-        for skill_data in skills_data:
-            # 기존에 동일한 name을 가진 Skill 객체가 있는지 확인
-            skill, created = JobType.objects.get_or_create(
-                name=skill_data["name"],
-                defaults={"code": skill_data["code"]},  # id 필드를 사용하는 경우
-            )
-            # Skill이 새로 생성되었으면 메시지를 출력
-            if created:
-                self.stdout.write(self.style.SUCCESS(f"Skill {skill.name} added"))
+    def handle(self, *args, **options):
+        posting_id = options["posting_id"]
+        try:
+            posting = Posting.objects.get(id=posting_id)
+            self.stdout.write(self.style.SUCCESS(f"Checking Posting: {posting.id}"))
+
+            # 연결된 JobType 객체들을 출력합니다.
+            job_types = posting.job_types.all()
+            if job_types:
+                self.stdout.write(self.style.SUCCESS("JobTypes:"))
+                for job_type in job_types:
+                    self.stdout.write(f" - {job_type.name}")
             else:
                 self.stdout.write(
-                    self.style.WARNING(f"Skill {skill.name} already exists")
+                    self.style.WARNING("No JobTypes connected to this posting.")
                 )
+        except Posting.DoesNotExist:
+            self.stdout.write(
+                self.style.ERROR(f"Posting with ID {posting_id} does not exist.")
+            )
 
-        self.stdout.write(
-            self.style.SUCCESS("Successfully loaded all skills into the database.")
-        )
+
+# class Command(BaseCommand):
+#     help = "Migrates Posting job_type string data to JobType ManyToManyField"
+
+#     @transaction.atomic
+#     def handle(self, *args, **options):
+#         for posting in Posting.objects.all():
+#             job_type_codes = posting.job_type.split(",") if posting.job_type else []
+#             for code in job_type_codes:
+#                 code = code.strip()
+#                 if not code:
+#                     continue
+#                 job_type, created = JobType.objects.get_or_create(code=code)
+#                 posting.job_types.add(job_type)
+#             posting.job_type = ""  # Clear the old job_type string field if needed
+#             posting.save()

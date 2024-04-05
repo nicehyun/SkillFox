@@ -26,20 +26,17 @@ class Posting(models.Model):
     company_link = models.URLField(blank=True, null=True)
     company_name = models.CharField(max_length=255, null=True, blank=True)
     title = models.CharField(max_length=255, null=True, blank=True)
-    industry = models.ForeignKey(
-        Industry,
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        related_name="postings",
-        db_index=True,
-    )
+
     location = models.CharField(max_length=255, null=True, blank=True)
-    job_type = models.CharField(max_length=255, null=True, blank=True)
-    job_code = models.TextField(null=True, blank=True)
+
     experience_min = models.IntegerField(null=True, blank=True)
     experience_max = models.IntegerField(null=True, blank=True)
     education_level = models.CharField(max_length=255, null=True, blank=True)
     modification_timestamp = models.DateTimeField(null=True, blank=True)
     salary = models.CharField(max_length=255, null=True, blank=True)
-    job_group = models.CharField(max_length=10, null=True, blank=True)
+    # Many to Many relationship
+    skills = models.ManyToManyField("Skill", related_name="postings", blank=True)
+    industries = models.ManyToManyField(
+        "Industry", related_name="related_postings", blank=True
+    )
+    job_types = models.ManyToManyField("JobType", related_name="postings", blank=True)
