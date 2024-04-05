@@ -13,7 +13,7 @@ class Command(BaseCommand):
         access_key = "Yioy75kmahFlSMtL4I8keyWUpdTj1QJGtzF1S42SJNJFWfe3ROb"
         keywords = "프론트엔드"
         job_cd = "92"
-        start = 132
+        start = 1
         count = 110
         max_iterations = 1  # 최대 반복 횟수
 
@@ -63,7 +63,7 @@ class Command(BaseCommand):
                         .get("detail", {})
                         .get("name", None),
                         "title": job.get("position", {}).get("title", None),
-                        "industry": job.get("position", {})
+                        "industry_id": job.get("position", {})
                         .get("industry", {})
                         .get("code", None),
                         "location": job.get("position", {})

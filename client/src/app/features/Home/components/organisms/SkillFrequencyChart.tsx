@@ -58,6 +58,8 @@ const SkillFrequencyChart = ({
 }: ISkillFrequencyChartProps) => {
   const { data, isLoading } = useGetSkillFrequencyQuery();
 
+  // console.log(data);
+
   if (isLoading) {
     return <div>loading ...</div>;
   }
@@ -69,7 +71,8 @@ const SkillFrequencyChart = ({
           title="채용 공고의 기술별 빈도를 나타낸 결과에요!"
           className="h-[1800px]"
         >
-          <ResponsiveContainer height="100%" id={`chart-bar-`}>
+          <></>
+          {/* <ResponsiveContainer height="100%" id={`chart-bar-`}>
             <BarChart
               height={300}
               data={data}
@@ -95,7 +98,7 @@ const SkillFrequencyChart = ({
                 ))}
               </Bar>
             </BarChart>
-          </ResponsiveContainer>
+          </ResponsiveContainer> */}
         </AnalysisResultLayout>
       )}
     </>

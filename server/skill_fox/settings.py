@@ -83,7 +83,7 @@ WSGI_APPLICATION = "skill_fox.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "jobPostingData",
+        "NAME": "skill_fox",
         "USER": "fox",
         "PASSWORD": "fox123123!",
         "HOST": "localhost",
@@ -122,7 +122,12 @@ USE_I18N = True
 
 USE_TZ = True
 
-CORS_ALLOW_ALL_ORIGINS = True
+# 프론트엔드가 실행 중인 주소
+CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    # 여기에 다른 허용할 출처를 추가할 수 있어
+]
 
 
 # Static files (CSS, JavaScript, Images)

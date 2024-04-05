@@ -6,7 +6,7 @@ export async function GET(request: Request) {
       `http://127.0.0.1:8000/api/skill-counts/`,
     ).then((res) => res.json());
 
-    return NextResponse.json(response.slice(0, 30), { status: 200 });
+    return NextResponse.json(response.slice(0, 50), { status: 200 });
   } catch (error: unknown) {
     throw error;
   }
