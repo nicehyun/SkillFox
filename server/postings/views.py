@@ -76,7 +76,7 @@ def get_skills_frequency(request):
     skills_with_counts = aggregate_top_skills(postings_with_skill)
 
     formatted_data = [
-        {"name": skill.name, "count": skill.num_postings}
+        {"name": skill.name, "value": skill.num_postings}
         for skill in skills_with_counts
     ]
 

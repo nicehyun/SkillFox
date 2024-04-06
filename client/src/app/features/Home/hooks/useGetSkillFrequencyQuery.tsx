@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { ChartData } from "../../common/types";
 
 type ResponseChartData = {
@@ -7,6 +7,8 @@ type ResponseChartData = {
 };
 
 export const useGetSkillFrequencyQuery = () => {
+  const queryClient = useQueryClient();
+
   return useQuery<ResponseChartData, Error>(
     ["skillFrequency"],
     async () => {
@@ -21,7 +23,15 @@ export const useGetSkillFrequencyQuery = () => {
 
       return await response.json();
     },
+
     {
+      onError() {
+        queryClient.setQueryData<ResponseChartData>(["skillFrequency"], {
+          data: [],
+          count: 0,
+        });
+      },
+
       staleTime: 60 * 60 * 1000,
       cacheTime: 60 * 60 * 1000,
     },

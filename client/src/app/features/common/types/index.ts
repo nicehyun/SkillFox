@@ -1,4 +1,4 @@
-export type Color = "primary" | "secondary";
+export type Color = "primary" | "secondary" | "gray";
 export type Size = "small" | "medium" | "normal";
 
 export interface IColorProps {

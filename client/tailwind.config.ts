@@ -23,6 +23,7 @@ const config: Config = {
       medium: ["18px", "25.2px"],
       normal: ["16px", "22.4px"],
       small: ["14px", "19.6px"],
+      xs: ["12px", "16.8px"],
     },
 
     spacing: {
@@ -48,8 +49,8 @@ const config: Config = {
 
     colors: {
       transparent: "transparent",
-      primary: "#F2994A",
-      secondary: "#092C4C",
+      primary: "#FFFFFF",
+      secondary: "#fafafa",
       info: "#2F80ED",
       success: "#27AE60",
       warning: "#E2B93B",
@@ -60,7 +61,7 @@ const config: Config = {
       white: "#FFFFFF",
       gray1: "#828282",
       gray2: "#BDBDBD",
-      gray3: "#E0E0E0",
+      border: "#EBEBEB",
     },
   },
 };
