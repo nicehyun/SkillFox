@@ -58,6 +58,8 @@ const SkillFrequencyChart = ({
 }: ISkillFrequencyChartProps) => {
   const { data, isLoading, error, isError } = useGetSkillFrequencyQuery();
 
+  console.log(data);
+
   if (isLoading) {
     return <div>loading ...</div>;
   }

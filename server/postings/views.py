@@ -1,47 +1,10 @@
 from collections import Counter, defaultdict
 
-from django.db.models import Count
+from django.db.models import Count, Q
 from django.http import JsonResponse
+from postings.constants import EXCLUDED_CODES, SKILL_IDS
 
-from .models import (
-    Industry,
-    JobType,
-    Posting,
-    Skill,
-)  # 모델 경로는 프로젝트에 맞게 조정하세요.
-
-
-def get_skill_counts(request):
-    classification = request.GET.get("classification", None)
-
-    # classification 값에 따라 스킬 ID 설정
-    skill_ids = {
-        "FE": "92",
-        "BE": "84",
-    }
-
-    if classification not in skill_ids:
-        return JsonResponse({"error": "Invalid classification value"}, status=400)
-
-    skill_id = skill_ids[classification]
-
-    # 스킬 ID를 기준으로 해당 스킬을 가지는 Posting 객체 필터링
-    postings = Posting.objects.filter(skills__id=skill_id)
-
-    # 각 Posting의 모든 스킬 이름 수집
-    matching_names = [
-        skill.name for posting in postings for skill in posting.skills.all()
-    ]
-
-    skill_counts = Counter(matching_names)
-
-    # 발생 횟수에 따라 정렬된 결과를 formatted_data에 저장
-    formatted_data = [
-        {"name": skill, "value": count} for skill, count in skill_counts.most_common(30)
-    ]
-
-    return JsonResponse({"data": formatted_data, "count": postings.count()}, safe=False)
-
+from .models import Education, Industry, JobType, Posting, Region, Skill
 
 # 시간 복작도 개선 전 ----------------------------------------------------------------
 # - 첫 번째로 모든 Posting 객체를 순회하여 job_code를 추출 : O(N*M)
@@ -63,80 +26,215 @@ def get_skill_counts(request):
 # 데이터베이스 수준에서의 집계와 인덱싱을 사용하면, 전반적인 시간 복잡도를 O(N*log(N))으로 줄일 수 있음
 
 
-def get_top_industries_based_on_top_skills(request):
+def validate_classification(request):
+    """classification 유효성 검사"""
     classification = request.GET.get("classification", None)
+    if classification not in SKILL_IDS:
+        return JsonResponse({"error": "분류 값이 유효하지 않습니다."}, status=400)
+    return classification
 
-    skill_ids = {
-        "FE": "92",
-        "BE": "84",
-    }
 
-    if classification not in skill_ids:
-        return JsonResponse({"error": "Invalid classification value"}, status=400)
+def filter_postings_by_skill(classification):
+    """classification를 기준으로 포스팅을 필터링"""
+    skill_code = SKILL_IDS.get(classification)
+    if skill_code:
+        postings_with_skill = Posting.objects.filter(skills__code=skill_code).distinct()
+        return postings_with_skill
+    else:
+        return Posting.objects.none()  # 일치하는 스킬 코드가 없으면 빈 쿼리셋 반환
 
-    skill_id = skill_ids[classification]
 
-    # 해당 스킬 ID를 가진 Posting과 연관된 Industry의 개수를 세고, 상위 5개 Industry를 추출
-    top_industries_query = (
-        Industry.objects.filter(
-            related_postings__skills__id=skill_id  # 'postings' 대신 'related_postings' 사용
-        )
-        .annotate(postings_count=Count("related_postings"))  # 여기도 마찬가지로 변경
-        .order_by("-postings_count")[:5]
+def validate_and_filter_postings(request):
+    """
+    classification 유효성 검사, classification를 기준으로 포스팅을 필터링
+    """
+    classification = request.GET.get("classification", None)
+    if classification not in SKILL_IDS:
+        return None, JsonResponse({"error": "분류 값이 유효하지 않습니다."}, status=400)
+
+    skill_code = SKILL_IDS[classification]
+    postings_with_skill = Posting.objects.filter(skills__code=skill_code).distinct()
+    return postings_with_skill, None
+
+
+def aggregate_top_skills(postings_with_skill):
+    """상위 스킬을 집계"""
+    skills_with_counts = (
+        Skill.objects.filter(postings__in=postings_with_skill)
+        .exclude(code__in=EXCLUDED_CODES)
+        .annotate(num_postings=Count("postings"))
+        .order_by("-num_postings")[:50]
     )
+    return skills_with_counts
 
-    # 결과 데이터 포맷팅
+
+def get_skills_frequency(request):
+    postings_with_skill, error_response = validate_and_filter_postings(request)
+    if error_response:
+        return error_response
+
+    skills_with_counts = aggregate_top_skills(postings_with_skill)
+
     formatted_data = [
-        {"name": industry.name, "value": industry.postings_count}
-        for industry in top_industries_query
+        {"name": skill.name, "count": skill.num_postings}
+        for skill in skills_with_counts
     ]
 
-    # 필터링된 postings의 총 개수 계산
-    postings_count = Posting.objects.filter(skills__id=skill_id).distinct().count()
+    return JsonResponse(
+        {"data": formatted_data, "count": postings_with_skill.count()},
+        safe=False,
+        status=200,
+    )
+
+
+def get_top_industries_based_on_top_skills(request):
+    postings_with_skill, error_response = validate_and_filter_postings(request)
+    if error_response:
+        return error_response
+
+    skills_with_counts = aggregate_top_skills(postings_with_skill)
+
+    # 상위 스킬 코드 목록
+    top_skill_codes = [skill.code for skill in skills_with_counts]
+
+    # 각 산업별로 해당 스킬을 포함하는 포스팅 수 집계
+    industry_counts = defaultdict(int)
+    for posting in postings_with_skill:
+        # 각 포스팅에서 상위 스킬에 해당하는 스킬의 수를 계산
+        posting_top_skill_count = posting.skills.filter(
+            code__in=top_skill_codes
+        ).count()
+        # 포스팅의 각 산업에 대해 스킬 수만큼 점수를 추가
+        for industry in posting.industries.all():
+            industry_counts[industry.name] += posting_top_skill_count
+
+    # 상위 10개 산업 선택
+    top_industries = sorted(industry_counts.items(), key=lambda x: x[1], reverse=True)[
+        :10
+    ]
+
+    # 응답 데이터 형식
+    formatted_data = [
+        {"name": industry, "value": count} for industry, count in top_industries
+    ]
 
     return JsonResponse(
-        {
-            "data": formatted_data,
-            "count": postings_count,
-        },
+        {"data": formatted_data, "count": postings_with_skill.count()}, safe=False
+    )
+
+
+def get_top_skills_by_jobtype(request):
+    postings_with_skill, error_response = validate_and_filter_postings(request)
+    if error_response:
+        return error_response
+
+    jobtype_skills = {}
+    for jobtype in JobType.objects.all():
+        postings = postings_with_skill.filter(job_types=jobtype)
+
+        skill_counts = (
+            Skill.objects.filter(postings__in=postings)
+            .annotate(num_postings=Count("postings"))
+            .order_by("-num_postings")[:10]
+        )
+
+        jobtype_skills[jobtype.name] = [
+            {"name": skill.name, "count": skill.num_postings} for skill in skill_counts
+        ]
+
+    return JsonResponse(
+        {"data": jobtype_skills, "count": postings_with_skill.count()},
         safe=False,
+        status=200,
     )
 
 
-def get_top_skill_by_job_type(request):
-    classification = request.GET.get("classification", None)
+def get_top_skills_by_education(request):
+    postings_with_skill, error_response = validate_and_filter_postings(request)
+    if error_response:
+        return error_response
 
-    # classification 값에 따라 스킬 ID 설정
-    skill_ids = {
-        "FE": "92",
-        "BE": "84",
-    }
+    education_skills = {}
+    for education in Education.objects.all():
+        postings = postings_with_skill.filter(educations=education)
 
-    if classification not in skill_ids:
-        return JsonResponse({"error": "Invalid classification value"}, status=400)
+        skill_counts = (
+            Skill.objects.filter(postings__in=postings)
+            .annotate(num_postings=Count("postings"))
+            .order_by("-num_postings")[:10]
+        )
 
-    skill_id = skill_ids[classification]
+        education_skills[education.name] = [
+            {"name": skill.name, "count": skill.num_postings} for skill in skill_counts
+        ]
 
-    # 스킬 ID를 기준으로 해당 스킬을 가지는 Posting 객체 필터링
-    postings = Posting.objects.filter(skills__id=skill_id).prefetch_related(
-        "job_types", "skills"
+    return JsonResponse(
+        {"data": education_skills, "count": postings_with_skill.count()},
+        safe=False,
+        status=200,
     )
 
-    # JobType 별 스킬 집계를 위한 구조
-    job_type_skill_counts = defaultdict(Counter)
 
-    for posting in postings:
-        for job_type in posting.job_types.all():
-            for skill in posting.skills.all():
-                job_type_skill_counts[job_type.code][skill.name] += 1
+def get_top_skills_by_experience_range(request):
+    postings_with_skill, error_response = validate_and_filter_postings(request)
+    if error_response:
+        return error_response
 
-    # 각 JobType별 상위 10개 스킬 식별 및 포맷팅
-    formatted_data = {}
-    for job_type_code, skills_counter in job_type_skill_counts.items():
-        top_skills = skills_counter.most_common(10)
-        job_type_name = JobType.objects.get(code=job_type_code).name
-        formatted_data[job_type_name] = {
-            skill_name: count for skill_name, count in top_skills
-        }
+    # 프론트에서 전달받은 experience_min과 experience_max 값을 불러옵니다.
+    experience_min = request.GET.get("experience_min", None)
+    experience_max = request.GET.get("experience_max", None)
 
-    return JsonResponse(formatted_data, safe=False)
+    # 경험치 범위에 따른 추가 필터링을 적용합니다.
+    if experience_min and experience_max:
+        filted_postings_with_experience_range = postings_with_skill.filter(
+            Q(experience_min__gte=experience_min)
+            & Q(experience_max__lte=experience_max)
+        )
+
+    # 필터링된 포스팅에서 사용된 스킬들을 집계합니다.
+    skill_counts = (
+        Skill.objects.filter(postings__in=filted_postings_with_experience_range)
+        .annotate(num_postings=Count("postings"))
+        .order_by("-num_postings")[:10]
+    )
+
+    # 집계된 데이터를 리스트로 포맷합니다.
+    formatted_data = [
+        {"name": skill.name, "count": skill.num_postings} for skill in skill_counts
+    ]
+
+    # 결과 데이터를 JSON 형식으로 반환합니다.
+    return JsonResponse(
+        {"data": formatted_data, "count": postings_with_skill.count()},
+        safe=False,
+        status=200,
+    )
+
+
+# TODO : 구현 계획 세우기
+def get_top_skills_by_region(request):
+    postings_with_skill, error_response = validate_and_filter_postings(request)
+    if error_response:
+        return error_response
+
+    linked_regions = Region.objects.filter(postings__in=postings_with_skill).distinct()
+
+    region_skills = {}
+    for region in linked_regions:
+        postings = postings_with_skill.filter(regions=region)
+
+        skill_counts = (
+            Skill.objects.filter(postings__in=postings)
+            .annotate(num_postings=Count("postings"))
+            .order_by("-num_postings")[:10]
+        )
+
+        region_skills[region.name] = [
+            {"name": skill.name, "count": skill.num_postings} for skill in skill_counts
+        ]
+
+    return JsonResponse(
+        {"data": region_skills, "count": postings_with_skill.count()},
+        safe=False,
+        status=200,
+    )

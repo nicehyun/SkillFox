@@ -4,20 +4,28 @@ import { useEffect, useState } from "react";
 import AnalysisResultLayout from "./AnalysisChartLayout";
 import { useGetIndustryFrequencyQuery } from "../../hooks/useGetIndustryFrequencyQuery";
 import { useGetJobTypeFrequencyQuery } from "../../hooks/useGetJobTypeFrequencyQuery";
+import { useGetEducationFrequencyQuery } from "../../hooks/useGetEducationFrequencyQuery";
+import { useGetExperienceRangeFrequencyQuery } from "../../hooks/useGetExperienceRangeFrequencyQuery";
+import { useGetRegionFrequencyQuery } from "../../hooks/useGetRegionFrequencyQuery";
 
 const IndustryFrequencyChart = () => {
   // const { data, isError, error, isLoading } = useGetIndustryFrequencyQuery();
-  const { data, isError, error, isLoading } = useGetJobTypeFrequencyQuery();
+  // const { data, isError, error, isLoading } = useGetJobTypeFrequencyQuery();
+  // const { data, isError, error, isLoading } = useGetEducationFrequencyQuery();
+  // const { data, isError, error, isLoading } =
+  // useGetExperienceRangeFrequencyQuery();
+  const { data, isError, error, isLoading } = useGetRegionFrequencyQuery();
+
   const [industries, setIndustries] = useState([]); // API로부터 받은 데이터를 저장할 상태
   const [jobTypes, setJobTypes] = useState([]);
+
+  console.log(data);
 
   if (isLoading) {
     return <div>loading ...</div>;
   }
 
   if (isError) return <div>Error: {error.message}</div>;
-
-  console.log(data);
 
   // useEffect(() => {
   //   // 컴포넌트가 마운트될 때 API 호출

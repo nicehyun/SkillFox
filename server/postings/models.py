@@ -1,8 +1,23 @@
 from django.db import models
 
 
+class Income(models.Model):
+    code = models.CharField(max_length=10, primary_key=True)
+    name = models.CharField(max_length=255, null=True, blank=True)
+
+
+class Region(models.Model):
+    code = models.CharField(max_length=10, primary_key=True)
+    name = models.CharField(max_length=255, null=True, blank=True)
+
+
+class Education(models.Model):
+    code = models.CharField(max_length=10, primary_key=True)
+    name = models.CharField(max_length=255, null=True, blank=True)
+
+
 class Skill(models.Model):
-    id = models.CharField(max_length=50, primary_key=True)
+    code = models.CharField(max_length=50, primary_key=True)
     name = models.CharField(max_length=100)
 
     def __str__(self):
@@ -26,17 +41,16 @@ class Posting(models.Model):
     company_link = models.URLField(blank=True, null=True)
     company_name = models.CharField(max_length=255, null=True, blank=True)
     title = models.CharField(max_length=255, null=True, blank=True)
-
-    location = models.CharField(max_length=255, null=True, blank=True)
-
     experience_min = models.IntegerField(null=True, blank=True)
     experience_max = models.IntegerField(null=True, blank=True)
-    education_level = models.CharField(max_length=255, null=True, blank=True)
     modification_timestamp = models.DateTimeField(null=True, blank=True)
-    salary = models.CharField(max_length=255, null=True, blank=True)
+
     # Many to Many relationship
-    skills = models.ManyToManyField("Skill", related_name="postings", blank=True)
+    skills = models.ManyToManyField(Skill, related_name="postings", blank=True)
     industries = models.ManyToManyField(
-        "Industry", related_name="related_postings", blank=True
+        Industry, related_name="related_postings", blank=True
     )
-    job_types = models.ManyToManyField("JobType", related_name="postings", blank=True)
+    job_types = models.ManyToManyField(JobType, related_name="postings", blank=True)
+    regions = models.ManyToManyField(Region, related_name="postings", blank=True)
+    educations = models.ManyToManyField(Education, related_name="postings", blank=True)
+    incomes = models.ManyToManyField(Income, related_name="postings", blank=True)
