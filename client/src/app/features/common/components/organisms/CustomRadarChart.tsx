@@ -10,32 +10,30 @@ import {
   ResponsiveContainer,
   Tooltip,
 } from "recharts";
-import { ChartData, IColorProps } from "../../types";
+import { ChartData } from "../../types";
 
-interface ICustomRadarChartProps extends IColorProps {
+interface ICustomRadarChartProps {
   id: string;
   chartData: ChartData[];
-  skill: string;
-  fillColor: string;
+  radarName: string;
 }
 
 const CustomRadarChart = ({
   id,
   chartData,
-  skill,
-  fillColor,
+  radarName,
 }: ICustomRadarChartProps) => {
   return (
-    <ResponsiveContainer height="100%" width="100%">
-      <RadarChart id={`chart-radar-${id}`} outerRadius={60} data={chartData}>
+    <ResponsiveContainer height={300} id={`chart-radar-${id}`}>
+      <RadarChart outerRadius={60} data={chartData}>
         <PolarGrid />
         <PolarAngleAxis dataKey="name" tick={{ fontSize: "12px" }} />
-        <PolarRadiusAxis angle={18} domain={[0, 150]} />
+        <PolarRadiusAxis angle={18} domain={[0, "auto"]} />
         <Radar
-          name={skill}
+          name={radarName}
           dataKey="value"
-          stroke={fillColor}
-          fill={fillColor}
+          stroke="#F2994A"
+          fill="#F2994A"
           fillOpacity={0.6}
         />
         <Tooltip />

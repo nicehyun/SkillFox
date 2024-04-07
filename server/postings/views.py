@@ -127,19 +127,24 @@ def get_top_skills_by_jobtype(request):
     postings_with_skill, error_response = validate_and_filter_postings(request)
     if error_response:
         return error_response
+    excluded_jobtype_names = ["1"]
+    excluded_skill_names = ["프론트엔드"]
 
     jobtype_skills = {}
-    for jobtype in JobType.objects.all():
+    for jobtype in JobType.objects.exclude(name__in=excluded_jobtype_names):
         postings = postings_with_skill.filter(job_types=jobtype)
 
+        # skill_counts 쿼리셋에서 빈 값과 특정 스킬 이름을 제외하고 카운트
         skill_counts = (
             Skill.objects.filter(postings__in=postings)
+            .exclude(name__in=excluded_skill_names)
             .annotate(num_postings=Count("postings"))
             .order_by("-num_postings")[:10]
         )
 
+        # jobtype_skills 딕셔너리에 결과 추가
         jobtype_skills[jobtype.name] = [
-            {"name": skill.name, "count": skill.num_postings} for skill in skill_counts
+            {"name": skill.name, "value": skill.num_postings} for skill in skill_counts
         ]
 
     return JsonResponse(

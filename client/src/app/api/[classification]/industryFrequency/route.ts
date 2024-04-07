@@ -6,7 +6,6 @@ export async function GET(
 ) {
   const { classification } = params;
 
-  console.log("server");
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_BE_URL}/api/industry-frequency/?classification=${classification}`,

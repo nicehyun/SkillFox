@@ -3,11 +3,11 @@
 import AnalysisSectionLayout, {
   GuideProps,
 } from "@/app/features/common/components/organisms/AnalysisSectionLayout";
-import { useGetIndustryFrequencyQuery } from "../../hooks/useGetIndustryFrequencyQuery";
 import IndustryAnalysisChart from "./IndustryAnalysisChart";
+import { useGetEducationFrequencyQuery } from "../../hooks/useGetEducationFrequencyQuery";
 
-const IndustryFrequencySection = () => {
-  const { data, error, isError } = useGetIndustryFrequencyQuery();
+const EducationFenquencySection = () => {
+  const { data, error, isError } = useGetEducationFrequencyQuery();
 
   console.log(data);
 
@@ -64,4 +64,4 @@ const IndustryFrequencySection = () => {
   );
 };
 
-export default IndustryFrequencySection;
+export default EducationFenquencySection;

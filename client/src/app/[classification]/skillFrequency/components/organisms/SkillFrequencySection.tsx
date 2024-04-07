@@ -9,8 +9,6 @@ import SkillAnalysisChart from "./SkillAnalysisChart";
 const SkillFrequencySection = () => {
   const { data, error, isError, isLoading } = useGetSkillFrequencyQuery();
 
-  console.log(data);
-
   //   if (isError) return <div>Error: {error.message}</div>;
 
   const guideProps: GuideProps = {

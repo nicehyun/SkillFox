@@ -1,11 +1,10 @@
 import { getQueryClient } from "@/tanstackQuery/utils/getQueryClient";
-
-import { industryFenquencyAPI } from "../educationFenquency/apis/educationFenquencyAPI";
 import { dehydrate } from "@tanstack/react-query";
 import Hydrate from "@/tanstackQuery/utils/hydrateOnClient";
-import IndustryFrequencySection from "./components/organisms/IndustryFrequencySection";
+import { jopTypeFenquencyAPI } from "./apis/jopTypeFenquencyAPI";
+import JopTypeFrequencySection from "./components/organisms/JopTypeFrequencySection";
 
-export default async function IndustryFrequencyPage({
+export default async function JopTypeFenquencyPage({
   params,
 }: {
   params: { classification: string };
@@ -15,16 +14,16 @@ export default async function IndustryFrequencyPage({
   const { classification } = params;
 
   await queryClient.prefetchQuery(
-    ["industryFrequency", classification],
+    ["jobTypeFrequency", classification],
     async () =>
-      await industryFenquencyAPI.getIndustryFenquencyAnalysis(classification),
+      await jopTypeFenquencyAPI.getJopTypeFenquencyAnalysis(classification),
   );
 
   const dehydratedState = dehydrate(queryClient);
 
   return (
     <Hydrate state={dehydratedState}>
-      <IndustryFrequencySection />
+      <JopTypeFrequencySection />
     </Hydrate>
   );
 }
