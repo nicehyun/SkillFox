@@ -3,7 +3,7 @@ import { ReactElement, cloneElement } from "react";
 export interface IIconProps {
   icon: ReactElement;
   className?: string;
-  size?: "small" | "large";
+  size?: "small" | "normal" | "large";
 }
 
 const Icon = ({ icon, className, size = "small" }: IIconProps) => {
@@ -13,7 +13,7 @@ const Icon = ({ icon, className, size = "small" }: IIconProps) => {
 
   return (
     <span
-      className={`${className} flexCenter ${size === "small" ? "min-h-[20px] min-w-[20px]" : "min-h-[26px] min-w-[26px]"} p-[2px]`}
+      className={`${className} flexCenter ${size === "small" ? "min-h-[20px] min-w-[20px]" : ""} ${size === "normal" ? "min-h-[24px] min-w-[24px]" : ""} ${size === "large" ? "min-h-[26px] min-w-[26px]" : ""} p-[2px]`}
     >
       {cloneIcon}
     </span>

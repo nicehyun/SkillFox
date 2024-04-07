@@ -28,3 +28,8 @@ export type FormattedData = {
   xAxisLabel: string;
   [key: string]: number | string;
 };
+
+export interface IChartProps {
+  chartData: ChartData[];
+  count: number;
+}

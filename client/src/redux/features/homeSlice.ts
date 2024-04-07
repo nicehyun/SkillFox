@@ -10,14 +10,14 @@ type InitialHomeState = {
   selectedSkill: string | null;
 };
 
-const initialSignUpState: InitialHomeState = {
+const initialHomeState: InitialHomeState = {
   activeStep: 1,
   selectedSkill: "next.js",
 };
 
 const homeSlice = createSlice({
   name: "home",
-  initialState: initialSignUpState,
+  initialState: initialHomeState,
   reducers: {
     nextStep(state) {
       if (state.activeStep === 1) return;

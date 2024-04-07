@@ -62,6 +62,7 @@ const config: Config = {
       gray1: "#828282",
       gray2: "#BDBDBD",
       border: "#EBEBEB",
+      orange: "#F2994A",
     },
   },
 };

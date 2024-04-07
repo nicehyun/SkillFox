@@ -15,8 +15,11 @@ const AnalysisNavigation = () => {
       className="fixed left-[48px] top-[80px] z-20 h-screen py-2"
     >
       <ul>
-        {links.map((link) => (
-          <li className="hover:text:black1 hover:bg-border w-[200px] text-small text-black3 transition duration-100 hover:font-bold hover:text-black1">
+        {links.map((link, index) => (
+          <li
+            key={`analysis-${index}`}
+            className="hover:text:black1 w-[200px] text-small text-black3 transition duration-100 hover:bg-border hover:font-bold hover:text-black1"
+          >
             {/* // TODO : aria-current 추가하기 */}
             <Link className="inline-block p-2" href={link.href}>
               {link.content}

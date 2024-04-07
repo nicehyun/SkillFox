@@ -1,5 +1,7 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { ChartData } from "../../common/types";
+import { ChartData } from "../../../features/common/types";
+import { skillFenquencyAPI } from "../apis/skillFenquencyAPI";
+import { useGetClassification } from "../../../features/common/hooks/useGetClassification";
 
 type ResponseChartData = {
   data: ChartData[];
@@ -9,20 +11,12 @@ type ResponseChartData = {
 export const useGetSkillFrequencyQuery = () => {
   const queryClient = useQueryClient();
 
+  const { classification } = useGetClassification();
+
   return useQuery<ResponseChartData, Error>(
-    ["skillFrequency"],
-    async () => {
-      const response = await fetch(`/api/skillFrequency`, {
-        next: { revalidate: 0 },
-      });
-
-      if (!response.ok) {
-        // 에러 객체 생성 후 throw
-        throw new Error("데이터를 가져오기를 실패했습니다.");
-      }
-
-      return await response.json();
-    },
+    ["skillFrequency", classification],
+    async () =>
+      await skillFenquencyAPI.getSkillFenquencyAnalysis(classification),
 
     {
       onError() {

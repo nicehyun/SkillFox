@@ -2,9 +2,9 @@
 
 import Panel from "@/app/features/common/components/organisms/Panel";
 import SkillCombinationChart from "./SkillCombinationChart";
-import SkillFrequencyChart from "./SkillFrequencyChart";
+import SkillFrequencyChart from "../../../../[classification]/skillFrequency/components/SkillFrequencyChart";
 import IndustryFrequencyChart from "./IndustryFrequencyChart";
-import SkillFrequencyRanking from "./SkillFrequencyRanking";
+import SkillFrequencyRanking from "../../../../[classification]/skillFrequency/components/organisms/SkillFrequencyRanking";
 import NpmDownloadsChart from "./NpmDownloadsChart";
 
 const SkillAnalysisResult = () => {
