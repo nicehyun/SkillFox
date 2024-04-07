@@ -5,6 +5,7 @@ import AnalysisSectionLayout, {
   GuideProps,
 } from "@/app/features/common/components/organisms/AnalysisSectionLayout";
 import SkillAnalysisChart from "./SkillAnalysisChart";
+import DownloadPDFButton from "@/app/features/common/components/atoms/DownloadPDFButton";
 
 const SkillFrequencySection = () => {
   const { data, error, isError } = useGetSkillFrequencyQuery();
@@ -23,7 +24,7 @@ const SkillFrequencySection = () => {
         수 있습니다.
         <br />
         <br />
-        🎨<strong>상위 10개의 기술 또는 키워드</strong>는 별로의 색상으로
+        🎨<strong>상위 10개의 기술 또는 키워드</strong>는 별도의 색상으로
         표시하고 있습니다.
       </>
     ),

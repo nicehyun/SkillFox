@@ -5,6 +5,7 @@ import { IChartProps } from "@/app/features/common/types";
 import ShowChartCountSelect from "./ShowChartCountSelect";
 import { selectShowChartCountState } from "@/redux/features/skillFrequencySlice";
 import { useAppSelector } from "@/redux/hooks";
+import DownloadPDFButton from "@/app/features/common/components/atoms/DownloadPDFButton";
 
 interface ISkillAnalysisChartProps extends IChartProps {}
 
@@ -41,10 +42,16 @@ const SkillAnalysisChart = ({ chartData, count }: ISkillAnalysisChartProps) => {
       </div>
 
       <div
-        className={`${handleBarChartHeightControl(showChartCount)} rounded-[5px] border-[2px] border-border bg-primary py-2`}
+        className={`${handleBarChartHeightControl(showChartCount)} rounded-[5px] border-[2px] border-border bg-primary py-4`}
       >
+        <div className="mb-2 flex justify-end px-4">
+          <span>
+            <DownloadPDFButton id="chart-bar-skill-Frenquency" />
+          </span>
+        </div>
         {chartData && (
           <CustomBarChart
+            id="skill-Frenquency"
             chartData={chartData.slice(0, showChartCount)}
             count={count}
           />

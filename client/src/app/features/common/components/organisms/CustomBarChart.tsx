@@ -49,19 +49,20 @@ const CustomLabel = ({ props, count }: { props: any; count: number }) => {
   );
 };
 
-interface ICustomBarChartProps extends IChartProps {}
+interface ICustomBarChartProps extends IChartProps {
+  id: string;
+}
 
-const CustomBarChart = ({ chartData, count }: ICustomBarChartProps) => {
+const CustomBarChart = ({ chartData, count, id }: ICustomBarChartProps) => {
   return (
-    <ResponsiveContainer width="100%" height="100%" id={`chart-bar-`}>
+    <ResponsiveContainer width="100%" height="100%" id={`chart-bar-${id}`}>
       <BarChart
         barSize={25}
         data={chartData}
         layout="vertical"
         margin={{
-          top: 20,
           left: 80,
-          bottom: 5,
+          bottom: 20,
         }}
       >
         <defs>
