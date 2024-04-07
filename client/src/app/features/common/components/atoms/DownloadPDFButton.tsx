@@ -18,9 +18,10 @@ const DownloadPDFButton = ({ id }: IDownloadPDFButtonProps) => {
 
       const pdf = new jsPDF({
         orientation: "landscape",
+        format: [canvas.width, canvas.height],
       });
 
-      pdf.addImage(imgData, "PNG", 0, 0, 210, 297);
+      pdf.addImage(imgData, "PNG", 0, 0, canvas.width, canvas.height);
       pdf.save("chart.pdf");
     } else {
       console.error("Unable to find the chart element");
