@@ -9,14 +9,28 @@ import {
 } from "recharts";
 import { IChartProps } from "../../types";
 
+type YAxisTickType = "ratio" | "count";
+interface ICustomBarChartProps extends IChartProps {
+  id: string;
+  emphasisCount: number;
+  yAxisTickType?: YAxisTickType;
+}
+
 const CustomBarShape = ({ fill, x, y, width, height }: any) => {
   return (
     <rect x={x} y={y} width={width} height={height} fill={fill} rx="5" ry="5" />
   );
 };
 
-const CustomYAxisTick = ({ x, y, payload, index }: any) => {
-  const isTopTen = index < 10;
+const CustomYAxisTick = ({
+  props,
+  emphasisCount,
+}: {
+  props: any;
+  emphasisCount: number;
+}) => {
+  const { x, y, payload, index } = props;
+  const isTopTen = index < emphasisCount;
   return (
     <text
       x={x}
@@ -32,11 +46,23 @@ const CustomYAxisTick = ({ x, y, payload, index }: any) => {
   );
 };
 
-const CustomLabel = ({ props, count }: { props: any; count: number }) => {
+const CustomLabel = ({
+  props,
+  count,
+  yAxisTickType,
+}: {
+  props: any;
+  count: number;
+  yAxisTickType: YAxisTickType;
+}) => {
   const { x, y, width, value, viewBox } = props;
+  const content =
+    yAxisTickType === "ratio"
+      ? `${((value / (count ?? 0)) * 100).toFixed(2)}%`
+      : value;
   return (
     <text
-      x={x + width - 40}
+      x={x + width}
       y={y}
       dy={parseInt(viewBox.height) / 2 + 4}
       fontSize="12"
@@ -44,16 +70,18 @@ const CustomLabel = ({ props, count }: { props: any; count: number }) => {
       fill="#666"
       textAnchor="start"
     >
-      {`${((value / (count ?? 0)) * 100).toFixed(2)}%`}
+      {content}
     </text>
   );
 };
 
-interface ICustomBarChartProps extends IChartProps {
-  id: string;
-}
-
-const CustomBarChart = ({ chartData, count, id }: ICustomBarChartProps) => {
+const CustomBarChart = ({
+  chartData,
+  count,
+  id,
+  emphasisCount,
+  yAxisTickType = "ratio",
+}: ICustomBarChartProps) => {
   return (
     <ResponsiveContainer width="100%" height="100%" id={`chart-bar-${id}`}>
       <BarChart
@@ -63,6 +91,7 @@ const CustomBarChart = ({ chartData, count, id }: ICustomBarChartProps) => {
         margin={{
           left: 80,
           bottom: 20,
+          right: 50,
         }}
       >
         <defs>
@@ -79,7 +108,9 @@ const CustomBarChart = ({ chartData, count, id }: ICustomBarChartProps) => {
           type="category"
           tickLine={false}
           axisLine={false}
-          tick={<CustomYAxisTick />}
+          tick={(props) => (
+            <CustomYAxisTick emphasisCount={emphasisCount} props={props} />
+          )}
         />
 
         <Bar
@@ -90,7 +121,13 @@ const CustomBarChart = ({ chartData, count, id }: ICustomBarChartProps) => {
           <LabelList
             dataKey="value"
             position="right"
-            content={(props) => <CustomLabel props={props} count={count} />}
+            content={(props) => (
+              <CustomLabel
+                props={props}
+                count={count}
+                yAxisTickType={yAxisTickType}
+              />
+            )}
           />
         </Bar>
       </BarChart>

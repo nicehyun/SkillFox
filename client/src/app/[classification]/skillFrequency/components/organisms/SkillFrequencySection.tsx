@@ -5,10 +5,11 @@ import AnalysisSectionLayout, {
   GuideProps,
 } from "@/app/features/common/components/organisms/AnalysisSectionLayout";
 import SkillAnalysisChart from "./SkillAnalysisChart";
-import DownloadPDFButton from "@/app/features/common/components/atoms/DownloadPDFButton";
 
 const SkillFrequencySection = () => {
-  const { data, error, isError } = useGetSkillFrequencyQuery();
+  const { data, error, isError, isLoading } = useGetSkillFrequencyQuery();
+
+  console.log(data);
 
   //   if (isError) return <div>Error: {error.message}</div>;
 

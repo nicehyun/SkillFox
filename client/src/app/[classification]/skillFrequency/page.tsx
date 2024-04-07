@@ -1,6 +1,9 @@
 import { skillFenquencyAPI } from "@/app/[classification]/skillFrequency/apis/skillFenquencyAPI";
 import SkillFrequencySection from "@/app/[classification]/skillFrequency/components/organisms/SkillFrequencySection";
 import { getQueryClient } from "@/tanstackQuery/utils/getQueryClient";
+import Hydrate from "@/tanstackQuery/utils/hydrateOnClient";
+
+import { dehydrate } from "@tanstack/react-query";
 
 export default async function SkillFrequencyPage({
   params,
@@ -11,9 +14,17 @@ export default async function SkillFrequencyPage({
 
   const { classification } = params;
 
-  await queryClient.prefetchQuery(["skillFrequency", classification], () =>
-    skillFenquencyAPI.getSkillFenquencyAnalysis(classification),
+  await queryClient.prefetchQuery(
+    ["skillFrequency", classification],
+    async () =>
+      await skillFenquencyAPI.getSkillFenquencyAnalysis(classification),
   );
 
-  return <SkillFrequencySection />;
+  const dehydratedState = dehydrate(queryClient);
+
+  return (
+    <Hydrate state={dehydratedState}>
+      <SkillFrequencySection />
+    </Hydrate>
+  );
 }

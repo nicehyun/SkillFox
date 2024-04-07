@@ -8,13 +8,13 @@ const RouteNavigation = () => {
   return (
     <nav
       aria-label="직무 선택"
-      className="border-border fixed top-[80px] z-20 h-screen border-r-[1px] py-2"
+      className="fixed top-[80px] z-20 h-screen border-r-[1px] border-border py-2"
     >
       <ul>
         {links.map((link) => (
           <li
             key={``}
-            className="flexCenter hover:bg-border mx-2 h-[32px] w-[32px] rounded-[5px] transition duration-100"
+            className="flexCenter mx-2 h-[32px] w-[32px] rounded-[5px] transition duration-100 hover:bg-border"
           >
             {/* // TODO : aria-current 추가하기 */}
             <Link href={link.href} className="flex">

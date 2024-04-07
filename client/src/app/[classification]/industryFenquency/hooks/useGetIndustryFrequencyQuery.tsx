@@ -1,34 +1,32 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { ChartData } from "../../../features/common/types";
-import { skillFenquencyAPI } from "../apis/skillFenquencyAPI";
-import { useGetClassification } from "../../../features/common/hooks/useGetClassification";
+import { useGetClassification } from "@/app/features/common/hooks/useGetClassification";
+import { industryFenquencyAPI } from "../apis/industryFenquencyAPI";
 
 type ResponseChartData = {
   data: ChartData[];
   count: number;
 };
 
-export const useGetSkillFrequencyQuery = () => {
+export const useGetIndustryFrequencyQuery = () => {
   const queryClient = useQueryClient();
 
   const { classification } = useGetClassification();
 
   return useQuery<ResponseChartData, Error>(
-    ["skillFrequency", classification],
+    ["industryFrequency", classification],
     async () =>
-      await skillFenquencyAPI.getSkillFenquencyAnalysis(classification),
-
+      await industryFenquencyAPI.getIndustryFenquencyAnalysis(classification),
     {
       onError() {
         queryClient.setQueryData<ResponseChartData>(
-          ["skillFrequency", classification],
+          ["industryFrequency", classification],
           {
             data: [],
             count: 0,
           },
         );
       },
-
       staleTime: 60 * 60 * 1000,
       cacheTime: 60 * 60 * 1000,
     },

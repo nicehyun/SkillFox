@@ -1,8 +1,8 @@
-export const skillFenquencyAPI = {
-  getSkillFenquencyAnalysis: async (classification: string) => {
+export const industryFenquencyAPI = {
+  getIndustryFenquencyAnalysis: async (classification: string) => {
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/${classification}/skillFrequency`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/${classification}/industryFrequency`,
         {
           next: { revalidate: 0 },
         },

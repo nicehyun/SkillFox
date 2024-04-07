@@ -3,7 +3,7 @@
 import Panel from "@/app/features/common/components/organisms/Panel";
 import SkillCombinationChart from "./SkillCombinationChart";
 import SkillFrequencyChart from "../../../../[classification]/skillFrequency/components/SkillFrequencyChart";
-import IndustryFrequencyChart from "./IndustryFrequencyChart";
+import IndustryFrequencyChart from "../../../../[classification]/industryFenquency/components/organisms/IndustryAnalysisChart";
 import SkillFrequencyRanking from "../../../../[classification]/skillFrequency/components/organisms/SkillFrequencyRanking";
 import NpmDownloadsChart from "./NpmDownloadsChart";
 
