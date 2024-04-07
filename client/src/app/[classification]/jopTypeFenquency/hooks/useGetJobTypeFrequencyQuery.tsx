@@ -1,12 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import { ChartData } from "../../../features/common/types";
+import { ObjectChartData } from "../../../features/common/types";
 import { useGetClassification } from "@/app/features/common/hooks/useGetClassification";
 import { jopTypeFenquencyAPI } from "../apis/jopTypeFenquencyAPI";
 
-export type JobTypeData = { [key: string]: ChartData[] };
-
 export type ResponseChartData = {
-  data: JobTypeData;
+  data: ObjectChartData;
   count: number;
 };
 

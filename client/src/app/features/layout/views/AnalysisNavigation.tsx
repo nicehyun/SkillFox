@@ -4,8 +4,8 @@ const AnalysisNavigation = () => {
   const links = [
     { href: "/FE/skillFrequency", content: "기술 빈도 분석" },
     { href: "/FE/industryFenquency", content: "산업별 분석" },
-    { href: "/FE/jopTypeFenquency", content: "근무형태별 분석" },
-    { href: "/", content: "학력별 분석" },
+    { href: "/FE/jopTypeFenquency", content: "근무 형태별 분석" },
+    { href: "/FE/educationFenquency", content: "학력별 분석" },
     { href: "/", content: "경력별 분석" },
   ];
 

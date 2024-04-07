@@ -33,3 +33,5 @@ export interface IChartProps {
   chartData: ChartData[];
   count: number;
 }
+
+export type ObjectChartData = { [key: string]: ChartData[] };

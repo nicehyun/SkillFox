@@ -159,18 +159,21 @@ def get_top_skills_by_education(request):
     if error_response:
         return error_response
 
+    excluded_skill_names = ["프론트엔드"]
+
     education_skills = {}
     for education in Education.objects.all():
         postings = postings_with_skill.filter(educations=education)
 
         skill_counts = (
             Skill.objects.filter(postings__in=postings)
+            .exclude(name__in=excluded_skill_names)
             .annotate(num_postings=Count("postings"))
             .order_by("-num_postings")[:10]
         )
 
         education_skills[education.name] = [
-            {"name": skill.name, "count": skill.num_postings} for skill in skill_counts
+            {"name": skill.name, "value": skill.num_postings} for skill in skill_counts
         ]
 
     return JsonResponse(

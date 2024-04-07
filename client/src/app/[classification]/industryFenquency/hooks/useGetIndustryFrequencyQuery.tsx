@@ -1,7 +1,7 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { ChartData } from "../../../features/common/types";
 import { useGetClassification } from "@/app/features/common/hooks/useGetClassification";
-import { industryFenquencyAPI } from "../../educationFenquency/apis/educationFenquencyAPI";
+import { industryFenquencyAPI } from "../apis/industryFenquencyAPI";
 
 type ResponseChartData = {
   data: ChartData[];

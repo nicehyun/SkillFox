@@ -1,46 +1,44 @@
 "use client";
 
-import ActiveShape from "@/app/features/common/components/atoms/ActiveShape";
-import { useCallback, useState } from "react";
-import { Pie, PieChart, ResponsiveContainer } from "recharts";
-import { IColorProps } from "../../types";
+import {
+  Cell,
+  Legend,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
+  Tooltip,
+} from "recharts";
+import { ChartData } from "../../types";
+import { chartColor } from "../../utils/chart";
 
-interface ICustomPieChartProps extends IColorProps {
+interface ICustomPieChartProps {
   id: string;
-  chartData: { name: string; value: number }[];
+  chartData: ChartData[];
 }
 
-const CustomPieChart = ({
-  color = "primary",
-  id,
-  chartData,
-}: ICustomPieChartProps) => {
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const onPieEnter = useCallback(
-    (_: any, index: number) => {
-      setActiveIndex(index);
-    },
-    [setActiveIndex],
-  );
-
-  const chartColor = color === "primary" ? "#F2994A" : "#092C4C";
-
+const CustomPieChart = ({ id, chartData }: ICustomPieChartProps) => {
   return (
-    <ResponsiveContainer height="100%">
-      <PieChart id={`chart-pie-${id}`}>
+    <ResponsiveContainer width="100%" height="100%" id={`chart-pie-${id}`}>
+      <PieChart>
         <Pie
-          activeIndex={activeIndex}
-          activeShape={(props) => ActiveShape({ props, color })}
-          data={chartData}
-          cx="50%"
-          cy="40%"
-          innerRadius={60}
-          outerRadius={80}
-          fill={chartColor}
           dataKey="value"
-          onMouseEnter={onPieEnter}
-        />
+          isAnimationActive={false}
+          data={chartData}
+          cx="40%"
+          cy="40%"
+          outerRadius={60}
+          fill="#8884d8"
+          label
+        >
+          {chartData.map((entry, index) => (
+            <Cell
+              key={`chart-pie-${id}-cell__${index}`}
+              fill={chartColor[index % chartColor.length]}
+            />
+          ))}
+        </Pie>
+
+        <Legend align="left" verticalAlign="top" layout="vertical" />
       </PieChart>
     </ResponsiveContainer>
   );

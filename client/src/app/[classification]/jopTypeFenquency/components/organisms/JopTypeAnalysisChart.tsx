@@ -3,10 +3,10 @@
 import ChartLayout from "@/app/features/common/components/atoms/ChartLayout";
 import DownloadPDFButton from "@/app/features/common/components/atoms/DownloadPDFButton";
 import CustomRadarChart from "@/app/features/common/components/organisms/CustomRadarChart";
-import { JobTypeData } from "../../hooks/useGetJobTypeFrequencyQuery";
+import { ObjectChartData } from "@/app/features/common/types";
 
 interface IJopTypeAnalysisChartProps {
-  chartData: JobTypeData;
+  chartData: ObjectChartData;
 }
 
 const JopTypeAnalysisChart = ({ chartData }: IJopTypeAnalysisChartProps) => {
