@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Radio from "../../../common/components/atoms/Radio";
+import Radio from "../../../features/common/components/atoms/Radio";
 import { Color, IColorAndSizeProps, Size } from "@/app/features/common/types";
 import { FaRegCircleCheck } from "react-icons/fa6";
 import Icon from "@/app/features/common/components/atoms/Icon";

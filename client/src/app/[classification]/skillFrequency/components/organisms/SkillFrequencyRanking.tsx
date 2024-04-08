@@ -1,6 +1,6 @@
 import { ChartData, IColorProps } from "@/app/features/common/types";
-import ChartRanking from "../../../../features/Home/components/molecules/ChartRanking";
-import AnalysisChartLayout from "../../../../features/Home/components/organisms/AnalysisChartLayout";
+import ChartRanking from "../../../../(home)/components/molecules/ChartRanking";
+import AnalysisChartLayout from "../../../../(home)/components/organisms/AnalysisChartLayout";
 import { useGetSkillFrequencyQuery } from "../../hooks/useGetSkillFrequencyQuery";
 
 interface ISkillFrequencyRankingProps extends IColorProps {}
