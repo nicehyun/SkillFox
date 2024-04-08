@@ -5,6 +5,8 @@ import AnalysisSectionLayout, {
 } from "@/app/features/common/components/organisms/AnalysisSectionLayout";
 import { useGetExperienceRangeFrequencyQuery } from "../../hooks/useGetExperienceRangeFrequencyQuery";
 import MainGuideContent from "../molecules/MainGuideContent";
+import SelectShowCountBarChart from "@/app/features/common/components/organisms/SelectShowCountBarChart";
+import ExperienceRangeContoller from "../molecules/ExperienceRangeContoller";
 
 interface IEducationFenquencySectionProps {
   postingClassification: string;
@@ -13,11 +15,8 @@ interface IEducationFenquencySectionProps {
 const ExperienceRangeFenquencySection = ({
   postingClassification,
 }: IEducationFenquencySectionProps) => {
-  const { data, error, isError } = useGetExperienceRangeFrequencyQuery();
-
-  console.log(data);
-
-  //   if (isError) return <div>Error: {error.message}</div>;
+  const { data, isLoading, onClickExperienceRangeApply } =
+    useGetExperienceRangeFrequencyQuery();
 
   const guideProps: GuideProps = {
     titleGuideContent: <MainGuideContent />,
@@ -31,7 +30,16 @@ const ExperienceRangeFenquencySection = ({
         guide={guideProps}
         postingCount={data?.count ?? 0}
       >
-        <></>
+        <ExperienceRangeContoller
+          onClickExperienceRangeApply={onClickExperienceRangeApply}
+        />
+        <SelectShowCountBarChart
+          id="experience-range-Frenquency"
+          yAxisTickType="count"
+          emphasisCount={10}
+          chartData={data?.data ?? []}
+          count={data?.count ?? 0}
+        />
       </AnalysisSectionLayout>
     </>
   );

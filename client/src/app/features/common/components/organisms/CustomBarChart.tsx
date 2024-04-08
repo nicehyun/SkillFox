@@ -9,7 +9,7 @@ import {
 } from "recharts";
 import { IChartProps } from "../../types";
 
-type YAxisTickType = "ratio" | "count";
+export type YAxisTickType = "ratio" | "count";
 interface ICustomBarChartProps extends IChartProps {
   id: string;
   emphasisCount: number;
@@ -90,7 +90,7 @@ const CustomBarChart = ({
         layout="vertical"
         margin={{
           left: 80,
-          bottom: 20,
+          bottom: 50,
           right: 50,
         }}
       >

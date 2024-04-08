@@ -4,8 +4,8 @@ import { useGetSkillFrequencyQuery } from "../../hooks/useGetSkillFrequencyQuery
 import AnalysisSectionLayout, {
   GuideProps,
 } from "@/app/features/common/components/organisms/AnalysisSectionLayout";
-import SkillAnalysisChart from "./SkillAnalysisChart";
 import MainGuideContent from "../molecules/MainGuideContent";
+import SelectShowCountBarChart from "@/app/features/common/components/organisms/SelectShowCountBarChart";
 
 interface IEducationFenquencySectionProps {
   postingClassification: string;
@@ -29,7 +29,9 @@ const SkillFrequencySection = ({
       guide={guideProps}
       postingCount={data?.count ?? 0}
     >
-      <SkillAnalysisChart
+      <SelectShowCountBarChart
+        id="skill-Frenquency"
+        emphasisCount={10}
         chartData={data?.data ?? []}
         count={data?.count ?? 0}
       />

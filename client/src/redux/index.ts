@@ -1,11 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import homeSlice from "./features/homeSlice";
-import skillFrequencySlice from "./features/skillFrequencySlice";
+
+import ShowChartCountSlice from "./features/showChartCountSlice";
 
 const store = configureStore({
   reducer: {
     home: homeSlice,
-    skillFrequency: skillFrequencySlice,
+    showChartCount: ShowChartCountSlice,
   },
 });
 

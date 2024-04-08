@@ -1,9 +1,18 @@
 export const experienceRangeFenquencyAPI = {
-  getExperienceRangeFenquencyAnalysis: async (classification: string) => {
+  getExperienceRangeFenquencyAnalysis: async (
+    classification: string,
+    experienceMin: number | null,
+    experienceMax: number | null,
+  ) => {
     try {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/${classification}/experienceRangeFrequency`,
         {
+          headers: {
+            "Content-Type": "application/json",
+            experienceMin: experienceMin ? experienceMin.toString() : "",
+            experienceMax: experienceMax ? experienceMax.toString() : "",
+          },
           next: { revalidate: 0 },
         },
       );

@@ -1,4 +1,4 @@
-from collections import defaultdict
+from collections import Counter, defaultdict
 
 from django.db.models import Count, Q
 from django.http import JsonResponse
@@ -186,26 +186,38 @@ def get_top_skills_by_experience_range(request):
         return error_response
 
     # 프론트에서 전달받은 experience_min과 experience_max 값을 불러옵니다.
-    experience_min = request.GET.get("experience_min", None)
-    experience_max = request.GET.get("experience_max", None)
+    experience_min = request.GET.get("experience-min")
+    experience_max = request.GET.get("experience-max")
 
-    # 경험치 범위에 따른 추가 필터링을 적용합니다.
-    if experience_min and experience_max:
-        filted_postings_with_experience_range = postings_with_skill.filter(
-            Q(experience_min__gte=experience_min)
-            & Q(experience_max__lte=experience_max)
+    experience_min = int(experience_min) if experience_min else None
+    experience_max = int(experience_max) if experience_max else None
+
+    if experience_min is not None and experience_max is not None:
+        filtered_postings_with_experience_range = postings_with_skill.filter(
+            Q(experience_min__gte=experience_min), Q(experience_max__lte=experience_max)
         )
+    elif experience_min is not None:
+        filtered_postings_with_experience_range = postings_with_skill.filter(
+            experience_min__gte=experience_min
+        )
+    elif experience_max is not None:
+        filtered_postings_with_experience_range = postings_with_skill.filter(
+            experience_max__lte=experience_max
+        )
+    else:
+        filtered_postings_with_experience_range = postings_with_skill
 
-    # 필터링된 포스팅에서 사용된 스킬들을 집계합니다.
+    # 스킬 집계
     skill_counts = (
-        Skill.objects.filter(postings__in=filted_postings_with_experience_range)
+        Skill.objects.filter(postings__in=filtered_postings_with_experience_range)
+        .exclude(name__in=EXCLUDED_SKILL_NAMES)
         .annotate(num_postings=Count("postings"))
-        .order_by("-num_postings")[:10]
+        .order_by("-num_postings")[:50]
     )
 
     # 집계된 데이터를 리스트로 포맷합니다.
     formatted_data = [
-        {"name": skill.name, "count": skill.num_postings} for skill in skill_counts
+        {"name": skill.name, "value": skill.num_postings} for skill in skill_counts
     ]
 
     # 결과 데이터를 JSON 형식으로 반환합니다.

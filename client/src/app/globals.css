@@ -17,3 +17,32 @@
 .recharts-layer {
   outline: none !important;
 }
+
+.thumb::-webkit-slider-thumb {
+  background-color: #f2994a;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  height: 18px;
+  width: 18px;
+  margin-top: 4px;
+  pointer-events: all;
+  position: relative;
+}
+
+/* For Firefox browsers */
+.thumb::-moz-range-thumb {
+  background-color: #f2994a;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  height: 18px;
+  width: 18px;
+  margin-top: 4px;
+  pointer-events: all;
+  position: relative;
+}
+
+.thumb::-webkit-slider-thumb {
+  -webkit-appearance: none;
+}

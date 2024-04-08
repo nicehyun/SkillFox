@@ -15,10 +15,12 @@ export default async function IndustryFrequencyPage({
   const { classification } = params;
 
   await queryClient.prefetchQuery(
-    ["experienceRangeFrequency", classification],
+    ["experienceRangeFrequency", classification, 0, 20],
     async () =>
       await experienceRangeFenquencyAPI.getExperienceRangeFenquencyAnalysis(
         classification,
+        0,
+        20,
       ),
   );
 

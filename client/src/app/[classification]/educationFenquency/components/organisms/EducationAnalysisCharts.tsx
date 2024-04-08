@@ -3,7 +3,6 @@ import EducationAnalysisChart from "./EducationAnalysisChart";
 
 const EducationAnalysisCharts = () => {
   const { data } = useGetEducationFrequencyQuery();
-  console.log(data);
 
   const educationInfos = [
     {

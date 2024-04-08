@@ -8,8 +8,6 @@ const AnalysisNavigation = () => {
   const pathname = usePathname();
   const { classification } = useGetClassification();
 
-  console.log(pathname);
-
   const links = [
     { href: `/skillFrequency`, content: "기술 빈도 분석" },
     { href: `/industryFenquency`, content: "산업별 분석" },

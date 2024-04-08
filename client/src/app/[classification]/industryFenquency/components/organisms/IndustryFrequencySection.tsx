@@ -16,8 +16,6 @@ const IndustryFrequencySection = ({
 }: IIndustryFrequencySectionProps) => {
   const { data, error, isError } = useGetIndustryFrequencyQuery();
 
-  console.log(data);
-
   //   if (isError) return <div>Error: {error.message}</div>;
 
   const guideProps: GuideProps = {
