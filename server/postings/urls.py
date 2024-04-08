@@ -24,9 +24,4 @@ urlpatterns = [
         views.get_top_skills_by_experience_range,
         name="experience_range_frequency",
     ),
-    path(
-        "region-frequency/",
-        views.get_top_skills_by_region,
-        name="region_frequency",
-    ),
 ]
