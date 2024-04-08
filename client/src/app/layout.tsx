@@ -3,8 +3,6 @@ import "./globals.css";
 import Footer from "./features/layout/views/Footer";
 import Header from "./features/layout/views/Header";
 import Providers from "./features/common/utils/Providers";
-import RouteNavigation from "./features/layout/views/RouteNavigation";
-import AnalysisNavigation from "./features/layout/views/AnalysisNavigation";
 
 const notoSansKr = Noto_Sans_KR({
   subsets: ["latin"],

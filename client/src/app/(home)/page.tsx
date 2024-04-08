@@ -24,16 +24,22 @@ export default function Home() {
     },
   ];
   return (
-    <section className="flex flex-col">
-      {links.map((link, index) => (
-        <Link
-          key={`link-${link.id}`}
-          className={`${index !== 0 ? "mt-6" : ""} flexCenter w-full rounded-[5px] border-[2px] border-orange py-4 font-bold shadow`}
-          href={`/${link.id}/skillFrequency`}
-        >
-          {link.content}
-        </Link>
-      ))}
+    <section className="">
+      <h1 className="flexCenter mb-10 font-bold">
+        🚀 기술 분석을 원하는 직무를 선택해주세요.
+      </h1>
+
+      <div className="grid grid-cols-2 gap-[20px] sm:grid-cols-1 md:grid-cols-1">
+        {links.map((link) => (
+          <Link
+            key={`link-${link.id}`}
+            className={` flexCenter w-full rounded-[5px] border-[2px] border-orange py-4 text-small font-bold shadow`}
+            href={`/${link.id}/skillFrequency`}
+          >
+            {link.content}
+          </Link>
+        ))}
+      </div>
     </section>
   );
 }
