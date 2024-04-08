@@ -22,12 +22,8 @@ export default function RootLayout({
         <Providers>
           <main>
             <Header />
-            <RouteNavigation />
-            <AnalysisNavigation />
 
-            <div className="md:4 min-w-[320px] pb-24 pl-[288px] pr-10 pt-30">
-              {children}
-            </div>
+            <div className="md:4 min-w-[320px] pb-24 pt-30">{children}</div>
 
             {/* <Footer /> */}
           </main>
