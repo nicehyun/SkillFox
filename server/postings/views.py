@@ -214,32 +214,3 @@ def get_top_skills_by_experience_range(request):
         safe=False,
         status=200,
     )
-
-
-# TODO : 구현 계획 세우기
-def get_top_skills_by_region(request):
-    postings_with_skill, error_response = validate_and_filter_postings(request)
-    if error_response:
-        return error_response
-
-    linked_regions = Region.objects.filter(postings__in=postings_with_skill).distinct()
-
-    region_skills = {}
-    for region in linked_regions:
-        postings = postings_with_skill.filter(regions=region)
-
-        skill_counts = (
-            Skill.objects.filter(postings__in=postings)
-            .annotate(num_postings=Count("postings"))
-            .order_by("-num_postings")[:10]
-        )
-
-        region_skills[region.name] = [
-            {"name": skill.name, "count": skill.num_postings} for skill in skill_counts
-        ]
-
-    return JsonResponse(
-        {"data": region_skills, "count": postings_with_skill.count()},
-        safe=False,
-        status=200,
-    )
