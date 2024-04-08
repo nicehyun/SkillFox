@@ -159,7 +159,15 @@ def get_top_skills_by_education(request):
     if error_response:
         return error_response
 
-    excluded_skill_names = ["프론트엔드"]
+    excluded_skill_names = [
+        "프론트엔드",
+        "웹개발",
+        "백엔드\/서버개발",
+        "풀스택",
+        "데이터엔지니어",
+        "데이터분석가",
+        "머신러닝",
+    ]
 
     education_skills = {}
     for education in Education.objects.all():

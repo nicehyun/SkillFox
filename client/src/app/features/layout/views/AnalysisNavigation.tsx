@@ -1,12 +1,27 @@
+"use client";
+
 import Link from "next/link";
+import { useGetClassification } from "../../common/hooks/useGetClassification";
+import { usePathname } from "next/navigation";
 
 const AnalysisNavigation = () => {
+  const pathname = usePathname();
+  const { classification } = useGetClassification();
+
+  console.log(pathname);
+
   const links = [
-    { href: "/FE/skillFrequency", content: "기술 빈도 분석" },
-    { href: "/FE/industryFenquency", content: "산업별 분석" },
-    { href: "/FE/jopTypeFenquency", content: "근무 형태별 분석" },
-    { href: "/FE/educationFenquency", content: "학력별 분석" },
-    { href: "/", content: "경력별 분석" },
+    { href: `/skillFrequency`, content: "기술 빈도 분석" },
+    { href: `/industryFenquency`, content: "산업별 분석" },
+    {
+      href: `/jopTypeFenquency`,
+      content: "근무 형태별 분석",
+    },
+    { href: `/educationFenquency`, content: "학력별 분석" },
+    {
+      href: `/experienceRangeFenquency`,
+      content: "경력별 분석",
+    },
   ];
 
   return (
@@ -18,10 +33,13 @@ const AnalysisNavigation = () => {
         {links.map((link, index) => (
           <li
             key={`analysis-${index}`}
-            className="hover:text:black1 w-[200px] text-small text-black3 transition duration-100 hover:bg-border hover:font-bold hover:text-black1"
+            className={`hover:text:black1 w-[200px] ${pathname === `/${classification}${link.href}` ? "bg-orange/30 font-bold text-black1" : "transition duration-100 hover:bg-border hover:font-bold hover:text-black1"} text-small text-black3 `}
           >
             {/* // TODO : aria-current 추가하기 */}
-            <Link className="inline-block p-2" href={link.href}>
+            <Link
+              className={`inline-block w-full p-2 `}
+              href={`${process.env.NEXT_PUBLIC_BASE_URL}/${classification}/${link.href}`}
+            >
               {link.content}
             </Link>
           </li>

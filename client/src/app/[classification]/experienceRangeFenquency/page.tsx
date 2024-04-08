@@ -1,8 +1,8 @@
 import { getQueryClient } from "@/tanstackQuery/utils/getQueryClient";
 import { dehydrate } from "@tanstack/react-query";
 import Hydrate from "@/tanstackQuery/utils/hydrateOnClient";
-import IndustryFrequencySection from "./components/organisms/IndustryFrequencySection";
-import { industryFenquencyAPI } from "./apis/industryFenquencyAPI";
+import { experienceRangeFenquencyAPI } from "./apis/experienceRangeFenquencyAPI";
+import EducationFenquencySection from "./components/organisms/ExperienceRangeFenquencySection";
 import { translateClassification } from "@/app/features/common/utils/translate";
 
 export default async function IndustryFrequencyPage({
@@ -15,9 +15,11 @@ export default async function IndustryFrequencyPage({
   const { classification } = params;
 
   await queryClient.prefetchQuery(
-    ["industryFrequency", classification],
+    ["experienceRangeFrequency", classification],
     async () =>
-      await industryFenquencyAPI.getIndustryFenquencyAnalysis(classification),
+      await experienceRangeFenquencyAPI.getExperienceRangeFenquencyAnalysis(
+        classification,
+      ),
   );
 
   const dehydratedState = dehydrate(queryClient);
@@ -30,7 +32,7 @@ export default async function IndustryFrequencyPage({
 
   return (
     <Hydrate state={dehydratedState}>
-      <IndustryFrequencySection
+      <EducationFenquencySection
         postingClassification={translatedClassification}
       />
     </Hydrate>

@@ -6,7 +6,13 @@ import AnalysisSectionLayout, {
 import { useGetIndustryFrequencyQuery } from "../../hooks/useGetIndustryFrequencyQuery";
 import IndustryAnalysisChart from "./IndustryAnalysisChart";
 
-const IndustryFrequencySection = () => {
+interface IIndustryFrequencySectionProps {
+  postingClassification: string;
+}
+
+const IndustryFrequencySection = ({
+  postingClassification,
+}: IIndustryFrequencySectionProps) => {
   const { data, error, isError } = useGetIndustryFrequencyQuery();
 
   console.log(data);
@@ -47,7 +53,7 @@ const IndustryFrequencySection = () => {
         🎨<strong>상위 3개의 산업</strong>은 별도의 색상으로 표시하고 있습니다.
       </>
     ),
-    postingClassification: "프론트엔드",
+    postingClassification,
   };
 
   return (

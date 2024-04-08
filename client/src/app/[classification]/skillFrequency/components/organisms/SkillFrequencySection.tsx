@@ -6,7 +6,13 @@ import AnalysisSectionLayout, {
 } from "@/app/features/common/components/organisms/AnalysisSectionLayout";
 import SkillAnalysisChart from "./SkillAnalysisChart";
 
-const SkillFrequencySection = () => {
+interface IEducationFenquencySectionProps {
+  postingClassification: string;
+}
+
+const SkillFrequencySection = ({
+  postingClassification,
+}: IEducationFenquencySectionProps) => {
   const { data, error, isError, isLoading } = useGetSkillFrequencyQuery();
 
   //   if (isError) return <div>Error: {error.message}</div>;
@@ -27,7 +33,7 @@ const SkillFrequencySection = () => {
         표시하고 있습니다.
       </>
     ),
-    postingClassification: "프론트엔드",
+    postingClassification,
   };
 
   return (

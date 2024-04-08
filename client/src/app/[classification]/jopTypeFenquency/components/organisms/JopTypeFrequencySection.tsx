@@ -4,13 +4,18 @@ import AnalysisSectionLayout, {
   GuideProps,
 } from "@/app/features/common/components/organisms/AnalysisSectionLayout";
 import {
-  JobTypeData,
   ResponseChartData,
   useGetJobTypeFrequencyQuery,
 } from "../../hooks/useGetJobTypeFrequencyQuery";
 import JopTypeAnalysisChart from "./JopTypeAnalysisChart";
 
-const JopTypeFrequencySection = () => {
+interface IJopTypeFrequencySectionProps {
+  postingClassification: string;
+}
+
+const JopTypeFrequencySection = ({
+  postingClassification,
+}: IJopTypeFrequencySectionProps) => {
   const { data, error, isError } = useGetJobTypeFrequencyQuery();
 
   //   if (isError) return <div>Error: {error.message}</div>;
@@ -41,7 +46,7 @@ const JopTypeFrequencySection = () => {
         할 수 있습니다.
       </>
     ),
-    postingClassification: "프론트엔드",
+    postingClassification,
   };
 
   return (

@@ -20,6 +20,8 @@ const AnalysisSectionLayout = ({
   guide,
 }: IAnalysisSectionLayoutProps) => {
   const { titleGuideContent, postingClassification } = guide;
+
+  console.log(postingClassification);
   return (
     <section>
       <div className="mb-2 flex items-center">

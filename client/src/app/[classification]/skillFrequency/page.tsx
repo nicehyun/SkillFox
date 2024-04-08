@@ -1,5 +1,6 @@
 import { skillFenquencyAPI } from "@/app/[classification]/skillFrequency/apis/skillFenquencyAPI";
 import SkillFrequencySection from "@/app/[classification]/skillFrequency/components/organisms/SkillFrequencySection";
+import { translateClassification } from "@/app/features/common/utils/translate";
 import { getQueryClient } from "@/tanstackQuery/utils/getQueryClient";
 import Hydrate from "@/tanstackQuery/utils/hydrateOnClient";
 
@@ -22,9 +23,15 @@ export default async function SkillFrequencyPage({
 
   const dehydratedState = dehydrate(queryClient);
 
+  const translatedClassification = translateClassification(classification);
+
+  if (!translatedClassification) {
+    return;
+  }
+
   return (
     <Hydrate state={dehydratedState}>
-      <SkillFrequencySection />
+      <SkillFrequencySection postingClassification={translatedClassification} />
     </Hydrate>
   );
 }

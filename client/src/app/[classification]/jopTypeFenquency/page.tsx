@@ -3,6 +3,7 @@ import { dehydrate } from "@tanstack/react-query";
 import Hydrate from "@/tanstackQuery/utils/hydrateOnClient";
 import { jopTypeFenquencyAPI } from "./apis/jopTypeFenquencyAPI";
 import JopTypeFrequencySection from "./components/organisms/JopTypeFrequencySection";
+import { translateClassification } from "@/app/features/common/utils/translate";
 
 export default async function JopTypeFenquencyPage({
   params,
@@ -21,9 +22,17 @@ export default async function JopTypeFenquencyPage({
 
   const dehydratedState = dehydrate(queryClient);
 
+  const translatedClassification = translateClassification(classification);
+
+  if (!translatedClassification) {
+    return;
+  }
+
   return (
     <Hydrate state={dehydratedState}>
-      <JopTypeFrequencySection />
+      <JopTypeFrequencySection
+        postingClassification={translatedClassification}
+      />
     </Hydrate>
   );
 }
