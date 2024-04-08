@@ -73,6 +73,9 @@ def get_skills_frequency(request):
     if error_response:
         return error_response
 
+    print(postings_with_skill)
+    print(error_response)
+
     skills_with_counts = aggregate_top_skills(postings_with_skill)
 
     formatted_data = [
