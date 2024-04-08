@@ -33,7 +33,6 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     # CORS 설정
     "corsheaders",
-    "skills.apps.SkillsConfig",
     "postings.apps.PostingsConfig",
     "rest_framework",
     "django.contrib.admin",

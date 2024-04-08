@@ -22,28 +22,7 @@ const EducationAnalysisChart = ({
   titleGuideContent,
   className,
 }: IEducationAnalysisChartProps) => {
-  return (
-    <article className={className}>
-      <div className="mb-2 flex items-center">
-        <h3 className="mr-2 text-small text-gray1">{chartTitle}</h3>
-        <ToolTip
-          title={chartTitle}
-          guideContent={titleGuideContent}
-          ariaLabel={`${chartTitle} 툴팁`}
-        />
-      </div>
-
-      <ChartLayout className="h-[400px] pl-6">
-        <div className="mb-2 flex justify-end px-4">
-          <span>
-            <DownloadPDFButton id={`chart-pie-${id}`} />
-          </span>
-        </div>
-
-        <CustomPieChart id={id} chartData={chartData} />
-      </ChartLayout>
-    </article>
-  );
+  return <></>;
 };
 
 export default EducationAnalysisChart;

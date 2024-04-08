@@ -1,10 +1,10 @@
-from collections import Counter, defaultdict
+from collections import defaultdict
 
 from django.db.models import Count, Q
 from django.http import JsonResponse
-from postings.constants import EXCLUDED_CODES, SKILL_IDS
+from postings.constants import EXCLUDED_CODES, EXCLUDED_SKILL_NAMES, SKILL_IDS
 
-from .models import Education, Industry, JobType, Posting, Region, Skill
+from .models import Education, JobType, Posting, Region, Skill
 
 # 시간 복작도 개선 전 ----------------------------------------------------------------
 # - 첫 번째로 모든 Posting 객체를 순회하여 job_code를 추출 : O(N*M)
@@ -128,7 +128,6 @@ def get_top_skills_by_jobtype(request):
     if error_response:
         return error_response
     excluded_jobtype_names = ["1"]
-    excluded_skill_names = ["프론트엔드"]
 
     jobtype_skills = {}
     for jobtype in JobType.objects.exclude(name__in=excluded_jobtype_names):
@@ -137,7 +136,7 @@ def get_top_skills_by_jobtype(request):
         # skill_counts 쿼리셋에서 빈 값과 특정 스킬 이름을 제외하고 카운트
         skill_counts = (
             Skill.objects.filter(postings__in=postings)
-            .exclude(name__in=excluded_skill_names)
+            .exclude(name__in=EXCLUDED_SKILL_NAMES)
             .annotate(num_postings=Count("postings"))
             .order_by("-num_postings")[:10]
         )
@@ -159,23 +158,13 @@ def get_top_skills_by_education(request):
     if error_response:
         return error_response
 
-    excluded_skill_names = [
-        "프론트엔드",
-        "웹개발",
-        "백엔드\/서버개발",
-        "풀스택",
-        "데이터엔지니어",
-        "데이터분석가",
-        "머신러닝",
-    ]
-
     education_skills = {}
     for education in Education.objects.all():
         postings = postings_with_skill.filter(educations=education)
 
         skill_counts = (
             Skill.objects.filter(postings__in=postings)
-            .exclude(name__in=excluded_skill_names)
+            .exclude(name__in=EXCLUDED_SKILL_NAMES)
             .annotate(num_postings=Count("postings"))
             .order_by("-num_postings")[:10]
         )

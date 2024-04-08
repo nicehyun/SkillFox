@@ -3,8 +3,9 @@ import EducationAnalysisChart from "./EducationAnalysisChart";
 
 const EducationAnalysisCharts = () => {
   const { data } = useGetEducationFrequencyQuery();
+  console.log(data);
 
-  const educationChartDatas = [
+  const educationInfos = [
     {
       id: "none-education",
       key: "학력무관",
@@ -36,15 +37,21 @@ const EducationAnalysisCharts = () => {
   return (
     <>
       {data?.data &&
-        educationChartDatas.map((chartData, index) => (
-          <EducationAnalysisChart
-            key={`education-chart-${chartData.id}__${index}`}
-            id={chartData.id}
-            chartTitle={chartData.title}
-            chartData={data?.data[chartData.key]}
-            className={index !== 0 ? "mt-8" : ""}
-          />
-        ))}
+        educationInfos.map((info, index) => {
+          const { id, key, title } = info;
+
+          return data?.data[key].length === 0 ? (
+            <>None Data</>
+          ) : (
+            <EducationAnalysisChart
+              key={`education-chart-${id}__${index}`}
+              id={id}
+              chartTitle={title}
+              chartData={data?.data[key]}
+              className={index !== 0 ? "mt-8" : ""}
+            />
+          );
+        })}
     </>
   );
 };

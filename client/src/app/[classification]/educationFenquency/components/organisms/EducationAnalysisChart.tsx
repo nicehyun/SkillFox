@@ -9,7 +9,6 @@ interface IEducationAnalysisChartProps {
   id: string;
   chartData: ChartData[];
   chartTitle: string;
-
   className?: string;
 }
 
@@ -17,7 +16,6 @@ const EducationAnalysisChart = ({
   id,
   chartData,
   chartTitle,
-
   className,
 }: IEducationAnalysisChartProps) => {
   return (

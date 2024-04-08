@@ -4,6 +4,7 @@ import AnalysisSectionLayout, {
   GuideProps,
 } from "@/app/features/common/components/organisms/AnalysisSectionLayout";
 import { useGetExperienceRangeFrequencyQuery } from "../../hooks/useGetExperienceRangeFrequencyQuery";
+import MainGuideContent from "../molecules/MainGuideContent";
 
 interface IEducationFenquencySectionProps {
   postingClassification: string;
@@ -14,10 +15,12 @@ const ExperienceRangeFenquencySection = ({
 }: IEducationFenquencySectionProps) => {
   const { data, error, isError } = useGetExperienceRangeFrequencyQuery();
 
+  console.log(data);
+
   //   if (isError) return <div>Error: {error.message}</div>;
 
   const guideProps: GuideProps = {
-    titleGuideContent: <></>,
+    titleGuideContent: <MainGuideContent />,
     postingClassification,
   };
 
