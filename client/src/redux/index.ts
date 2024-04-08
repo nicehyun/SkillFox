@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import homeSlice from "./features/homeSlice";
 
 import ShowChartCountSlice from "./features/showChartCountSlice";
+import layoutSlice from "./features/layoutSlice";
 
 const store = configureStore({
   reducer: {
-    home: homeSlice,
+    layoutSlice: layoutSlice,
     showChartCount: ShowChartCountSlice,
   },
 });
