@@ -24,7 +24,7 @@ const AnalysisSectionLayout = ({
   return (
     <section>
       <div className="mb-2 flex items-center">
-        <h1 className="mr-2 text-medium font-bold sm:text-normal md:text-normal">
+        <h1 className="mr-2 text-medium font-bold sm:text-small md:text-normal">
           {analysisTitle}
         </h1>
         <ToolTip
