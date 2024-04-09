@@ -34,7 +34,7 @@ export default function Home() {
     },
   ];
   return (
-    <section className="">
+    <section>
       <h1 className="flexCenter mb-10 font-bold">
         🚀 기술 분석을 원하는 직무를 선택해주세요.
       </h1>
