@@ -4,6 +4,7 @@ import Hydrate from "@/tanstackQuery/utils/hydrateOnClient";
 import { jopTypeFenquencyAPI } from "./apis/jopTypeFenquencyAPI";
 import JopTypeFrequencySection from "./components/organisms/JopTypeFrequencySection";
 import { translateClassification } from "@/app/common/utils/translate";
+import AnlaysisNavigationProvider from "@/app/common/utils/AnlaysisNavigationProvider";
 
 export default async function JopTypeFenquencyPage({
   params,
@@ -30,9 +31,11 @@ export default async function JopTypeFenquencyPage({
 
   return (
     <Hydrate state={dehydratedState}>
-      <JopTypeFrequencySection
-        postingClassification={translatedClassification}
-      />
+      <AnlaysisNavigationProvider>
+        <JopTypeFrequencySection
+          postingClassification={translatedClassification}
+        />
+      </AnlaysisNavigationProvider>
     </Hydrate>
   );
 }

@@ -3,15 +3,11 @@
 import Link from "next/link";
 import { useGetClassification } from "../../common/hooks/useGetClassification";
 import { usePathname } from "next/navigation";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import {
-  hideNavigation,
-  selectShowNavigationState,
-} from "@/redux/features/layoutSlice";
+import { useAppSelector } from "@/redux/hooks";
+import { selectShowNavigationState } from "@/redux/features/layoutSlice";
 
 const AnalysisNavigation = () => {
   const showNavigationState = useAppSelector(selectShowNavigationState);
-  const dispatch = useAppDispatch();
   const pathname = usePathname();
   const { classification } = useGetClassification();
 
@@ -43,7 +39,6 @@ const AnalysisNavigation = () => {
             <Link
               className={`inline-block w-full p-2`}
               href={`${process.env.NEXT_PUBLIC_BASE_URL}/${classification}/${link.href}`}
-              onClick={() => dispatch(hideNavigation())}
               aria-current={
                 pathname ===
                 `${process.env.NEXT_PUBLIC_BASE_URL}/${classification}${link.href}`

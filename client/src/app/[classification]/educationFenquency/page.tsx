@@ -4,6 +4,7 @@ import Hydrate from "@/tanstackQuery/utils/hydrateOnClient";
 import { educationFenquencyAPI } from "./apis/educationFenquencyAPI";
 import EducationFenquencySection from "./components/organisms/EducationFenquencySection";
 import { translateClassification } from "@/app/common/utils/translate";
+import AnlaysisNavigationProvider from "@/app/common/utils/AnlaysisNavigationProvider";
 
 export default async function IndustryFrequencyPage({
   params,
@@ -30,9 +31,11 @@ export default async function IndustryFrequencyPage({
 
   return (
     <Hydrate state={dehydratedState}>
-      <EducationFenquencySection
-        postingClassification={translatedClassification}
-      />
+      <AnlaysisNavigationProvider>
+        <EducationFenquencySection
+          postingClassification={translatedClassification}
+        />
+      </AnlaysisNavigationProvider>
     </Hydrate>
   );
 }
