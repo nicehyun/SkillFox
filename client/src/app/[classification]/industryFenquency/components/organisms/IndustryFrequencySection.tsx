@@ -2,7 +2,7 @@
 
 import AnalysisSectionLayout, {
   GuideProps,
-} from "@/app/features/common/components/organisms/AnalysisSectionLayout";
+} from "@/app/common/components/organisms/AnalysisSectionLayout";
 import { useGetIndustryFrequencyQuery } from "../../hooks/useGetIndustryFrequencyQuery";
 import IndustryAnalysisChart from "./IndustryAnalysisChart";
 import MainGuideContent from "../molecules/MainGuideContent";

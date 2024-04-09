@@ -1,8 +1,8 @@
 "use client";
 
 import { ReactNode } from "react";
-import RouteNavigation from "../features/layout/views/AnalysisNavigationController";
-import AnalysisNavigationController from "../features/layout/views/AnalysisNavigationController";
+import RouteNavigation from "../layout/views/AnalysisNavigationController";
+import AnalysisNavigationController from "../layout/views/AnalysisNavigationController";
 import { useAppSelector } from "@/redux/hooks";
 import { selectShowNavigationState } from "@/redux/features/layoutSlice";
 

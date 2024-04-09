@@ -2,10 +2,10 @@
 
 import AnalysisSectionLayout, {
   GuideProps,
-} from "@/app/features/common/components/organisms/AnalysisSectionLayout";
+} from "@/app/common/components/organisms/AnalysisSectionLayout";
 import { useGetExperienceRangeFrequencyQuery } from "../../hooks/useGetExperienceRangeFrequencyQuery";
 import MainGuideContent from "../molecules/MainGuideContent";
-import SelectShowCountBarChart from "@/app/features/common/components/organisms/SelectShowCountBarChart";
+import SelectShowCountBarChart from "@/app/common/components/organisms/SelectShowCountBarChart";
 import ExperienceRangeContoller from "../molecules/ExperienceRangeContoller";
 
 interface IEducationFenquencySectionProps {

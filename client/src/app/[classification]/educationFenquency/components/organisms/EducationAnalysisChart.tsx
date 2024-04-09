@@ -1,9 +1,9 @@
 "use client";
 
-import { ChartData } from "@/app/features/common/types";
-import ChartLayout from "@/app/features/common/components/atoms/ChartLayout";
-import DownloadPDFButton from "@/app/features/common/components/atoms/DownloadPDFButton";
-import CustomPieChart from "@/app/features/common/components/organisms/CustomPieChart";
+import { ChartData } from "@/app/common/types";
+import ChartLayout from "@/app/common/components/atoms/ChartLayout";
+import DownloadPDFButton from "@/app/common/components/atoms/DownloadPDFButton";
+import CustomPieChart from "@/app/common/components/organisms/CustomPieChart";
 
 interface IEducationAnalysisChartProps {
   id: string;

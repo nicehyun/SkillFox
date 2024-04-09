@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { ChartData } from "../../../features/common/types";
-import { useGetClassification } from "@/app/features/common/hooks/useGetClassification";
+import { ChartData } from "../../../common/types";
+import { useGetClassification } from "@/app/common/hooks/useGetClassification";
 import { experienceRangeFenquencyAPI } from "../apis/experienceRangeFenquencyAPI";
 import { useState } from "react";
 

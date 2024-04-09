@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import PageLayout from "../features/layout/views/PageLayout";
+import PageLayout from "../layout/views/PageLayout";
 
 interface ILayoutProps {
   children: ReactNode;

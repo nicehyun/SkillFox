@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { TbBrandReactNative } from "react-icons/tb";
-import Icon from "../features/common/components/atoms/Icon";
+import Icon from "../common/components/atoms/Icon";
 import { SiApache, SiTensorflow } from "react-icons/si";
 import { LuServer } from "react-icons/lu";
 import { IoStatsChartOutline } from "react-icons/io5";

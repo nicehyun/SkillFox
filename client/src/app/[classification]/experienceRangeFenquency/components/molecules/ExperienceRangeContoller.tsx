@@ -1,10 +1,10 @@
 "use client";
 
 import DualRangeSlider from "./DualRangeSlider";
-import Button from "@/app/features/common/components/atoms/Button";
+import Button from "@/app/common/components/atoms/Button";
 import { Range } from "../../hooks/useGetExperienceRangeFrequencyQuery";
 import { useState } from "react";
-import ToolTip from "@/app/features/common/components/molecules/ToolTip";
+import ToolTip from "@/app/common/components/molecules/ToolTip";
 import ExperienceRangeControllerGuideContent from "./ExperienceRangeControllerGuideContent";
 
 interface IExperienceRangeContollerProps {

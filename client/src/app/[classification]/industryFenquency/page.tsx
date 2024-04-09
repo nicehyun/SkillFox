@@ -3,7 +3,7 @@ import { dehydrate } from "@tanstack/react-query";
 import Hydrate from "@/tanstackQuery/utils/hydrateOnClient";
 import IndustryFrequencySection from "./components/organisms/IndustryFrequencySection";
 import { industryFenquencyAPI } from "./apis/industryFenquencyAPI";
-import { translateClassification } from "@/app/features/common/utils/translate";
+import { translateClassification } from "@/app/common/utils/translate";
 
 export default async function IndustryFrequencyPage({
   params,

@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { ObjectChartData } from "../../../features/common/types";
-import { useGetClassification } from "@/app/features/common/hooks/useGetClassification";
+import { ObjectChartData } from "../../../common/types";
+import { useGetClassification } from "@/app/common/hooks/useGetClassification";
 import { jopTypeFenquencyAPI } from "../apis/jopTypeFenquencyAPI";
 
 export type ResponseChartData = {

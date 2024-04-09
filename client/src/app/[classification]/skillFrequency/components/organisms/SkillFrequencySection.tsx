@@ -3,9 +3,9 @@
 import { useGetSkillFrequencyQuery } from "../../hooks/useGetSkillFrequencyQuery";
 import AnalysisSectionLayout, {
   GuideProps,
-} from "@/app/features/common/components/organisms/AnalysisSectionLayout";
+} from "@/app/common/components/organisms/AnalysisSectionLayout";
 import MainGuideContent from "../molecules/MainGuideContent";
-import SelectShowCountBarChart from "@/app/features/common/components/organisms/SelectShowCountBarChart";
+import SelectShowCountBarChart from "@/app/common/components/organisms/SelectShowCountBarChart";
 
 interface IEducationFenquencySectionProps {
   postingClassification: string;

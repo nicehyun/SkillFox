@@ -2,7 +2,7 @@
 
 import AnalysisSectionLayout, {
   GuideProps,
-} from "@/app/features/common/components/organisms/AnalysisSectionLayout";
+} from "@/app/common/components/organisms/AnalysisSectionLayout";
 import { useGetJobTypeFrequencyQuery } from "../../hooks/useGetJobTypeFrequencyQuery";
 import JopTypeAnalysisChart from "./JopTypeAnalysisChart";
 import MainGuideContent from "../molecules/MainGuideContent";

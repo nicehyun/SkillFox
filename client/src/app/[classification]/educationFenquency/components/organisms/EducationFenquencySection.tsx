@@ -2,7 +2,7 @@
 
 import AnalysisSectionLayout, {
   GuideProps,
-} from "@/app/features/common/components/organisms/AnalysisSectionLayout";
+} from "@/app/common/components/organisms/AnalysisSectionLayout";
 import { useGetEducationFrequencyQuery } from "../../hooks/useGetEducationFrequencyQuery";
 import EducationAnalysisCharts from "./EducationAnalysisCharts";
 import MainGuideContent from "../molecules/MainGuideContent";

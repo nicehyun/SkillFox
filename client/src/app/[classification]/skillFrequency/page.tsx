@@ -1,6 +1,6 @@
 import { skillFenquencyAPI } from "@/app/[classification]/skillFrequency/apis/skillFenquencyAPI";
 import SkillFrequencySection from "@/app/[classification]/skillFrequency/components/organisms/SkillFrequencySection";
-import { translateClassification } from "@/app/features/common/utils/translate";
+import { translateClassification } from "@/app/common/utils/translate";
 import { getQueryClient } from "@/tanstackQuery/utils/getQueryClient";
 import Hydrate from "@/tanstackQuery/utils/hydrateOnClient";
 
