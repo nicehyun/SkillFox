@@ -15,7 +15,7 @@ const AnalysisLayout = ({ children }: { children: ReactNode }) => {
       <RouteNavigation />
       <AnlaysisNavigationProvider>
         <div
-          className={`${showNavigationState ? "pl-[288px]" : "pl-18"} pr-10 transition-all duration-300 ease-in-out`}
+          className={`${showNavigationState ? "sm:pt-[240px] md:pt-[240px] lg:pl-[288px] xl:pl-[288px]" : "sm:pt-[48px] md:pt-[48px] lg:pl-20 xl:pl-20"} px-4 pr-10 transition-all duration-300 ease-in-out`}
         >
           {children}
         </div>
