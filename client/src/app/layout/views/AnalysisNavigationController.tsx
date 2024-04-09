@@ -17,7 +17,7 @@ const AnalysisNavigationController = () => {
     <>
       <div
         aria-label="직무 선택"
-        className={`fixed top-[80px] z-20 h-screen border-border bg-secondary px-4 py-2 sm:h-auto sm:w-screen sm:border-b-[1px] md:h-auto md:w-screen md:border-b-[1px] lg:border-r-[1px] xl:border-r-[1px]`}
+        className={`fixed top-[80px] z-20 bg-secondary px-4 py-2 sm:h-auto sm:w-screen md:h-auto md:w-screen`}
       >
         <button
           onClick={() => dispatch(toggleShowNavigation())}

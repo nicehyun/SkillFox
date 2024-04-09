@@ -21,9 +21,9 @@ export default function RootLayout({
           <main>
             <Header />
 
-            <div className="md:4 min-w-[320px] pb-24 pt-30">{children}</div>
+            <div className="min-w-[320px] pb-24 pt-30">{children}</div>
 
-            {/* <Footer /> */}
+            <Footer />
           </main>
         </Providers>
       </body>
