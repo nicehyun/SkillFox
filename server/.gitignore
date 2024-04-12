@@ -69,3 +69,4 @@ debug.log
 
 # mypy
 .mypy_cache/
+secrets.json
