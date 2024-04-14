@@ -3,18 +3,19 @@
 import AnalysisSectionLayout, {
   GuideProps,
 } from "@/app/common/components/organisms/AnalysisSectionLayout";
-import { useGetIndustryFrequencyQuery } from "../../hooks/useGetIndustryFrequencyQuery";
-import IndustryAnalysisChart from "./IndustryAnalysisChart";
-import MainGuideContent from "../molecules/MainGuideContent";
 
-interface IIndustryFrequencySectionProps {
+import ResionAnalysisCharts from "./ResionAnalysisCharts";
+import MainGuideContent from "../molecules/MainGuideContent";
+import { useGetResion1FrequencyQuery } from "../../hooks/useGetResion1FrequencyQuery";
+
+interface IResionFrequencySectionProps {
   postingClassification: string;
 }
 
-const IndustryFrequencySection = ({
+const ResionFrequencySection = ({
   postingClassification,
-}: IIndustryFrequencySectionProps) => {
-  const { data, error, isError } = useGetIndustryFrequencyQuery();
+}: IResionFrequencySectionProps) => {
+  const { data, error, isError } = useGetResion1FrequencyQuery();
 
   //   if (isError) return <div>Error: {error.message}</div>;
 
@@ -25,16 +26,13 @@ const IndustryFrequencySection = ({
 
   return (
     <AnalysisSectionLayout
-      analysisTitle="산업별 기술 분석"
+      analysisTitle="지역별 기술 분석"
       guide={guideProps}
       postingCount={data?.count ?? 0}
     >
-      <IndustryAnalysisChart
-        chartData={data?.data ?? []}
-        count={data?.count ?? 0}
-      />
+      {data?.data && <ResionAnalysisCharts />}
     </AnalysisSectionLayout>
   );
 };
 
-export default IndustryFrequencySection;
+export default ResionFrequencySection;

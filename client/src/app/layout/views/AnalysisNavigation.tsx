@@ -13,10 +13,10 @@ const AnalysisNavigation = () => {
 
   const links = [
     { href: `/skillFrequency`, content: "기술 빈도 분석" },
-    { href: `/industryFenquency`, content: "산업별 분석" },
+
     {
-      href: `/jopTypeFenquency`,
-      content: "근무 형태별 분석",
+      href: `/resion1Fenquency`,
+      content: "지역별 분석",
     },
     { href: `/educationFenquency`, content: "학력별 분석" },
     {

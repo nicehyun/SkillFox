@@ -1,8 +1,8 @@
-export const jopTypeFenquencyAPI = {
-  getJopTypeFenquencyAnalysis: async (classification: string) => {
+export const resionFenquencyAPI = {
+  getResion1FenquencyAnalysis: async (classification: string) => {
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/${classification}/jobTypeFrequency`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/${classification}/resion1Frequency`,
         {
           next: { revalidate: 0 },
         },

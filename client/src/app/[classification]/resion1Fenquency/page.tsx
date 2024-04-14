@@ -1,12 +1,12 @@
 import { getQueryClient } from "@/tanstackQuery/utils/getQueryClient";
 import { dehydrate } from "@tanstack/react-query";
 import Hydrate from "@/tanstackQuery/utils/hydrateOnClient";
-import { jopTypeFenquencyAPI } from "./apis/jopTypeFenquencyAPI";
-import JopTypeFrequencySection from "./components/organisms/JopTypeFrequencySection";
+import { resionFenquencyAPI } from "./apis/resionFenquencyAPI";
 import { translateClassification } from "@/app/common/utils/translate";
 import AnlaysisNavigationProvider from "@/app/common/utils/AnlaysisNavigationProvider";
+import ResionFrequencySection from "./components/organisms/ResionFrequencySection";
 
-export default async function JopTypeFenquencyPage({
+export default async function ResionFenquencyPage({
   params,
 }: {
   params: { classification: string };
@@ -18,7 +18,7 @@ export default async function JopTypeFenquencyPage({
   await queryClient.prefetchQuery(
     ["regionFrequency", classification],
     async () =>
-      await jopTypeFenquencyAPI.getJopTypeFenquencyAnalysis(classification),
+      await resionFenquencyAPI.getResion1FenquencyAnalysis(classification),
   );
 
   const dehydratedState = dehydrate(queryClient);
@@ -32,7 +32,7 @@ export default async function JopTypeFenquencyPage({
   return (
     <Hydrate state={dehydratedState}>
       <AnlaysisNavigationProvider>
-        <JopTypeFrequencySection
+        <ResionFrequencySection
           postingClassification={translatedClassification}
         />
       </AnlaysisNavigationProvider>
