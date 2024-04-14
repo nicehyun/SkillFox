@@ -5,16 +5,6 @@ from . import views
 urlpatterns = [
     path("skill-frequency/", views.get_skills_frequency, name="skill_frequency"),
     path(
-        "industry-frequency/",
-        views.get_top_industries_based_on_top_skills,
-        name="industry_frequency",
-    ),
-    path(
-        "job-type-frequency/",
-        views.get_top_skills_by_jobtype,
-        name="job_type_frequency",
-    ),
-    path(
         "education-frequency/",
         views.get_top_skills_by_education,
         name="education_frequency",
@@ -23,5 +13,10 @@ urlpatterns = [
         "experience-range-frequency/",
         views.get_top_skills_by_experience_range,
         name="experience_range_frequency",
+    ),
+    path(
+        "region1-frequency/",
+        views.get_top_skills_by_region1,
+        name="region1_frequency",
     ),
 ]

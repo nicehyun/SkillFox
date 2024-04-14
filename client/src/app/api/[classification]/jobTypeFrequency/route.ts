@@ -8,7 +8,7 @@ export async function GET(
 
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BE_URL}/api/job-type-frequency/?classification=${classification}`,
+      `${process.env.NEXT_PUBLIC_BE_URL}/api/region1-frequency/?classification=${classification}`,
       {
         next: { revalidate: 0 },
       },

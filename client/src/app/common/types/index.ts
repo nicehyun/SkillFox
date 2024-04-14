@@ -16,3 +16,13 @@ export interface IChartProps {
 }
 
 export type ObjectChartData = { [key: string]: ChartData[] };
+
+export type EducationChartData = {
+  education: string;
+  skills: ChartData[];
+};
+
+export type RegionChartData = {
+  region: string;
+  skills: ChartData[];
+};

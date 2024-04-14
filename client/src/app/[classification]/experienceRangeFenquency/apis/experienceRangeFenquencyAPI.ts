@@ -4,6 +4,7 @@ export const experienceRangeFenquencyAPI = {
     experienceMin: number | null,
     experienceMax: number | null,
   ) => {
+    console.log("apis");
     try {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/${classification}/experienceRangeFrequency`,

@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import { ObjectChartData } from "../../../common/types";
+import { EducationChartData } from "../../../common/types";
 import { useGetClassification } from "@/app/common/hooks/useGetClassification";
 import { educationFenquencyAPI } from "../apis/educationFenquencyAPI";
 
 export type EducationResponseChartData = {
-  data: ObjectChartData;
+  data: EducationChartData[];
   count: number;
 };
 

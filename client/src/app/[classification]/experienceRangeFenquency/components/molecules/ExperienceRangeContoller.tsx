@@ -15,7 +15,7 @@ const ExperienceRangeContoller = ({
   onClickExperienceRangeApply,
 }: IExperienceRangeContollerProps) => {
   const [experienceMax, setExperienceMax] = useState(0);
-  const [experienceMin, setExperienceMin] = useState(20);
+  const [experienceMin, setExperienceMin] = useState(30);
 
   return (
     <>
@@ -24,7 +24,7 @@ const ExperienceRangeContoller = ({
       <div className="flex h-[60px] items-center">
         <DualRangeSlider
           min={0}
-          max={20}
+          max={30}
           currentMin={experienceMin}
           currentMax={experienceMax}
           onChange={({ max, min }: Range) => {

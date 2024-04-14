@@ -15,6 +15,7 @@ const JopTypeFrequencySection = ({
   postingClassification,
 }: IJopTypeFrequencySectionProps) => {
   const { data, error, isError } = useGetJobTypeFrequencyQuery();
+  console.log(data);
 
   //   if (isError) return <div>Error: {error.message}</div>;
 
@@ -25,7 +26,7 @@ const JopTypeFrequencySection = ({
 
   return (
     <AnalysisSectionLayout
-      analysisTitle="근무 형태별 기술 분석"
+      analysisTitle="지역별 기술 분석"
       guide={guideProps}
       postingCount={data?.count ?? 0}
     >

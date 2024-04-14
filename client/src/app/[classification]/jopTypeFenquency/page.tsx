@@ -16,7 +16,7 @@ export default async function JopTypeFenquencyPage({
   const { classification } = params;
 
   await queryClient.prefetchQuery(
-    ["jobTypeFrequency", classification],
+    ["regionFrequency", classification],
     async () =>
       await jopTypeFenquencyAPI.getJopTypeFenquencyAnalysis(classification),
   );

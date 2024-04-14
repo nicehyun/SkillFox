@@ -1,10 +1,10 @@
-from collections import Counter, defaultdict
+from collections import Counter
 
-from django.db.models import Count, Q
+from django.db.models import Q
 from django.http import JsonResponse
-from postings.constants import EXCLUDED_CODES, EXCLUDED_SKILL_NAMES, SKILL_IDS
+from postings.constants import CLASSIFICATION
 
-from .models import Education, JobType, Posting, Region, Skill
+from .models import JobPosting
 
 # 시간 복작도 개선 전 ----------------------------------------------------------------
 # - 첫 번째로 모든 Posting 객체를 순회하여 job_code를 추출 : O(N*M)
@@ -29,203 +29,168 @@ from .models import Education, JobType, Posting, Region, Skill
 def validate_classification(request):
     """classification 유효성 검사"""
     classification = request.GET.get("classification", None)
-    if classification not in SKILL_IDS:
+    if classification not in CLASSIFICATION:
         return JsonResponse({"error": "분류 값이 유효하지 않습니다."}, status=400)
     return classification
 
 
-def filter_postings_by_skill(classification):
-    """classification를 기준으로 포스팅을 필터링"""
-    skill_code = SKILL_IDS.get(classification)
-    if skill_code:
-        postings_with_skill = Posting.objects.filter(skills__code=skill_code).distinct()
-        return postings_with_skill
-    else:
-        return Posting.objects.none()  # 일치하는 스킬 코드가 없으면 빈 쿼리셋 반환
+def filter_postings_by_classification(classificationValue):
+    """classification를 기준으로 JobPosting을 필터링"""
+    postings_with_classification = JobPosting.objects.filter(
+        classification=classificationValue
+    )
+
+    print(postings_with_classification)
+    return postings_with_classification
 
 
 def validate_and_filter_postings(request):
     """
     classification 유효성 검사, classification를 기준으로 포스팅을 필터링
     """
-    classification = request.GET.get("classification", None)
-    if classification not in SKILL_IDS:
-        return None, JsonResponse({"error": "분류 값이 유효하지 않습니다."}, status=400)
+    classification = validate_classification(request)
 
-    skill_code = SKILL_IDS[classification]
-    postings_with_skill = Posting.objects.filter(skills__code=skill_code).distinct()
-    return postings_with_skill, None
+    if isinstance(classification, JsonResponse):
+        return None, classification
+
+    filted_postings = filter_postings_by_classification(classification)
+
+    return filted_postings, None
 
 
-def aggregate_top_skills(postings_with_skill):
-    """상위 스킬을 집계"""
-    skills_with_counts = (
-        Skill.objects.filter(postings__in=postings_with_skill)
-        .exclude(code__in=EXCLUDED_CODES)
-        .annotate(num_postings=Count("postings"))
-        .order_by("-num_postings")[:50]
-    )
-    return skills_with_counts
+def aggregate_top_skills(postings):
+    """상위 스킬을 집계하여 스킬 이름과 카운트를 딕셔너리 리스트로 반환합니다."""
+
+    skill_counts = Counter()
+
+    for posting in postings:
+        skills = posting.skills
+        skill_counts.update(skills)
+
+    # 최종적으로 상위 50개 스킬만 반환 (예시로 50개 제한을 둔 경우)
+    return skill_counts.most_common(50)
 
 
 def get_skills_frequency(request):
-    postings_with_skill, error_response = validate_and_filter_postings(request)
+    filted_postings, error_response = validate_and_filter_postings(request)
     if error_response:
         return error_response
 
-    print(postings_with_skill)
-    print(error_response)
-
-    skills_with_counts = aggregate_top_skills(postings_with_skill)
+    skills_with_counts = aggregate_top_skills(filted_postings)
 
     formatted_data = [
-        {"name": skill.name, "value": skill.num_postings}
-        for skill in skills_with_counts
+        {"name": skill[0], "value": skill[1]} for skill in skills_with_counts
     ]
 
     return JsonResponse(
-        {"data": formatted_data, "count": postings_with_skill.count()},
-        safe=False,
-        status=200,
-    )
-
-
-def get_top_industries_based_on_top_skills(request):
-    postings_with_skill, error_response = validate_and_filter_postings(request)
-    if error_response:
-        return error_response
-
-    skills_with_counts = aggregate_top_skills(postings_with_skill)
-
-    # 상위 스킬 코드 목록
-    top_skill_codes = [skill.code for skill in skills_with_counts]
-
-    # 각 산업별로 해당 스킬을 포함하는 포스팅 수 집계
-    industry_counts = defaultdict(int)
-    for posting in postings_with_skill:
-        # 각 포스팅에서 상위 스킬에 해당하는 스킬의 수를 계산
-        posting_top_skill_count = posting.skills.filter(
-            code__in=top_skill_codes
-        ).count()
-        # 포스팅의 각 산업에 대해 스킬 수만큼 점수를 추가
-        for industry in posting.industries.all():
-            industry_counts[industry.name] += posting_top_skill_count
-
-    # 상위 10개 산업 선택
-    top_industries = sorted(industry_counts.items(), key=lambda x: x[1], reverse=True)[
-        :10
-    ]
-
-    # 응답 데이터 형식
-    formatted_data = [
-        {"name": industry, "value": count} for industry, count in top_industries
-    ]
-
-    return JsonResponse(
-        {"data": formatted_data, "count": postings_with_skill.count()}, safe=False
-    )
-
-
-def get_top_skills_by_jobtype(request):
-    postings_with_skill, error_response = validate_and_filter_postings(request)
-    if error_response:
-        return error_response
-    excluded_jobtype_names = ["1"]
-
-    jobtype_skills = {}
-    for jobtype in JobType.objects.exclude(name__in=excluded_jobtype_names):
-        postings = postings_with_skill.filter(job_types=jobtype)
-
-        # skill_counts 쿼리셋에서 빈 값과 특정 스킬 이름을 제외하고 카운트
-        skill_counts = (
-            Skill.objects.filter(postings__in=postings)
-            .exclude(name__in=EXCLUDED_SKILL_NAMES)
-            .annotate(num_postings=Count("postings"))
-            .order_by("-num_postings")[:10]
-        )
-
-        # jobtype_skills 딕셔너리에 결과 추가
-        jobtype_skills[jobtype.name] = [
-            {"name": skill.name, "value": skill.num_postings} for skill in skill_counts
-        ]
-
-    return JsonResponse(
-        {"data": jobtype_skills, "count": postings_with_skill.count()},
+        {"data": formatted_data, "count": filted_postings.count()},
         safe=False,
         status=200,
     )
 
 
 def get_top_skills_by_education(request):
-    postings_with_skill, error_response = validate_and_filter_postings(request)
+    filted_postings, error_response = validate_and_filter_postings(request)
     if error_response:
         return error_response
 
-    education_skills = {}
-    for education in Education.objects.all():
-        postings = postings_with_skill.filter(educations=education)
+    # JobPosting 모델에서 모든 유니크한 'education' 값을 가져옵니다.
+    unique_educations = filted_postings.values_list("education", flat=True).distinct()
 
-        skill_counts = (
-            Skill.objects.filter(postings__in=postings)
-            .exclude(name__in=EXCLUDED_SKILL_NAMES)
-            .annotate(num_postings=Count("postings"))
-            .order_by("-num_postings")[:10]
-        )
+    # 결과를 담을 리스트 초기화
+    results = []
 
-        education_skills[education.name] = [
-            {"name": skill.name, "value": skill.num_postings} for skill in skill_counts
-        ]
+    for educationValue in unique_educations:
+        if educationValue:  # 빈 학력 값은 무시합니다.
+            # 해당 education 값을 가진 포스팅을 필터링합니다.
+            postings = filted_postings.filter(education=educationValue)
+
+            # 필터링된 포스팅으로부터 상위 스킬을 집계합니다.
+            top_skills = aggregate_top_skills(postings)
+
+            # 결과를 리스트에 추가합니다.
+            results.append(
+                {
+                    "education": educationValue,
+                    "skills": [
+                        {"name": skill, "value": count} for skill, count in top_skills
+                    ],
+                }
+            )
 
     return JsonResponse(
-        {"data": education_skills, "count": postings_with_skill.count()},
+        {"data": results, "count": filted_postings.count()},
+        safe=False,
+        status=200,
+    )
+
+
+def get_top_skills_by_region1(request):
+    filted_postings, error_response = validate_and_filter_postings(request)
+    if error_response:
+        return error_response
+
+    unique_educations = filted_postings.values_list("region1", flat=True).distinct()
+
+    # 결과를 담을 리스트 초기화
+    results = []
+
+    for regionValue in unique_educations:
+        if regionValue and regionValue != "No results found":
+
+            postings = filted_postings.filter(region1=regionValue)
+
+            top_skills = aggregate_top_skills(postings)
+
+            results.append(
+                {
+                    "region": regionValue,
+                    "skills": [
+                        {"name": skill, "value": count} for skill, count in top_skills
+                    ],
+                }
+            )
+
+    return JsonResponse(
+        {"data": results, "count": filted_postings.count()},
         safe=False,
         status=200,
     )
 
 
 def get_top_skills_by_experience_range(request):
-    postings_with_skill, error_response = validate_and_filter_postings(request)
+    filted_postings, error_response = validate_and_filter_postings(request)
     if error_response:
         return error_response
 
-    # 프론트에서 전달받은 experience_min과 experience_max 값을 불러옵니다.
-    experience_min = request.GET.get("experience-min")
-    experience_max = request.GET.get("experience-max")
+    experience_min = request.GET.get("experience-min", "").strip()
+    experience_max = request.GET.get("experience-max", "").strip()
 
-    experience_min = int(experience_min) if experience_min else None
-    experience_max = int(experience_max) if experience_max else None
+    # 값이 빈 문자열이거나 숫자가 아니면 기본값 설정
+    experience_min = int(experience_min) if experience_min.isdigit() else 0
+    experience_max = int(experience_max) if experience_max.isdigit() else 30
 
-    if experience_min is not None and experience_max is not None:
-        filtered_postings_with_experience_range = postings_with_skill.filter(
-            Q(experience_min__gte=experience_min), Q(experience_max__lte=experience_max)
-        )
-    elif experience_min is not None:
-        filtered_postings_with_experience_range = postings_with_skill.filter(
-            experience_min__gte=experience_min
-        )
-    elif experience_max is not None:
-        filtered_postings_with_experience_range = postings_with_skill.filter(
-            experience_max__lte=experience_max
-        )
-    else:
-        filtered_postings_with_experience_range = postings_with_skill
+    print(f"experience_min : {experience_min}")
+    print(f"experience_max : {experience_max}")
 
-    # 스킬 집계
-    skill_counts = (
-        Skill.objects.filter(postings__in=filtered_postings_with_experience_range)
-        .exclude(name__in=EXCLUDED_SKILL_NAMES)
-        .annotate(num_postings=Count("postings"))
-        .order_by("-num_postings")[:50]
+    # 경험치에 따른 포스팅 필터링
+    filtered_postings_with_experience_range = filted_postings.filter(
+        Q(experience_min__gte=experience_min) & Q(experience_max__lte=experience_max)
     )
+
+    skills_with_counts = aggregate_top_skills(filtered_postings_with_experience_range)
 
     # 집계된 데이터를 리스트로 포맷합니다.
     formatted_data = [
-        {"name": skill.name, "value": skill.num_postings} for skill in skill_counts
+        {"name": skill[0], "value": skill[1]} for skill in skills_with_counts
     ]
 
     # 결과 데이터를 JSON 형식으로 반환합니다.
     return JsonResponse(
-        {"data": formatted_data, "count": postings_with_skill.count()},
+        {
+            "data": formatted_data,
+            "count": filtered_postings_with_experience_range.count(),
+        },
         safe=False,
         status=200,
     )

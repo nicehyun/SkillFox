@@ -14,8 +14,10 @@ export type Range = { min: number; max: number };
 export const useGetExperienceRangeFrequencyQuery = () => {
   const { classification } = useGetClassification();
 
-  const [experienceMax, setExperienceMax] = useState(20);
+  const [experienceMax, setExperienceMax] = useState(30);
   const [experienceMin, setExperienceMin] = useState(0);
+  console.log(experienceMin);
+  console.log(experienceMax);
 
   const { data, isLoading } = useQuery<ResponseChartData, Error>(
     ["experienceRangeFrequency", classification, experienceMin, experienceMax],
@@ -26,8 +28,8 @@ export const useGetExperienceRangeFrequencyQuery = () => {
         experienceMax,
       ),
     {
-      staleTime: 60 * 60 * 1000,
-      cacheTime: 60 * 60 * 1000,
+      // staleTime: 60 * 60 * 1000,
+      // cacheTime: 60 * 60 * 1000,
     },
   );
 
