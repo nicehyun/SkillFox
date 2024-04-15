@@ -22,23 +22,25 @@ class Command(BaseCommand):
             self.style.SUCCESS("Starting the browser and fetching links...")
         )
 
-        keyword = "데이터분석"
-        classification = "DA"
-        links = self.fetch_links_with_scroll(keyword)
+        # keyword = "데이터분석"
+        # classification = "DA"
+        # links = self.fetch_links_with_scroll(keyword)
 
-        for url in links:  # 수집한 링크들을 순회
-            try:
-                page_data = self.parse_page(url)  # 각 링크에서 페이지 데이터 파싱
-                self.save_job_posting(
-                    page_data, classification
-                )  # 파싱된 데이터를 DB에 저장
-                self.stdout.write(
-                    self.style.SUCCESS(f"Successfully saved data from {url}")
-                )
-            except Exception as e:
-                self.stdout.write(
-                    self.style.ERROR(f"Failed to process {url}: {str(e)}")
-                )
+        test = page_data = self.parse_page("https://www.jumpit.co.kr/position/22821")
+
+        # for url in links:  # 수집한 링크들을 순회
+        #     try:
+        #         page_data = self.parse_page(url)  # 각 링크에서 페이지 데이터 파싱
+        #         self.save_job_posting(
+        #             page_data, classification
+        #         )  # 파싱된 데이터를 DB에 저장
+        #         self.stdout.write(
+        #             self.style.SUCCESS(f"Successfully saved data from {url}")
+        #         )
+        #     except Exception as e:
+        #         self.stdout.write(
+        #             self.style.ERROR(f"Failed to process {url}: {str(e)}")
+        #         )
 
     def fetch_links_with_scroll(self, keyword):
         driver = webdriver.Chrome()
@@ -103,6 +105,7 @@ class Command(BaseCommand):
         education = self.extract_education(soup)
         region = self.extract_region(soup)
 
+        print(skills)
         return {
             "skills": skills,
             "experience": experience,
@@ -112,20 +115,37 @@ class Command(BaseCommand):
 
     # -------------------------------- 기술 추출
     def extract_skill_stacks(self, soup):
-        position_info_div = soup.find("div", class_="position_info")
         divs_in_pre = [
             pre.find_all("div")
             for pre in (
-                dd.find("pre") for dd in position_info_div.find("dl").find_all("dd")
+                dd.find("pre")
+                for dd in soup.find("div", class_="position_info")
+                .find("dl")
+                .find_all("dd")
             )
             if pre
         ]
-        techs = {
-            div.get_text(strip=True).lower()
-            for div_list in divs_in_pre
-            for div in div_list
-        }
-        return list(techs)
+        images_descriptions = [
+            div.get_text() for div_list in divs_in_pre for div in div_list
+        ]
+
+        # "자격요건" dt 태그 찾기
+        dt_tag = soup.find("dt", string="자격요건")
+        dd_tag = dt_tag.find_next_sibling("dd") if dt_tag else None
+
+        # 자격요건 기술 분리 및 필터링
+        # words = re.findall(r"[A-Za-z0-9.]+", dd_tag.text if dd_tag else "")
+        # technology_stacks = list(filter(lambda word: word[0].isupper(), words))
+
+        pattern = re.compile(r"\b[A-Z][A-Za-z0-9]*(?:\s+[A-Z][A-Za-z0-9]*)*")
+        technology_stacks = pattern.findall(dd_tag.text)
+
+        # 리스트 합치기 및 중복 제거
+        lowercase_list1 = [item.lower() for item in images_descriptions]
+        lowercase_list2 = [item.lower() for item in technology_stacks]
+        combined_unique_list = list(set(lowercase_list1 + lowercase_list2))
+
+        return combined_unique_list
 
     # -------------------------------- 경력 추출
     def extract_experience_information(self, soup):
