@@ -5,7 +5,7 @@ import AnalysisSectionLayout, {
 } from "@/app/common/components/organisms/AnalysisSectionLayout";
 import { useGetExperienceRangeFrequencyQuery } from "../../hooks/useGetExperienceRangeFrequencyQuery";
 import MainGuideContent from "../molecules/MainGuideContent";
-import SelectShowCountBarChart from "@/app/common/components/organisms/SelectShowCountBarChart";
+import SelectShowCountBarChart from "@/app/common/components/organisms/SelectShowCountMonthlyBarChart";
 import ExperienceRangeContoller from "../molecules/ExperienceRangeContoller";
 
 interface IEducationFenquencySectionProps {

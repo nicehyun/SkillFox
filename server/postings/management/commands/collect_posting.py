@@ -14,6 +14,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 
 
+# JobPosting.objects.all().delete()
 class Command(BaseCommand):
     help = "Crawl a website and extract information."
 
@@ -22,25 +23,24 @@ class Command(BaseCommand):
             self.style.SUCCESS("Starting the browser and fetching links...")
         )
 
-        # keyword = "데이터분석"
-        # classification = "DA"
-        # links = self.fetch_links_with_scroll(keyword)
+        keyword = "머신러닝"
+        classification = "ML"
+        links = self.fetch_links_with_scroll(keyword)
 
-        test = page_data = self.parse_page("https://www.jumpit.co.kr/position/22821")
-
-        # for url in links:  # 수집한 링크들을 순회
-        #     try:
-        #         page_data = self.parse_page(url)  # 각 링크에서 페이지 데이터 파싱
-        #         self.save_job_posting(
-        #             page_data, classification
-        #         )  # 파싱된 데이터를 DB에 저장
-        #         self.stdout.write(
-        #             self.style.SUCCESS(f"Successfully saved data from {url}")
-        #         )
-        #     except Exception as e:
-        #         self.stdout.write(
-        #             self.style.ERROR(f"Failed to process {url}: {str(e)}")
-        #         )
+        for url in links:  # 수집한 링크들을 순회
+            try:
+                page_data = self.parse_page(url)  # 각 링크에서 페이지 데이터 파싱
+                self.save_job_posting(
+                    page_data, classification
+                )  # 파싱된 데이터를 DB에 저장
+                self.stdout.write(
+                    self.style.SUCCESS(f"Successfully saved data from {url}")
+                )
+                time.sleep(3)
+            except Exception as e:
+                self.stdout.write(
+                    self.style.ERROR(f"Failed to process {url}: {str(e)}")
+                )
 
     def fetch_links_with_scroll(self, keyword):
         driver = webdriver.Chrome()
@@ -143,6 +143,7 @@ class Command(BaseCommand):
         # 리스트 합치기 및 중복 제거
         lowercase_list1 = [item.lower() for item in images_descriptions]
         lowercase_list2 = [item.lower() for item in technology_stacks]
+
         combined_unique_list = list(set(lowercase_list1 + lowercase_list2))
 
         return combined_unique_list

@@ -9,7 +9,7 @@ import {
   Tooltip,
 } from "recharts";
 import { ChartData } from "../../types";
-import { chartColor } from "../../utils/chart";
+import { chartColor } from "../../utils/charData";
 
 interface ICustomPieChartProps {
   id: string;

@@ -10,8 +10,19 @@ export type ChartData = {
   value: number;
 };
 
-export interface IChartProps {
-  chartData: ChartData[];
+export type MonthlyChartData = {
+  name: string;
+  months_value: { [key: number]: number }[];
+};
+
+export type SeriesItem = {
+  name: string;
+  group: "budget" | "actual";
+  data: number[];
+};
+
+export interface IMonthlyBarChartProps {
+  chartData: MonthlyChartData[];
   count: number;
 }
 

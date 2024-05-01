@@ -1,29 +1,12 @@
+import datetime
 from collections import Counter
 
 from django.db.models import Q
 from django.http import JsonResponse
+from django.utils import timezone
 from postings.constants import CLASSIFICATION
 
 from .models import JobPosting
-
-# 시간 복작도 개선 전 ----------------------------------------------------------------
-# - 첫 번째로 모든 Posting 객체를 순회하여 job_code를 추출 : O(N*M)
-# N은 Posting 객체의 수, M은 평균적인 job_code의 개수
-# - 상위 30개 스킬 식별 : O(N*log(N))
-# - 각 산업별 스킬 출현 빈도 분석 : O(N*M)
-# - 상위 5개 산업 추출: O(K*log(K))
-# 산업의 수를 K
-# 전반적으로, 가장 지배적인 시간 복잡도는 O(N*M)입니다. N과 M이 크면 성능에 상당한 영향을 줄 수 있음
-
-
-# 시간 복작도 개선 후 ----------------------------------------------------------------
-# - ORM을 활용하여, 가능한 많은 데이터 처리를 데이터베이스 수준에서 수행하도록 합니다. 이는 annotate와 aggregate 함수를 사용하여 구현
-# 데이터베이스가 최적화된 쿼리 실행 계획을 사용하여 데이터를 효율적으로 처리할 수 있게 해줌
-# - Posting 모델의 industry와 job_code 필드에 인덱스를 추가하여 검색 성능을 향상
-# 데이터베이스에서 Posting 객체를 필터링하고 정렬하는 과정의 속도를 높여줌
-# - 상위 30개 스킬과 같이 자주 변경되지 않는 데이터는 캐시에 저장하여 성능을 향상
-# 매 요청마다 동일한 계산을 반복하지 않아도 됨
-# 데이터베이스 수준에서의 집계와 인덱싱을 사용하면, 전반적인 시간 복잡도를 O(N*log(N))으로 줄일 수 있음
 
 
 def validate_classification(request):
@@ -58,17 +41,104 @@ def validate_and_filter_postings(request):
     return filted_postings, None
 
 
+def get_start_end_dates(month_delta):
+    """현재 월 또는 이전 월의 시작과 끝 날짜를 반환합니다."""
+    today = timezone.now().date()
+    first_day_this_month = today.replace(day=1)
+    first_day_target_month = first_day_this_month - datetime.timedelta(
+        days=month_delta * 30
+    )
+
+    if first_day_target_month.month == 12:
+        last_day_target_month = first_day_target_month.replace(day=31)
+    else:
+        last_day_target_month = (
+            first_day_target_month + datetime.timedelta(days=32)
+        ).replace(day=1) - datetime.timedelta(days=1)
+
+    return first_day_target_month, last_day_target_month
+
+
+def validate_current_month_postings(postings):
+    """현재 월에 데이터가 있는지 확인하고 해당 날짜를 반환합니다."""
+    first_day_this_month, last_day_this_month = get_start_end_dates(0)
+    current_month_postings = postings.filter(
+        collection_date__range=(first_day_this_month, last_day_this_month)
+    )
+    if current_month_postings.exists():
+        return current_month_postings, 0
+    else:
+        # 현재 월에 데이터가 없는 경우 이전 월을 검사
+        for i in range(1, 12):  # 최대 이전 12개월까지 확인
+            first_day_previous_month, last_day_previous_month = get_start_end_dates(i)
+            previous_month_postings = postings.filter(
+                collection_date__range=(
+                    first_day_previous_month,
+                    last_day_previous_month,
+                )
+            )
+            if previous_month_postings.exists():
+                return previous_month_postings, i
+        return postings.none(), 12  # 최종적으로 아무 데이터도 없는 경우
+
+
+# def aggregate_top_skills(postings):
+#     """상위 스킬을 집계하여 스킬 이름과 카운트를 딕셔너리 리스트로 반환합니다."""
+
+#     skill_counts = Counter()
+
+#     for posting in postings:
+#         skills = posting.skills
+#         skill_counts.update(skills)
+
+#     # 최종적으로 상위 50개 스킬만 반환 (예시로 50개 제한을 둔 경우)
+#     return skill_counts.most_common(50)
+
+
 def aggregate_top_skills(postings):
-    """상위 스킬을 집계하여 스킬 이름과 카운트를 딕셔너리 리스트로 반환합니다."""
-
+    postings, month_delta = validate_current_month_postings(postings)
     skill_counts = Counter()
-
     for posting in postings:
         skills = posting.skills
         skill_counts.update(skills)
+    return skill_counts.most_common(50), month_delta
 
-    # 최종적으로 상위 50개 스킬만 반환 (예시로 50개 제한을 둔 경우)
-    return skill_counts.most_common(50)
+
+def get_previous_months_skills_counts(postings, top_skills, month_delta):
+    """전월에 대한 스킬 노출 횟수를 계산합니다."""
+    previous_months_data = {}
+    for i in range(1, 6):
+        month_start, month_end = get_start_end_dates(month_delta + i)
+        monthly_postings = postings.filter(
+            collection_date__gte=month_start, collection_date__lte=month_end
+        )
+        monthly_skill_counts = Counter()
+        for posting in monthly_postings:
+            skills = posting.skills
+            monthly_skill_counts.update(skills)
+        for skill, _ in top_skills:
+            previous_months_data[f"{skill}_{month_start.month}월"] = (
+                monthly_skill_counts[skill]
+            )
+    return previous_months_data
+
+
+# def get_skills_frequency(request):
+#     filted_postings, error_response = validate_and_filter_postings(request)
+#     if error_response:
+#         return error_response
+
+#     skills_with_counts = aggregate_top_skills(filted_postings)
+
+#     formatted_data = [
+#         {"name": skill[0], "value": skill[1]} for skill in skills_with_counts
+#     ]
+
+#     return JsonResponse(
+#         {"data": formatted_data, "count": filted_postings.count()},
+#         safe=False,
+#         status=200,
+#     )
 
 
 def get_skills_frequency(request):
@@ -76,11 +146,32 @@ def get_skills_frequency(request):
     if error_response:
         return error_response
 
-    skills_with_counts = aggregate_top_skills(filted_postings)
+    top_skills, month_delta = aggregate_top_skills(filted_postings)
+    previous_months_counts = get_previous_months_skills_counts(
+        filted_postings, top_skills, month_delta
+    )
 
-    formatted_data = [
-        {"name": skill[0], "value": skill[1]} for skill in skills_with_counts
-    ]
+    formatted_data = []
+    for skill, count in top_skills:
+        months_value = []
+        # 현재 월 포함 이전 4개월의 데이터를 배열로 취합
+        for j in range(0, 6):  # 0은 현재 월, 1-4는 이전 월
+            month_start, _ = get_start_end_dates(month_delta + j)
+            month_key = month_start.month
+            if j == 0:
+                # 현재 월의 데이터를 skill count 값으로 설정
+                months_value.append({month_key: count})
+            else:
+                # 이전 월의 데이터를 배열 요소로 추가
+                months_value.append(
+                    {
+                        month_key: previous_months_counts.get(
+                            f"{skill}_{month_start.month}월", 0
+                        )
+                    }
+                )
+
+        formatted_data.append({"name": skill, "months_value": months_value})
 
     return JsonResponse(
         {"data": formatted_data, "count": filted_postings.count()},
@@ -169,9 +260,6 @@ def get_top_skills_by_experience_range(request):
     # 값이 빈 문자열이거나 숫자가 아니면 기본값 설정
     experience_min = int(experience_min) if experience_min.isdigit() else 0
     experience_max = int(experience_max) if experience_max.isdigit() else 30
-
-    print(f"experience_min : {experience_min}")
-    print(f"experience_max : {experience_max}")
 
     # 경험치에 따른 포스팅 필터링
     filtered_postings_with_experience_range = filted_postings.filter(

@@ -1,10 +1,10 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { ChartData } from "../../../common/types";
+import { MonthlyChartData } from "../../../common/types";
 import { skillFenquencyAPI } from "../apis/skillFenquencyAPI";
 import { useGetClassification } from "../../../common/hooks/useGetClassification";
 
 type ResponseChartData = {
-  data: ChartData[];
+  data: MonthlyChartData[];
   count: number;
 };
 

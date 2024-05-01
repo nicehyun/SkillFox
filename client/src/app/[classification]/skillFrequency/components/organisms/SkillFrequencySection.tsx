@@ -5,7 +5,7 @@ import AnalysisSectionLayout, {
   GuideProps,
 } from "@/app/common/components/organisms/AnalysisSectionLayout";
 import MainGuideContent from "../molecules/MainGuideContent";
-import SelectShowCountBarChart from "@/app/common/components/organisms/SelectShowCountBarChart";
+import SelectShowCountBarChart from "@/app/common/components/organisms/SelectShowCountMonthlyBarChart";
 
 interface IEducationFenquencySectionProps {
   postingClassification: string;
@@ -31,7 +31,6 @@ const SkillFrequencySection = ({
     >
       <SelectShowCountBarChart
         id="skill-Frenquency"
-        emphasisCount={10}
         chartData={data?.data ?? []}
         count={data?.count ?? 0}
       />
