@@ -5,17 +5,17 @@ import AnalysisSectionLayout, {
   GuideProps,
 } from "@/app/common/components/organisms/AnalysisSectionLayout";
 import MainGuideContent from "../molecules/MainGuideContent";
-import SelectShowCountBarChart from "@/app/common/components/organisms/SelectShowCountMonthlyBarChart";
 import ChartWrapper from "@/app/common/components/organisms/ChartWrapper";
 import { MonthlyChartData } from "@/app/common/types";
+import DynamicSelectShowCountMonthlyBarChart from "@/app/common/components/organisms/DynamicSelectShowCountMonthlyBarChart";
 
-interface IEducationFenquencySectionProps {
+interface ISkillFrequencySectionProps {
   postingClassification: string;
 }
 
 const SkillFrequencySection = ({
   postingClassification,
-}: IEducationFenquencySectionProps) => {
+}: ISkillFrequencySectionProps) => {
   const { data } = useGetSkillFrequencyQuery();
 
   const guideProps: GuideProps = {
@@ -30,7 +30,7 @@ const SkillFrequencySection = ({
       postingCount={data?.count ?? 0}
     >
       <ChartWrapper<MonthlyChartData[]> chartData={data?.data}>
-        <SelectShowCountBarChart
+        <DynamicSelectShowCountMonthlyBarChart
           id="skill-Frequency"
           chartData={data?.data ?? []}
           count={data?.count ?? 0}

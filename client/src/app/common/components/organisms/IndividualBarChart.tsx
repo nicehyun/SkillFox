@@ -1,7 +1,7 @@
 "use client";
 
 import { IMonthlyBarChartProps } from "@/app/common/types";
-import SelectShowCountMonthlyBarChart from "@/app/common/components/organisms/SelectShowCountMonthlyBarChart";
+import DynamicSelectShowCountMonthlyBarChart from "./DynamicSelectShowCountMonthlyBarChart";
 
 interface IIndividualBarChartProps extends IMonthlyBarChartProps {
   id: string;
@@ -22,7 +22,7 @@ const IndividualBarChart = ({
         <h3 className="mr-2 text-small font-bold text-black1">{chartTitle}</h3>
       </div>
 
-      <SelectShowCountMonthlyBarChart
+      <DynamicSelectShowCountMonthlyBarChart
         id={id}
         chartData={chartData}
         count={count}

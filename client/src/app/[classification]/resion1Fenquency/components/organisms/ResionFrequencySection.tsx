@@ -32,6 +32,7 @@ const ResionFrequencySection = ({
       <ChartWrapper<RegionChartData[]> chartData={data?.data}>
         {data?.data.map((resionChart, index) => (
           <IndividualBarChart
+            key={`region-Frenquency__${index}`}
             id={`region-Frenquency__${index}`}
             chartData={resionChart.data ?? []}
             count={data?.count ?? 0}

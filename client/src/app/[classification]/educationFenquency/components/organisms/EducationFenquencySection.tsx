@@ -32,6 +32,7 @@ const EducationFenquencySection = ({
       <ChartWrapper<EducationChartData[]> chartData={data?.data}>
         {data?.data.map((educationChart, index) => (
           <IndividualBarChart
+            key={`education-Frenquency__${index}`}
             id={`education-Frenquency__${index}`}
             chartData={educationChart.data ?? []}
             count={data?.count ?? 0}

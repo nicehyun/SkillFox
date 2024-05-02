@@ -8,7 +8,8 @@ import ChartLayout from "../atoms/ChartLayout";
 import ReactApexChart from "react-apexcharts";
 import { ApexOptions } from "apexcharts";
 import { extractMonthlyChartData } from "../../utils/charData";
-import NoneChartData from "./NoneChartData";
+import SkeletonShowCountMonthlyBarChart from "./SkeletonShowCountMonthlyBarChart";
+import dynamic from "next/dynamic";
 
 interface ISelectShowCountBarChartProps extends IMonthlyBarChartProps {
   id: string;
@@ -93,13 +94,15 @@ const SelectShowCountMonthlyBarChart = ({
       </div>
 
       <ChartLayout>
-        <ReactApexChart
-          id={id}
-          options={options}
-          series={monthlyValues}
-          type="bar"
-          height={handleBarChartHeightControl(showBarChartCount)}
-        />
+        {monthlyValues && monthlyValues.length > 0 && (
+          <ReactApexChart
+            id={id}
+            options={options}
+            series={monthlyValues}
+            type="bar"
+            height={handleBarChartHeightControl(showBarChartCount)}
+          />
+        )}
       </ChartLayout>
     </>
   );
