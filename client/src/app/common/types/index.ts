@@ -24,3 +24,8 @@ export type RegionChartData = {
   region: string;
   data: MonthlyChartData[];
 };
+
+export interface ResponseChartData<T> {
+  data: T[];
+  count: number;
+}

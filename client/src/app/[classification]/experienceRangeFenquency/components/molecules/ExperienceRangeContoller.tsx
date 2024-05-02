@@ -36,7 +36,7 @@ const ExperienceRangeContoller = ({
           <Button
             id="update-experience-range"
             content="적용"
-            color="primary"
+            color="gray"
             onClick={() =>
               onClickExperienceRangeApply({
                 max: experienceMax,

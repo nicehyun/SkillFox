@@ -6,6 +6,8 @@ import AnalysisSectionLayout, {
 import MainGuideContent from "../molecules/MainGuideContent";
 import { useGetResion1FrequencyQuery } from "../../hooks/useGetResion1FrequencyQuery";
 import IndividualBarChart from "@/app/common/components/organisms/IndividualBarChart";
+import ChartWrapper from "@/app/common/components/organisms/ChartWrapper";
+import { RegionChartData } from "@/app/common/types";
 
 interface IResionFrequencySectionProps {
   postingClassification: string;
@@ -14,9 +16,7 @@ interface IResionFrequencySectionProps {
 const ResionFrequencySection = ({
   postingClassification,
 }: IResionFrequencySectionProps) => {
-  const { data, error, isError } = useGetResion1FrequencyQuery();
-
-  //   if (isError) return <div>Error: {error.message}</div>;
+  const { data } = useGetResion1FrequencyQuery();
 
   const guideProps: GuideProps = {
     titleGuideContent: <MainGuideContent />,
@@ -29,15 +29,17 @@ const ResionFrequencySection = ({
       guide={guideProps}
       postingCount={data?.count ?? 0}
     >
-      {data?.data.map((resionChart, index) => (
-        <IndividualBarChart
-          id={`region-Frenquency__${index}`}
-          chartData={resionChart.data ?? []}
-          count={data?.count ?? 0}
-          chartTitle={resionChart.region}
-          className={index !== 0 ? "mt-20" : ""}
-        />
-      ))}
+      <ChartWrapper<RegionChartData[]> chartData={data?.data}>
+        {data?.data.map((resionChart, index) => (
+          <IndividualBarChart
+            id={`region-Frenquency__${index}`}
+            chartData={resionChart.data ?? []}
+            count={data?.count ?? 0}
+            chartTitle={resionChart.region}
+            className={index !== 0 ? "mt-20" : ""}
+          />
+        ))}
+      </ChartWrapper>
     </AnalysisSectionLayout>
   );
 };

@@ -6,7 +6,6 @@ export async function GET(
 ) {
   const { classification } = params;
 
-  console.log("api route");
   const experienceMin = request.headers.get("experienceMin");
   const experienceMax = request.headers.get("experienceMax");
 

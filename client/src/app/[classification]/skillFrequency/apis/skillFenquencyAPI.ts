@@ -13,11 +13,8 @@ export const skillFenquencyAPI = {
       }
 
       return await response.json();
-    } catch (error) {
-      return {
-        data: [],
-        count: 0,
-      };
+    } catch (error: any) {
+      throw new Error(error);
     }
   },
 };

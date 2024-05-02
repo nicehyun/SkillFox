@@ -7,6 +7,8 @@ import { useGetExperienceRangeFrequencyQuery } from "../../hooks/useGetExperienc
 import MainGuideContent from "../molecules/MainGuideContent";
 import SelectShowCountBarChart from "@/app/common/components/organisms/SelectShowCountMonthlyBarChart";
 import ExperienceRangeContoller from "../molecules/ExperienceRangeContoller";
+import ChartWrapper from "@/app/common/components/organisms/ChartWrapper";
+import { MonthlyChartData } from "@/app/common/types";
 
 interface IEducationFenquencySectionProps {
   postingClassification: string;
@@ -15,7 +17,7 @@ interface IEducationFenquencySectionProps {
 const ExperienceRangeFenquencySection = ({
   postingClassification,
 }: IEducationFenquencySectionProps) => {
-  const { data, isLoading, onClickExperienceRangeApply } =
+  const { data, onClickExperienceRangeApply } =
     useGetExperienceRangeFrequencyQuery();
 
   const guideProps: GuideProps = {
@@ -30,15 +32,17 @@ const ExperienceRangeFenquencySection = ({
         guide={guideProps}
         postingCount={data?.count ?? 0}
       >
-        <ExperienceRangeContoller
-          onClickExperienceRangeApply={onClickExperienceRangeApply}
-        />
+        <ChartWrapper<MonthlyChartData[]> chartData={data?.data}>
+          <ExperienceRangeContoller
+            onClickExperienceRangeApply={onClickExperienceRangeApply}
+          />
 
-        <SelectShowCountBarChart
-          id="experience-range-Frenquency"
-          chartData={data?.data ?? []}
-          count={data?.count ?? 0}
-        />
+          <SelectShowCountBarChart
+            id="experience-range-Frenquency"
+            chartData={data?.data ?? []}
+            count={data?.count ?? 0}
+          />
+        </ChartWrapper>
       </AnalysisSectionLayout>
     </>
   );

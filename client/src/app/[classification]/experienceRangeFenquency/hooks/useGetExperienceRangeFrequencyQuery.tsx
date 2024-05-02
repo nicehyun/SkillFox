@@ -16,8 +16,6 @@ export const useGetExperienceRangeFrequencyQuery = () => {
 
   const [experienceMax, setExperienceMax] = useState(30);
   const [experienceMin, setExperienceMin] = useState(0);
-  console.log(experienceMin);
-  console.log(experienceMax);
 
   const { data, isLoading } = useQuery<ResponseChartData, Error>(
     ["experienceRangeFrequency", classification, experienceMin, experienceMax],
