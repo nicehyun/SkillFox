@@ -33,10 +33,9 @@ const ExperienceRangeFenquencySection = ({
         <ExperienceRangeContoller
           onClickExperienceRangeApply={onClickExperienceRangeApply}
         />
+
         <SelectShowCountBarChart
           id="experience-range-Frenquency"
-          yAxisTickType="count"
-          emphasisCount={10}
           chartData={data?.data ?? []}
           count={data?.count ?? 0}
         />

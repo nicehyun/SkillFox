@@ -1,4 +1,10 @@
-import { MonthlyChartData, SeriesItem } from "../types";
+import { MonthlyChartData } from "../types";
+
+type SeriesItem = {
+  name: string;
+  group: "budget" | "actual";
+  data: number[];
+};
 
 export const chartColor = [
   "#f77189",

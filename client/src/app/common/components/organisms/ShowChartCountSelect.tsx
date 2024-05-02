@@ -5,13 +5,17 @@ import {
 } from "@/redux/features/showChartCountSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 
-const ShowChartCountSelect = () => {
+interface IShowChartCountSelectProps {
+  id: string;
+}
+
+const ShowChartCountSelect = ({ id }: IShowChartCountSelectProps) => {
   const dispatch = useAppDispatch();
   const showBarChartCount = useAppSelector(selectShowBarChartCountState);
 
   return (
     <CustomSelect
-      id="skill-Frenquency-count"
+      id={`${id}-count`}
       onChangeSelectValue={(value: number) =>
         dispatch(selcetShowBarChartCount({ count: +value }))
       }

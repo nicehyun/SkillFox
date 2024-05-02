@@ -3,7 +3,7 @@
 import { useAppSelector } from "@/redux/hooks";
 import { IMonthlyBarChartProps } from "../../types";
 import { selectShowBarChartCountState } from "@/redux/features/showChartCountSlice";
-import ShowChartCountSelect from "@/app/[classification]/skillFrequency/components/organisms/ShowChartCountSelect";
+import ShowChartCountSelect from "@/app/common/components/organisms/ShowChartCountSelect";
 import ChartLayout from "../atoms/ChartLayout";
 import ReactApexChart from "react-apexcharts";
 import { ApexOptions } from "apexcharts";
@@ -88,7 +88,7 @@ const SelectShowCountMonthlyBarChart = ({
   return (
     <>
       <div className="flex justify-end">
-        <ShowChartCountSelect />
+        <ShowChartCountSelect id={id} />
       </div>
 
       <ChartLayout>

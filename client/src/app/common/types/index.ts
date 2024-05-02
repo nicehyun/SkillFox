@@ -5,20 +5,9 @@ export interface IColorProps {
   color?: Color;
 }
 
-export type ChartData = {
-  name: string;
-  value: number;
-};
-
 export type MonthlyChartData = {
   name: string;
   months_value: { [key: number]: number }[];
-};
-
-export type SeriesItem = {
-  name: string;
-  group: "budget" | "actual";
-  data: number[];
 };
 
 export interface IMonthlyBarChartProps {
@@ -26,14 +15,12 @@ export interface IMonthlyBarChartProps {
   count: number;
 }
 
-export type ObjectChartData = { [key: string]: ChartData[] };
-
 export type EducationChartData = {
   education: string;
-  skills: ChartData[];
+  data: MonthlyChartData[];
 };
 
 export type RegionChartData = {
   region: string;
-  skills: ChartData[];
+  data: MonthlyChartData[];
 };
