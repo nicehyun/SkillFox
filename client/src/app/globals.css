@@ -14,10 +14,6 @@
   justify-content: center;
 }
 
-.recharts-layer {
-  outline: none !important;
-}
-
 .thumb::-webkit-slider-thumb {
   background-color: #f2994a;
   border: none;
@@ -45,4 +41,12 @@
 
 .thumb::-webkit-slider-thumb {
   -webkit-appearance: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  pointer-events: all;
+  width: 24px;
+  height: 24px;
+  -webkit-appearance: none;
+  @apply pointer-events-auto h-6 w-6 appearance-none;
 }

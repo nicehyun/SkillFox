@@ -8,6 +8,7 @@ import MainGuideContent from "../molecules/MainGuideContent";
 import ChartWrapper from "@/app/common/components/organisms/ChartWrapper";
 import { MonthlyChartData } from "@/app/common/types";
 import DynamicSelectShowCountMonthlyBarChart from "@/app/common/components/organisms/DynamicSelectShowCountMonthlyBarChart";
+import SkeletonShowCountMonthlyBarChart from "@/app/common/components/organisms/SkeletonShowCountMonthlyBarChart";
 
 interface ISkillFrequencySectionProps {
   postingClassification: string;

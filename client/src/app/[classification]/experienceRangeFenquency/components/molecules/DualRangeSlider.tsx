@@ -12,91 +12,79 @@ interface IDualRangeSliderProps {
 }
 
 const DualRangeSlider = ({
-  max,
-  min,
+  // max,
+  // min,
   currentMax,
   currentMin,
   onChange,
   className,
 }: IDualRangeSliderProps) => {
-  const [minVal, setMinVal] = useState(min);
-  const [maxVal, setMaxVal] = useState(max);
-
-  const minValRef = useRef<number>(0);
-  const maxValRef = useRef<number>(0);
-  const range = useRef<HTMLDivElement>(null);
-
-  // Convert to percentage
-  const getPercent = useCallback(
-    (value: number) => Math.round(((value - min) / (max - min)) * 100),
-    [min, max],
-  );
-
-  // Set width of the range to decrease from the left side
-  useEffect(() => {
-    const minPercent = getPercent(minVal);
-    const maxPercent = getPercent(maxValRef.current);
-
-    if (range.current) {
-      range.current.style.left = `${minPercent}%`;
-      range.current.style.width = `${maxPercent - minPercent}%`;
-    }
-  }, [minVal, getPercent]);
-
-  // Set width of the range to decrease from the right side
-  useEffect(() => {
-    const minPercent = getPercent(minValRef.current);
-    const maxPercent = getPercent(maxVal);
-
-    if (range.current) {
-      range.current.style.width = `${maxPercent - minPercent}%`;
-    }
-  }, [maxVal, getPercent]);
+  const [minPrice, setMinPrice] = useState(0); // 초기 최소 가격을 0으로 설정
+  const [maxPrice, setMaxPrice] = useState(30); // 초기 최대 가격을 20으로 설정
+  const min = 0; // 최소 범위를 0으로 설정
+  const max = 30; // 최대 범위를 20으로 설정
+  const [minThumb, setMinThumb] = useState(0);
+  const [maxThumb, setMaxThumb] = useState(100);
 
   useEffect(() => {
-    onChange({ min: minVal, max: maxVal });
-  }, [minVal, maxVal]);
+    setMinThumb(((minPrice - min) / (max - min)) * 100);
+    setMaxThumb(100 - ((maxPrice - min) / (max - min)) * 100);
+  }, [minPrice, maxPrice, min, max]);
+
+  const handleMinPriceChange = (event) => {
+    const newMinPrice = Math.min(Number(event.target.value), maxPrice - 1); // 최소값과 최대값 사이의 간격을 1로 설정
+    setMinPrice(newMinPrice);
+  };
+
+  const handleMaxPriceChange = (event) => {
+    const newMaxPrice = Math.max(Number(event.target.value), minPrice + 1); // 최소값과 최대값 사이의 간격을 1로 설정
+    setMaxPrice(newMaxPrice);
+  };
 
   return (
-    <div className={`${className}`}>
-      <input
-        type="range"
-        min={min}
-        max={max}
-        value={minVal}
-        onChange={(event) => {
-          const value = Math.min(Number(event.target.value), maxVal - 1);
-          setMinVal(value);
-          minValRef.current = value;
-        }}
-        className="thumb pointer-events-none absolute z-[3] h-0 w-[200px] appearance-none outline-none"
-        style={{ zIndex: minVal > max - 100 ? "5" : "3" }}
-      />
-      <input
-        type="range"
-        min={min}
-        max={max}
-        value={maxVal}
-        onChange={(event) => {
-          const value = Math.max(Number(event.target.value), minVal + 1);
-          setMaxVal(value);
-          maxValRef.current = value;
-        }}
-        className="thumb pointer-events-none absolute z-[4] h-0 w-[200px] appearance-none outline-none"
-      />
+    <div className="mt-8 flex w-[500px] items-center justify-center">
+      <div className="relative w-full max-w-xl">
+        <div>
+          <input
+            type="range"
+            step="1"
+            min={min}
+            max={max}
+            value={minPrice}
+            onChange={handleMinPriceChange}
+            className="pointer-events-none absolute z-20 h-2 w-full cursor-pointer appearance-none opacity-0"
+          />
 
-      <div className="relative w-[200px]">
-        <div className="absolute z-[1] h-[5px] w-full rounded-[3px] bg-border" />
-        <div
-          ref={range}
-          className="absolute z-[2] h-[5px] rounded-[3px] bg-orange"
-        />
-        <div className="absolute left-[-6px] mt-4 text-small font-bold text-black3">
-          {minVal}
+          <input
+            type="range"
+            step="1"
+            min={min}
+            max={max}
+            value={maxPrice}
+            onChange={handleMaxPriceChange}
+            className="pointer-events-none absolute z-20 h-2 w-full cursor-pointer appearance-none opacity-0"
+          />
+
+          <div className="relative z-10 h-2">
+            <div className="absolute bottom-0 left-0 right-0 top-0 z-10 rounded-md bg-gray1"></div>
+            <div
+              className="absolute bottom-0 top-0 z-20 rounded-md bg-primary"
+              style={{ right: `${maxThumb}%`, left: `${minThumb}%` }}
+            ></div>
+
+            <div
+              className="-ml-1 absolute left-0 top-0 z-30 -mt-[4px] h-4 w-4 rounded-full bg-primary"
+              style={{ left: `${minThumb}%` }}
+            ></div>
+
+            <div
+              className="-mr-3 absolute right-0 top-0 z-30 -mt-[4px] h-4 w-4 rounded-full bg-primary"
+              style={{ right: `${maxThumb}%` }}
+            ></div>
+          </div>
         </div>
-        <div className="absolute right-[-4px] mt-4 text-small font-bold text-black3">
-          {maxVal}
-        </div>
+
+        <p className="mt-2">{`🚀 경력 : ${minPrice} ~ ${maxPrice}`}</p>
       </div>
     </div>
   );

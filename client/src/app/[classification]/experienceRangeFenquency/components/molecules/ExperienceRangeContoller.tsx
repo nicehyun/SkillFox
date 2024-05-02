@@ -9,10 +9,12 @@ import ExperienceRangeControllerGuideContent from "./ExperienceRangeControllerGu
 
 interface IExperienceRangeContollerProps {
   onClickExperienceRangeApply: ({ min, max }: Range) => void;
+  isDisabled: boolean;
 }
 
 const ExperienceRangeContoller = ({
   onClickExperienceRangeApply,
+  isDisabled,
 }: IExperienceRangeContollerProps) => {
   const [experienceMax, setExperienceMax] = useState(0);
   const [experienceMin, setExperienceMin] = useState(30);
@@ -37,6 +39,7 @@ const ExperienceRangeContoller = ({
             id="update-experience-range"
             content="적용"
             color="gray"
+            disabled={isDisabled}
             onClick={() =>
               onClickExperienceRangeApply({
                 max: experienceMax,

@@ -8,6 +8,7 @@ export interface IButtonProps extends IColorProps {
   onClick: () => void;
   content: ReactNode;
   className?: string;
+  disabled?: boolean;
   testId?: string;
   // 버튼의 기능을 명확하게 설명
   ariaLabel?: string;
@@ -35,6 +36,7 @@ const Button = ({
   ariaLabel,
   ariaControls,
   ariaHaspopup,
+  disabled,
 }: IButtonProps) => {
   return (
     <button
@@ -43,9 +45,10 @@ const Button = ({
       aria-haspopup={ariaHaspopup}
       id={`button-${id}`}
       type={type}
-      className={`${className}  ${color === "gray" ? "" : "border-border border-[1px]"} ${bgColorClasses[color]} text-xs w-full rounded-[5px] p-[5px] font-bold text-black2`}
+      className={`${className} ${color === "gray" ? "" : "border-[1px] border-border"} ${bgColorClasses[color]} w-full rounded-[5px] p-[5px] text-xs font-bold text-black2 disabled:cursor-not-allowed`}
       onClick={onClick}
       data-cy={testId}
+      disabled={disabled}
     >
       {content}
     </button>

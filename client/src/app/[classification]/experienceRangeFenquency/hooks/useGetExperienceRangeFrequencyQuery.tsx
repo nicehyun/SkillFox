@@ -40,5 +40,7 @@ export const useGetExperienceRangeFrequencyQuery = () => {
     data,
     isLoading,
     onClickExperienceRangeApply: handleExperienceRangeApplyClick,
+    experienceMax,
+    experienceMin,
   };
 };

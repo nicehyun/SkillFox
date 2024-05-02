@@ -1,4 +1,4 @@
-import SkeletonUI from "../atoms/SkeletonUi";
+import SkeletonUI from "../atoms/SkeletonUI";
 
 const SkeletonShowCountMonthlyBarChart = () => {
   return (

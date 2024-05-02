@@ -5,10 +5,10 @@ import AnalysisSectionLayout, {
 } from "@/app/common/components/organisms/AnalysisSectionLayout";
 import { useGetExperienceRangeFrequencyQuery } from "../../hooks/useGetExperienceRangeFrequencyQuery";
 import MainGuideContent from "../molecules/MainGuideContent";
-import SelectShowCountBarChart from "@/app/common/components/organisms/SelectShowCountMonthlyBarChart";
 import ExperienceRangeContoller from "../molecules/ExperienceRangeContoller";
 import ChartWrapper from "@/app/common/components/organisms/ChartWrapper";
 import { MonthlyChartData } from "@/app/common/types";
+import DynamicSelectShowCountMonthlyBarChart from "@/app/common/components/organisms/DynamicSelectShowCountMonthlyBarChart";
 
 interface IEducationFenquencySectionProps {
   postingClassification: string;
@@ -17,8 +17,15 @@ interface IEducationFenquencySectionProps {
 const ExperienceRangeFenquencySection = ({
   postingClassification,
 }: IEducationFenquencySectionProps) => {
-  const { data, onClickExperienceRangeApply } =
-    useGetExperienceRangeFrequencyQuery();
+  const {
+    data,
+    isLoading,
+    onClickExperienceRangeApply,
+    experienceMax,
+    experienceMin,
+    onChangeExperienceMaxValue,
+    onChangeExperienceMinValue,
+  } = useGetExperienceRangeFrequencyQuery();
 
   const guideProps: GuideProps = {
     titleGuideContent: <MainGuideContent />,
@@ -32,12 +39,20 @@ const ExperienceRangeFenquencySection = ({
         guide={guideProps}
         postingCount={data?.count ?? 0}
       >
-        <ChartWrapper<MonthlyChartData[]> chartData={data?.data}>
-          <ExperienceRangeContoller
-            onClickExperienceRangeApply={onClickExperienceRangeApply}
-          />
+        <ExperienceRangeContoller
+          isDisabled={isLoading}
+          onClickExperienceRangeApply={onClickExperienceRangeApply}
+          experienceMax={experienceMax}
+          experienceMin={experienceMin}
+          onChangeExperienceMaxValue={onChangeExperienceMaxValue}
+          onChangeExperienceMinValue={onChangeExperienceMinValue}
+        />
 
-          <SelectShowCountBarChart
+        <ChartWrapper<MonthlyChartData[]>
+          chartData={data?.data}
+          isLoading={isLoading}
+        >
+          <DynamicSelectShowCountMonthlyBarChart
             id="experience-range-Frenquency"
             chartData={data?.data ?? []}
             count={data?.count ?? 0}
