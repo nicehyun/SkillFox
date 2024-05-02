@@ -4,7 +4,6 @@ import { useAppSelector } from "@/redux/hooks";
 import { IMonthlyBarChartProps } from "../../types";
 import { selectShowBarChartCountState } from "@/redux/features/showChartCountSlice";
 import ShowChartCountSelect from "@/app/[classification]/skillFrequency/components/organisms/ShowChartCountSelect";
-import { YAxisTickType } from "./CustomBarChart";
 import ChartLayout from "../atoms/ChartLayout";
 import ReactApexChart from "react-apexcharts";
 import { ApexOptions } from "apexcharts";
@@ -85,8 +84,6 @@ const SelectShowCountMonthlyBarChart = ({
   const monthlyValues = extractMonthlyChartData(
     chartData.slice(0, showBarChartCount) ?? [],
   );
-
-  console.log(monthlyValues);
 
   return (
     <>

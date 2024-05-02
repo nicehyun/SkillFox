@@ -8,7 +8,7 @@ interface IChartLayoutProps {
 const ChartLayout = ({ className, children }: IChartLayoutProps) => {
   return (
     <div
-      className={`${className} rounded-[5px] border-[2px] border-border bg-primary py-4`}
+      className={`${className} rounded-[5px] border-[2px] border-border bg-white py-4`}
     >
       {children}
     </div>

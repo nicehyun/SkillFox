@@ -28,7 +28,7 @@ const AnalysisNavigation = () => {
   return (
     <nav
       aria-label="분석 선택"
-      className={`${showNavigationState ? "pointer-events-auto opacity-100 " : "pointer-events-none opacity-0 sm:-translate-y-full md:-translate-y-full lg:-translate-x-full  xl:-translate-x-full"} fixed top-[80px] z-20  bg-secondary py-2 transition-all duration-300 ease-in-out sm:top-[128px] sm:w-screen md:top-[128px] md:w-screen lg:left-[64px] lg:h-screen xl:left-[64px] xl:h-screen `}
+      className={`${showNavigationState ? "pointer-events-auto opacity-100 " : "pointer-events-none opacity-0 sm:-translate-y-full md:-translate-y-full lg:-translate-x-full  xl:-translate-x-full"} fixed left-[0px] top-[80px]  z-20 h-screen bg-white py-2 shadow transition-all duration-300 ease-in-out`}
     >
       <ul>
         {links.map((link, index) => (

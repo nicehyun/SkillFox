@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import ToolTip from "../molecules/ToolTip";
+import InteractiveSection from "./InteractiveSection";
 
 export type GuideProps = {
   titleGuideContent: ReactNode;
@@ -22,7 +23,7 @@ const AnalysisSectionLayout = ({
   const { titleGuideContent, postingClassification } = guide;
 
   return (
-    <section>
+    <InteractiveSection>
       <div className="mb-2 flex items-center">
         <h1 className="mr-2 text-medium font-bold sm:text-small md:text-normal">
           {analysisTitle}
@@ -60,7 +61,7 @@ const AnalysisSectionLayout = ({
       </div>
 
       {children}
-    </section>
+    </InteractiveSection>
   );
 };
 

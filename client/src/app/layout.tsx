@@ -16,12 +16,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={`${notoSansKr.className} bg-secondary`}>
+      <body className={`${notoSansKr.className}`}>
         <Providers>
           <main>
             <Header />
 
-            <div className="min-h-[1000px] min-w-[320px] pb-24 pt-30">
+            <div className="min-h-[1000px] min-w-[320px] pb-24 pt-20">
               {children}
             </div>
 

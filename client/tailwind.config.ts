@@ -52,12 +52,8 @@ const config: Config = {
 
     colors: {
       transparent: "transparent",
-      primary: "#FFFFFF",
-      secondary: "#fafafa",
-      info: "#2F80ED",
-      success: "#27AE60",
-      warning: "#E2B93B",
-      error: "#EB5757",
+      primary: "#F2994A",
+      secondary: "#003366",
       black1: "#000000",
       black2: "#1C1C1C",
       black3: "#333333",

@@ -66,7 +66,7 @@ export const CustomSelect = ({
       </div>
 
       {isOpen && (
-        <div className="absolute z-10 mt-2 w-full rounded-[5px] bg-white text-xs shadow">
+        <div className="absolute z-20 mt-2 w-full rounded-[5px] bg-white text-xs shadow">
           {options.map((option, index) => (
             <div
               key={index}
