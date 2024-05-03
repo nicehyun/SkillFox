@@ -1,11 +1,19 @@
 "use client";
 
-import DualRangeSlider from "./DualRangeSlider";
 import Button from "@/app/common/components/atoms/Button";
 import { Range } from "../../hooks/useGetExperienceRangeFrequencyQuery";
-import { useState } from "react";
 import ToolTip from "@/app/common/components/molecules/ToolTip";
 import ExperienceRangeControllerGuideContent from "./ExperienceRangeControllerGuideContent";
+import { useExperienceRange } from "../../hooks/useExperienceRange";
+import dynamic from "next/dynamic";
+import SkeletonUI from "@/app/common/components/atoms/SkeletonUI";
+
+const DynamicDualRangeSlider = dynamic(() => import("./DualRangeSlider"), {
+  ssr: false,
+  loading: () => (
+    <SkeletonUI className="m:flex-grow mt-8 w-[500px] md:flex-grow" />
+  ),
+});
 
 interface IExperienceRangeContollerProps {
   onClickExperienceRangeApply: ({ min, max }: Range) => void;
@@ -16,24 +24,30 @@ const ExperienceRangeContoller = ({
   onClickExperienceRangeApply,
   isDisabled,
 }: IExperienceRangeContollerProps) => {
-  const [experienceMax, setExperienceMax] = useState(0);
-  const [experienceMin, setExperienceMin] = useState(30);
-
+  const {
+    experienceCurrentMax,
+    experienceCurrentMin,
+    onChangeExperienceMaxValue,
+    onChangeExperienceMinValue,
+  } = useExperienceRange({ maxValue: 20, minValue: 0 });
   return (
     <>
-      <h3 className="text-small text-gray1">경력 범위 조절 슬라이더</h3>
+      <h3 className="text-small text-gray1">경력 범위 조절</h3>
 
       <div className="flex h-[60px] items-center">
-        <DualRangeSlider
-          min={0}
-          max={30}
-          currentMin={experienceMin}
-          currentMax={experienceMax}
-          onChange={({ max, min }: Range) => {
-            setExperienceMax(max);
-            setExperienceMin(min);
-          }}
-        />
+        <div className="flex flex-col">
+          <DynamicDualRangeSlider
+            min={0}
+            max={20}
+            currentMin={experienceCurrentMin}
+            currentMax={experienceCurrentMax}
+            onChangeMinValue={onChangeExperienceMinValue}
+            onChangeMaxValue={onChangeExperienceMaxValue}
+            className="mt-8 flex w-[500px] items-center justify-center sm:flex-grow md:flex-grow"
+          />
+          <p className="mt-2 w-full sm:text-small md:text-small">{`🚀 경력 : ${experienceCurrentMin} ~ ${experienceCurrentMax}`}</p>
+        </div>
+
         <span className="ml-6 mr-2">
           <Button
             id="update-experience-range"
@@ -42,8 +56,8 @@ const ExperienceRangeContoller = ({
             disabled={isDisabled}
             onClick={() =>
               onClickExperienceRangeApply({
-                max: experienceMax,
-                min: experienceMin,
+                max: experienceCurrentMax,
+                min: experienceCurrentMin,
               })
             }
           />

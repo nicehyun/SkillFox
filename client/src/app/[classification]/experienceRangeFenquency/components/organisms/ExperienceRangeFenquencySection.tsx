@@ -17,15 +17,8 @@ interface IEducationFenquencySectionProps {
 const ExperienceRangeFenquencySection = ({
   postingClassification,
 }: IEducationFenquencySectionProps) => {
-  const {
-    data,
-    isLoading,
-    onClickExperienceRangeApply,
-    experienceMax,
-    experienceMin,
-    onChangeExperienceMaxValue,
-    onChangeExperienceMinValue,
-  } = useGetExperienceRangeFrequencyQuery();
+  const { data, isLoading, onClickExperienceRangeApply } =
+    useGetExperienceRangeFrequencyQuery();
 
   const guideProps: GuideProps = {
     titleGuideContent: <MainGuideContent />,
@@ -42,10 +35,6 @@ const ExperienceRangeFenquencySection = ({
         <ExperienceRangeContoller
           isDisabled={isLoading}
           onClickExperienceRangeApply={onClickExperienceRangeApply}
-          experienceMax={experienceMax}
-          experienceMin={experienceMin}
-          onChangeExperienceMaxValue={onChangeExperienceMaxValue}
-          onChangeExperienceMinValue={onChangeExperienceMinValue}
         />
 
         <ChartWrapper<MonthlyChartData[]>
