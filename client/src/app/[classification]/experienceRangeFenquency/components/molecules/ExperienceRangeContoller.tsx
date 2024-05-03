@@ -35,7 +35,7 @@ const ExperienceRangeContoller = ({
       <h3 className="text-small text-gray1">경력 범위 조절</h3>
 
       <div className="flex h-[60px] items-center">
-        <div className="flex flex-col">
+        <div className="flex grow-0 flex-col">
           <DynamicDualRangeSlider
             min={0}
             max={20}
@@ -43,12 +43,12 @@ const ExperienceRangeContoller = ({
             currentMax={experienceCurrentMax}
             onChangeMinValue={onChangeExperienceMinValue}
             onChangeMaxValue={onChangeExperienceMaxValue}
-            className="mt-8 flex w-[500px] items-center justify-center sm:flex-grow md:flex-grow"
+            className="mt-8 flex w-[400px] items-center justify-center sm:w-full md:w-full"
           />
           <p className="mt-2 w-full sm:text-small md:text-small">{`🚀 경력 : ${experienceCurrentMin} ~ ${experienceCurrentMax}`}</p>
         </div>
 
-        <span className="ml-6 mr-2">
+        <span className="ml-6 flex grow items-center">
           <Button
             id="update-experience-range"
             content="적용"
@@ -60,13 +60,14 @@ const ExperienceRangeContoller = ({
                 min: experienceCurrentMin,
               })
             }
+            className="mr-2 w-10"
+          />
+          <ToolTip
+            title={`경력 범위 가이드`}
+            guideContent={<ExperienceRangeControllerGuideContent />}
+            ariaLabel={`경력 범위 툴팁`}
           />
         </span>
-        <ToolTip
-          title={`경력 범위 가이드`}
-          guideContent={<ExperienceRangeControllerGuideContent />}
-          ariaLabel={`경력 범위 툴팁`}
-        />
       </div>
     </>
   );
