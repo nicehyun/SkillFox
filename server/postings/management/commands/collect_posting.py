@@ -23,8 +23,8 @@ class Command(BaseCommand):
             self.style.SUCCESS("Starting the browser and fetching links...")
         )
 
-        keyword = "머신러닝"
-        classification = "ML"
+        keyword = "프론트엔드"
+        classification = "FE"
         links = self.fetch_links_with_scroll(keyword)
 
         for url in links:  # 수집한 링크들을 순회
@@ -56,11 +56,12 @@ class Command(BaseCommand):
             last_height = driver.execute_script("return document.body.scrollHeight")
             while True:
                 # 모든 지정 클래스의 div 태그 찾기
-                div_elements = driver.find_elements(By.CLASS_NAME, "gOSXGP")
+                div_elements = driver.find_elements(By.CLASS_NAME, "gfaMvI")
                 for div in div_elements:
                     a_tags = div.find_elements(By.TAG_NAME, "a")
                     for a in a_tags:
                         href = a.get_attribute("href")
+                        print(href)
                         if href:
                             links_collected.add(href)
 
@@ -98,6 +99,7 @@ class Command(BaseCommand):
 
     def parse_page(self, url):
         html = requests.get(url).text
+        print(html)
         soup = BeautifulSoup(html, "html.parser")
 
         skills = self.extract_skill_stacks(soup)

@@ -24,6 +24,7 @@ const SkillFrequencySection = ({
     postingClassification,
   };
 
+  console.log(data);
   return (
     <AnalysisSectionLayout
       analysisTitle="기술 빈도 분석"
