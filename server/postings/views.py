@@ -100,29 +100,22 @@ def aggregate_top_skills(postings):
 
 def get_previous_months_skills_counts(postings, top_skills, month_delta):
     """지정된 기간 동안의 각 스킬의 노출 횟수를 계산하고, 이를 사전으로 반환합니다."""
-    # 모든 관련 날짜 범위를 한 번에 쿼리하여 필요한 모든 postings를 가져옵니다.
-    date_filters = Q()
-    for i in range(1, 6):
+    previous_months_data = {}
+    for i in range(1, 6):  # 이전 5개월을 독립적으로 처리
         month_start, month_end = get_start_end_dates(month_delta + i)
-        date_filters |= Q(
+        month_postings = postings.filter(
             collection_date__gte=month_start, collection_date__lte=month_end
         )
+        skill_counter = Counter()
+        for posting in month_postings:
+            skill_counter.update(posting.skills)
 
-    # 필요한 postings만 가져오기
-    relevant_postings = postings.filter(date_filters)
-
-    # 스킬별로 카운트
-    skill_counter = Counter()
-    for posting in relevant_postings:
-        skill_counter.update(posting.skills)
-
-    # 각 스킬에 대해 최근 몇 달간의 카운트 저장
-    previous_months_data = {}
-    for i in range(1, 6):
-        month_start, _ = get_start_end_dates(month_delta + i)
+        # 해당 월의 모든 top_skills에 대해 결과 저장
         for skill, _ in top_skills:
             skill_key = f"{skill}_{month_start.month}월"
-            previous_months_data[skill_key] = skill_counter[skill]
+            previous_months_data[skill_key] = skill_counter.get(
+                skill, 0
+            )  # 없는 경우 0으로 설정
 
     return previous_months_data
 
@@ -136,6 +129,8 @@ def get_skills_frequency(request):
     previous_months_counts = get_previous_months_skills_counts(
         filted_postings, top_skills, month_delta
     )
+
+    print(previous_months_counts)
 
     formatted_data = []
     # 월별 데이터 준비
