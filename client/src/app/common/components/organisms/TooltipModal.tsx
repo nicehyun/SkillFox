@@ -1,44 +1,42 @@
 "use client";
 
-import Icon from "../atoms/Icon";
 import { IoMdClose } from "react-icons/io";
-import { FaCaretLeft, FaCaretRight } from "react-icons/fa";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import {
-  hideTooltipModal,
-  selectShowTooltipModalState,
-} from "@/redux/features/layoutSlice";
+import { useAppSelector } from "@/redux/hooks";
+import { selectTooltipModalState } from "@/redux/features/layoutSlice";
+import IconButton from "../atoms/IconButton";
+import TooltipModalPageController from "../molecules/TooltipModalPageController";
+import TooltipModalContent from "../molecules/TooltipModalContent";
+import TooltipModalTitle from "../atoms/TooltipModalTitle";
+import { useTooltipModalController } from "../../hooks/useTooltipModalController";
 
 const TooltipModal = () => {
-  const dispatch = useAppDispatch();
-  const isShowTooltipModal = useAppSelector(selectShowTooltipModalState);
+  const { isShowTooltipModal } = useAppSelector(selectTooltipModalState);
+  const { hideTooltipModal } = useTooltipModalController();
+
   return (
     <>
       {isShowTooltipModal && (
-        <div className="flexCenter fixed inset-0 z-40 bg-border bg-opacity-50">
-          <div className="absolute z-40 h-2/3 max-h-[800px] w-2/3 max-w-[600px] rounded-[5px] bg-white p-6 shadow">
-            <button
-              onClick={() => dispatch(hideTooltipModal())}
-              className="absolute right-6 h-[32px] w-[32px] rounded-[5px]"
-            >
-              <Icon icon={<IoMdClose />} />
-            </button>
+        <section
+          onClick={hideTooltipModal}
+          className="flexCenter fixed inset-0 z-40 cursor-default bg-border bg-opacity-50"
+        >
+          <div
+            onClick={(event) => event.stopPropagation()}
+            className="absolute z-40 flex h-2/3 max-h-[800px] w-2/3 max-w-[600px] flex-col rounded-[5px] bg-white p-6 shadow"
+          >
+            <IconButton
+              icon={<IoMdClose />}
+              onClick={hideTooltipModal}
+              className="absolute right-6"
+            />
 
-            <h3 className="mb-6 mt-6 font-bold">📊 title</h3>
+            <TooltipModalTitle />
 
-            <p className="mb-6">tooltip contents</p>
+            <TooltipModalContent />
 
-            <div className="flexCenter absolute inset-x-0 bottom-6">
-              <button className="h-[32px] w-[32px] rounded-[5px]">
-                <Icon icon={<FaCaretLeft />} />
-              </button>
-              <span className="mx-6">1/10</span>
-              <button className="h-[32px] w-[32px] rounded-[5px]">
-                <Icon icon={<FaCaretRight />} />
-              </button>
-            </div>
+            <TooltipModalPageController />
           </div>
-        </div>
+        </section>
       )}
     </>
   );

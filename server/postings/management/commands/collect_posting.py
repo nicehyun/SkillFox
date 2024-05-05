@@ -23,8 +23,8 @@ class Command(BaseCommand):
             self.style.SUCCESS("Starting the browser and fetching links...")
         )
 
-        keyword = "프론트엔드"
-        classification = "FE"
+        keyword = "백엔드"
+        classification = "BE"
         links = self.fetch_links_with_scroll(keyword)
 
         for url in links:  # 수집한 링크들을 순회
@@ -61,7 +61,7 @@ class Command(BaseCommand):
                     a_tags = div.find_elements(By.TAG_NAME, "a")
                     for a in a_tags:
                         href = a.get_attribute("href")
-                        print(href)
+
                         if href:
                             links_collected.add(href)
 
@@ -99,7 +99,6 @@ class Command(BaseCommand):
 
     def parse_page(self, url):
         html = requests.get(url).text
-        print(html)
         soup = BeautifulSoup(html, "html.parser")
 
         skills = self.extract_skill_stacks(soup)
@@ -107,7 +106,6 @@ class Command(BaseCommand):
         education = self.extract_education(soup)
         region = self.extract_region(soup)
 
-        print(skills)
         return {
             "skills": skills,
             "experience": experience,

@@ -36,9 +36,7 @@ export default async function IndustryFrequencyPage({
   return (
     <Hydrate state={dehydratedState}>
       <AnlaysisNavigationProvider>
-        <EducationFenquencySection
-          postingClassification={translatedClassification}
-        />
+        <EducationFenquencySection />
       </AnlaysisNavigationProvider>
     </Hydrate>
   );

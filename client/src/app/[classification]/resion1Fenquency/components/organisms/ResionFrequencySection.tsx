@@ -1,32 +1,20 @@
 "use client";
 
-import AnalysisSectionLayout, {
-  GuideProps,
-} from "@/app/common/components/organisms/AnalysisSectionLayout";
-import MainGuideContent from "../molecules/MainGuideContent";
+import AnalysisSectionLayout from "@/app/common/components/organisms/AnalysisSectionLayout";
 import { useGetResion1FrequencyQuery } from "../../hooks/useGetResion1FrequencyQuery";
 import IndividualBarChart from "@/app/common/components/organisms/IndividualBarChart";
 import ChartWrapper from "@/app/common/components/organisms/ChartWrapper";
 import { RegionChartData } from "@/app/common/types";
+import { useTooltipModalController } from "@/app/common/hooks/useTooltipModalController";
 
-interface IResionFrequencySectionProps {
-  postingClassification: string;
-}
-
-const ResionFrequencySection = ({
-  postingClassification,
-}: IResionFrequencySectionProps) => {
+const ResionFrequencySection = () => {
   const { data } = useGetResion1FrequencyQuery();
-
-  const guideProps: GuideProps = {
-    titleGuideContent: <MainGuideContent />,
-    postingClassification,
-  };
+  const { showTooltipModal } = useTooltipModalController();
 
   return (
     <AnalysisSectionLayout
-      analysisTitle="지역별 기술 분석"
-      guide={guideProps}
+      analysisTitle="지역별 기술 빈도 분석"
+      onClickAnalysisTypeToolTip={() => showTooltipModal(2)}
       postingCount={data?.count ?? 0}
     >
       <ChartWrapper<RegionChartData[]> chartData={data?.data}>

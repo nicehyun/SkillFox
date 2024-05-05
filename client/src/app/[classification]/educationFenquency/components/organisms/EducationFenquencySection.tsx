@@ -1,32 +1,20 @@
 "use client";
 
-import AnalysisSectionLayout, {
-  GuideProps,
-} from "@/app/common/components/organisms/AnalysisSectionLayout";
+import AnalysisSectionLayout from "@/app/common/components/organisms/AnalysisSectionLayout";
 import { useGetEducationFrequencyQuery } from "../../hooks/useGetEducationFrequencyQuery";
-import MainGuideContent from "../molecules/MainGuideContent";
 import IndividualBarChart from "@/app/common/components/organisms/IndividualBarChart";
 import ChartWrapper from "@/app/common/components/organisms/ChartWrapper";
 import { EducationChartData } from "@/app/common/types";
+import { useTooltipModalController } from "@/app/common/hooks/useTooltipModalController";
 
-interface IEducationFenquencySectionProps {
-  postingClassification: string;
-}
-
-const EducationFenquencySection = ({
-  postingClassification,
-}: IEducationFenquencySectionProps) => {
+const EducationFenquencySection = () => {
   const { data } = useGetEducationFrequencyQuery();
-
-  const guideProps: GuideProps = {
-    titleGuideContent: <MainGuideContent />,
-    postingClassification,
-  };
+  const { showTooltipModal } = useTooltipModalController();
 
   return (
     <AnalysisSectionLayout
-      analysisTitle="학력별 기술 분석"
-      guide={guideProps}
+      analysisTitle="학력별 기술 빈도 분석"
+      onClickAnalysisTypeToolTip={() => showTooltipModal(3)}
       postingCount={data?.count ?? 0}
     >
       <ChartWrapper<EducationChartData[]> chartData={data?.data}>

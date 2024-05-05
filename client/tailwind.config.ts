@@ -62,6 +62,12 @@ const config: Config = {
       gray2: "#BDBDBD",
       border: "#EBEBEB",
       orange: "#F2994A",
+      currentMonthChart: "#F46036",
+      previosMonthChart1: "#775DD0",
+      previosMonthChart2: "#FF4560",
+      previosMonthChart3: "#FEB019",
+      previosMonthChart4: "#00E396",
+      previosMonthChart5: "#008FFB",
     },
   },
 };

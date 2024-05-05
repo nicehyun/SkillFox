@@ -33,9 +33,7 @@ export default async function SkillFrequencyPage({
   return (
     <Hydrate state={dehydratedState}>
       <AnlaysisNavigationProvider>
-        <SkillFrequencySection
-          postingClassification={translatedClassification}
-        />
+        <SkillFrequencySection />
       </AnlaysisNavigationProvider>
     </Hydrate>
   );

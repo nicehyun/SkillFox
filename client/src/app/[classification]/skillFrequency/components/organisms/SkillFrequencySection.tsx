@@ -1,34 +1,20 @@
 "use client";
 
 import { useGetSkillFrequencyQuery } from "../../hooks/useGetSkillFrequencyQuery";
-import AnalysisSectionLayout, {
-  GuideProps,
-} from "@/app/common/components/organisms/AnalysisSectionLayout";
-import MainGuideContent from "../molecules/MainGuideContent";
+import AnalysisSectionLayout from "@/app/common/components/organisms/AnalysisSectionLayout";
 import ChartWrapper from "@/app/common/components/organisms/ChartWrapper";
 import { MonthlyChartData } from "@/app/common/types";
 import DynamicSelectShowCountMonthlyBarChart from "@/app/common/components/organisms/DynamicSelectShowCountMonthlyBarChart";
-import SkeletonShowCountMonthlyBarChart from "@/app/common/components/organisms/SkeletonShowCountMonthlyBarChart";
+import { useTooltipModalController } from "@/app/common/hooks/useTooltipModalController";
 
-interface ISkillFrequencySectionProps {
-  postingClassification: string;
-}
-
-const SkillFrequencySection = ({
-  postingClassification,
-}: ISkillFrequencySectionProps) => {
+const SkillFrequencySection = () => {
   const { data } = useGetSkillFrequencyQuery();
+  const { showTooltipModal } = useTooltipModalController();
 
-  const guideProps: GuideProps = {
-    titleGuideContent: <MainGuideContent />,
-    postingClassification,
-  };
-
-  console.log(data);
   return (
     <AnalysisSectionLayout
       analysisTitle="기술 빈도 분석"
-      guide={guideProps}
+      onClickAnalysisTypeToolTip={() => showTooltipModal(1)}
       postingCount={data?.count ?? 0}
     >
       <ChartWrapper<MonthlyChartData[]> chartData={data?.data}>

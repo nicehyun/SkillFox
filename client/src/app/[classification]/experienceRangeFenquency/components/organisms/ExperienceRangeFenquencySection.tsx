@@ -1,35 +1,23 @@
 "use client";
 
-import AnalysisSectionLayout, {
-  GuideProps,
-} from "@/app/common/components/organisms/AnalysisSectionLayout";
+import AnalysisSectionLayout from "@/app/common/components/organisms/AnalysisSectionLayout";
 import { useGetExperienceRangeFrequencyQuery } from "../../hooks/useGetExperienceRangeFrequencyQuery";
-import MainGuideContent from "../molecules/MainGuideContent";
 import ExperienceRangeContoller from "../molecules/ExperienceRangeContoller";
 import ChartWrapper from "@/app/common/components/organisms/ChartWrapper";
 import { MonthlyChartData } from "@/app/common/types";
 import DynamicSelectShowCountMonthlyBarChart from "@/app/common/components/organisms/DynamicSelectShowCountMonthlyBarChart";
+import { useTooltipModalController } from "@/app/common/hooks/useTooltipModalController";
 
-interface IEducationFenquencySectionProps {
-  postingClassification: string;
-}
-
-const ExperienceRangeFenquencySection = ({
-  postingClassification,
-}: IEducationFenquencySectionProps) => {
+const ExperienceRangeFenquencySection = () => {
   const { data, isLoading, onClickExperienceRangeApply } =
     useGetExperienceRangeFrequencyQuery();
-
-  const guideProps: GuideProps = {
-    titleGuideContent: <MainGuideContent />,
-    postingClassification,
-  };
+  const { showTooltipModal } = useTooltipModalController();
 
   return (
     <>
       <AnalysisSectionLayout
         analysisTitle="경력별 기술 분석"
-        guide={guideProps}
+        onClickAnalysisTypeToolTip={() => showTooltipModal(4)}
         postingCount={data?.count ?? 0}
       >
         <ExperienceRangeContoller

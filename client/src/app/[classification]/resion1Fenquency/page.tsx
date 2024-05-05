@@ -32,9 +32,7 @@ export default async function ResionFenquencyPage({
   return (
     <Hydrate state={dehydratedState}>
       <AnlaysisNavigationProvider>
-        <ResionFrequencySection
-          postingClassification={translatedClassification}
-        />
+        <ResionFrequencySection />
       </AnlaysisNavigationProvider>
     </Hydrate>
   );
