@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import NoneChartData from "./NoneChartData";
+import NoneChartData from "../molecules/NoneChartData";
 import SkeletonShowCountMonthlyBarChart from "./SkeletonShowCountMonthlyBarChart";
 
 interface IChartWrapperProps<T> {

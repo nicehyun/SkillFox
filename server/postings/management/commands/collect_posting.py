@@ -23,8 +23,8 @@ class Command(BaseCommand):
             self.style.SUCCESS("Starting the browser and fetching links...")
         )
 
-        keyword = "백엔드"
-        classification = "BE"
+        keyword = "데이터엔지니어"
+        classification = "DE"
         links = self.fetch_links_with_scroll(keyword)
 
         for url in links:  # 수집한 링크들을 순회
