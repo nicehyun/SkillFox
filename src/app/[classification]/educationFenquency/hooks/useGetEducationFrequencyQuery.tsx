@@ -10,13 +10,11 @@ export type EducationResponseChartData = {
 
 export const useGetEducationFrequencyQuery = () => {
   const { classification } = useGetClassification();
-  return useQuery<EducationResponseChartData, Error>(
-    ["educationFrequency", classification],
-    async () =>
+  return useQuery<EducationResponseChartData, Error>({
+    queryKey: ["educationFrequency", classification],
+    queryFn: async () =>
       await educationFenquencyAPI.getEducationFenquencyAnalysis(classification),
-    {
-      staleTime: 60 * 60 * 1000,
-      cacheTime: 60 * 60 * 1000,
-    },
-  );
+    gcTime: 60 * 60 * 1000,
+    staleTime: 60 * 60 * 1000,
+  });
 };

@@ -17,19 +17,21 @@ export const useGetExperienceRangeFrequencyQuery = () => {
   const [experienceMax, setExperienceMax] = useState(20);
   const [experienceMin, setExperienceMin] = useState(0);
 
-  const { data, isLoading } = useQuery<ResponseChartData, Error>(
-    ["experienceRangeFrequency", classification, experienceMin, experienceMax],
-    async () =>
+  const { data, isLoading } = useQuery<ResponseChartData, Error>({
+    queryKey: [
+      "experienceRangeFrequency",
+      classification,
+      experienceMin,
+      experienceMax,
+    ],
+    queryFn: async () =>
       await experienceRangeFenquencyAPI.getExperienceRangeFenquencyAnalysis(
         classification,
         experienceMin,
         experienceMax,
       ),
-    {
-      // staleTime: 60 * 60 * 1000,
-      // cacheTime: 60 * 60 * 1000,
-    },
-  );
+    gcTime: 60 * 60 * 1000,
+  });
 
   const handleExperienceRangeApplyClick = ({ min, max }: Range) => {
     setExperienceMax(max);

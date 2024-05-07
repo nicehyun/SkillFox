@@ -1,5 +1,5 @@
 import { getQueryClient } from "@/tanstackQuery/utils/getQueryClient";
-import { Hydrate, dehydrate } from "@tanstack/react-query";
+import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 import { resionFenquencyAPI } from "./apis/resionFenquencyAPI";
 import { translateClassification } from "@/app/common/utils/translate";
 import AnlaysisNavigationProvider from "@/app/common/utils/AnlaysisNavigationProvider";
@@ -14,11 +14,12 @@ export default async function ResionFenquencyPage({
 
   const { classification } = params;
 
-  await queryClient.prefetchQuery(
-    ["regionFrequency", classification],
-    async () =>
+  await queryClient.prefetchQuery({
+    queryKey: ["regionFrequency", classification],
+
+    queryFn: async () =>
       await resionFenquencyAPI.getResion1FenquencyAnalysis(classification),
-  );
+  });
 
   const dehydratedState = dehydrate(queryClient);
 
@@ -29,10 +30,10 @@ export default async function ResionFenquencyPage({
   }
 
   return (
-    <Hydrate state={dehydratedState}>
+    <HydrationBoundary state={dehydratedState}>
       <AnlaysisNavigationProvider>
         <ResionFrequencySection />
       </AnlaysisNavigationProvider>
-    </Hydrate>
+    </HydrationBoundary>
   );
 }

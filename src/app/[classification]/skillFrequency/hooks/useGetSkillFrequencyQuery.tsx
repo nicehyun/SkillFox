@@ -1,4 +1,4 @@
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { QueryCache, QueryClient, useQuery } from "@tanstack/react-query";
 import { MonthlyChartData } from "../../../common/types";
 import { skillFenquencyAPI } from "../apis/skillFenquencyAPI";
 import { useGetClassification } from "../../../common/hooks/useGetClassification";
@@ -9,17 +9,9 @@ type ResponseChartData = {
 };
 
 export const useGetSkillFrequencyQuery = () => {
-  const queryClient = useQueryClient();
-
-  const { classification } = useGetClassification();
-
-  return useQuery<ResponseChartData, Error>(
-    ["skillFrequency", classification],
-    async () =>
-      await skillFenquencyAPI.getSkillFenquencyAnalysis(classification),
-
-    {
-      onError() {
+  const queryClient = new QueryClient({
+    queryCache: new QueryCache({
+      onError: (error) => {
         queryClient.setQueryData<ResponseChartData>(
           ["skillFrequency", classification],
           {
@@ -28,9 +20,17 @@ export const useGetSkillFrequencyQuery = () => {
           },
         );
       },
+    }),
+  });
 
-      staleTime: 60 * 60 * 1000,
-      cacheTime: 60 * 60 * 1000,
-    },
-  );
+  const { classification } = useGetClassification();
+
+  return useQuery<ResponseChartData, Error>({
+    queryKey: ["skillFrequency", classification],
+    queryFn: async () =>
+      await skillFenquencyAPI.getSkillFenquencyAnalysis(classification),
+
+    staleTime: 60 * 60 * 1000,
+    gcTime: 60 * 60 * 1000,
+  });
 };

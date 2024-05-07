@@ -1,11 +1,8 @@
 "use client";
 
-import {
-  Hydrate,
-  QueryClient,
-  QueryClientProvider,
-} from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
 import { ReactNode, useState } from "react";
 
 interface IReactQueryProvider {
@@ -18,15 +15,20 @@ const TanstackQueryProvider = ({ children }: IReactQueryProvider) => {
       defaultOptions: {
         queries: {
           refetchOnWindowFocus: false,
+          retryOnMount: true,
+          refetchOnReconnect: false,
           retry: false,
         },
       },
     }),
   );
+
   return (
     <QueryClientProvider client={queryClient}>
-      <Hydrate>{children}</Hydrate>
-      <ReactQueryDevtools initialIsOpen={false} />
+      {children}
+      <ReactQueryDevtools
+        initialIsOpen={process.env.NEXT_PUBLIC_MODE === "local"}
+      />
     </QueryClientProvider>
   );
 };

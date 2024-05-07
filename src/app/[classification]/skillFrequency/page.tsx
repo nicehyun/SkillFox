@@ -3,8 +3,7 @@ import SkillFrequencySection from "@/app/[classification]/skillFrequency/compone
 import AnlaysisNavigationProvider from "@/app/common/utils/AnlaysisNavigationProvider";
 import { translateClassification } from "@/app/common/utils/translate";
 import { getQueryClient } from "@/tanstackQuery/utils/getQueryClient";
-
-import { Hydrate, dehydrate } from "@tanstack/react-query";
+import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 
 export default async function SkillFrequencyPage({
   params,
@@ -15,13 +14,13 @@ export default async function SkillFrequencyPage({
 
   const { classification } = params;
 
-  await queryClient.prefetchQuery(
-    ["skillFrequency", classification],
-    async () =>
+  await queryClient.prefetchQuery({
+    queryKey: ["skillFrequency", classification],
+    queryFn: async () =>
       await skillFenquencyAPI.getSkillFenquencyAnalysis(classification),
-  );
+  });
 
-  const dehydratedState = dehydrate(queryClient);
+  // const dehydratedState = dehydrate(queryClient);
 
   const translatedClassification = translateClassification(classification);
 
@@ -30,10 +29,10 @@ export default async function SkillFrequencyPage({
   }
 
   return (
-    <Hydrate state={dehydratedState}>
+    <HydrationBoundary state={dehydrate(queryClient)}>
       <AnlaysisNavigationProvider>
         <SkillFrequencySection />
       </AnlaysisNavigationProvider>
-    </Hydrate>
+    </HydrationBoundary>
   );
 }
