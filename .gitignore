@@ -24,14 +24,14 @@ ENV/
 env/
 .venv/
 
-.next
-
 # PyCharm/IntelliJ
 .idea/
 *.iml
 
 # VS Code
 .vscode/
+
+.next
 
 # Jupyter Notebook
 .ipynb_checkpoints
