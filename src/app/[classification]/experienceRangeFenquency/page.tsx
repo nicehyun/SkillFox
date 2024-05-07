@@ -1,6 +1,5 @@
 import { getQueryClient } from "@/tanstackQuery/utils/getQueryClient";
-import { dehydrate } from "@tanstack/react-query";
-import Hydrate from "@/tanstackQuery/utils/hydrateOnClient";
+import { Hydrate, dehydrate } from "@tanstack/react-query";
 import { experienceRangeFenquencyAPI } from "./apis/experienceRangeFenquencyAPI";
 import EducationFenquencySection from "./components/organisms/ExperienceRangeFenquencySection";
 import { translateClassification } from "@/app/common/utils/translate";

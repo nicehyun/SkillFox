@@ -1,6 +1,5 @@
 import { getQueryClient } from "@/tanstackQuery/utils/getQueryClient";
-import { dehydrate } from "@tanstack/react-query";
-import Hydrate from "@/tanstackQuery/utils/hydrateOnClient";
+import { Hydrate, dehydrate } from "@tanstack/react-query";
 import { resionFenquencyAPI } from "./apis/resionFenquencyAPI";
 import { translateClassification } from "@/app/common/utils/translate";
 import AnlaysisNavigationProvider from "@/app/common/utils/AnlaysisNavigationProvider";

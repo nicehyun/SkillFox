@@ -3,9 +3,8 @@ import SkillFrequencySection from "@/app/[classification]/skillFrequency/compone
 import AnlaysisNavigationProvider from "@/app/common/utils/AnlaysisNavigationProvider";
 import { translateClassification } from "@/app/common/utils/translate";
 import { getQueryClient } from "@/tanstackQuery/utils/getQueryClient";
-import Hydrate from "@/tanstackQuery/utils/hydrateOnClient";
 
-import { dehydrate } from "@tanstack/react-query";
+import { Hydrate, dehydrate } from "@tanstack/react-query";
 
 export default async function SkillFrequencyPage({
   params,
