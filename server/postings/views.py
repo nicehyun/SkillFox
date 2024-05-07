@@ -25,7 +25,6 @@ def filter_postings_by_classification(classificationValue):
         classification=classificationValue
     )
 
-    print(postings_with_classification)
     return postings_with_classification
 
 
@@ -129,8 +128,6 @@ def get_skills_frequency(request):
     previous_months_counts = get_previous_months_skills_counts(
         filted_postings, top_skills, month_delta
     )
-
-    print(previous_months_counts)
 
     formatted_data = []
     # 월별 데이터 준비

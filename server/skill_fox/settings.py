@@ -1,31 +1,18 @@
-import json
 import os
 from pathlib import Path
 
-from django.core.exceptions import ImproperlyConfigured
+import environ
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-
-# secret.json 파일 경로
-secret_file = os.path.join(BASE_DIR, "secret.json")
-
-# secret.json 파일 로드
-with open(secret_file) as f:
-    secrets = json.loads(f.read())
+# 환경 변수 파일 위치 설정 및 불러오기
+env = environ.Env()
+root = environ.Path(__file__) - 2
+environ.Env.read_env(env_file=root(".env"))
 
 
-def get_secret(setting, secrets=secrets):
-    """비밀 변수를 가져오거나 명시적 예외를 반환"""
-    try:
-        return secrets[setting]
-    except KeyError:
-        error_msg = "Set the {0} environment variable".format(setting)
-        raise ImproperlyConfigured(error_msg)
-
-
-SECRET_KEY = get_secret("SECRET_KEY")
+SECRET_KEY = env("SECRET_KEY", default=os.getenv("SECRET_KEY"))
+DB_HOST = env("DB_HOST", default=os.getenv("DB_HOST"))
+DB_PORT = env("DB_PORT", default=os.getenv("DB_PORT"))
+DB_PASSWORD = env("DB_PASSWORD", default=os.getenv("DB_PASSWORD"))
 
 
 DEBUG = True
@@ -79,17 +66,14 @@ TEMPLATES = [
 WSGI_APPLICATION = "skill_fox.wsgi.application"
 
 
-# Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
         "NAME": "skill_fox",
-        "USER": "fox",
-        "PASSWORD": "fox123123!",
-        "HOST": "localhost",
-        "PORT": "3306",
+        "USER": "root",
+        "PASSWORD": DB_PASSWORD,
+        "HOST": DB_HOST,
+        "PORT": DB_PORT,
     }
 }
 

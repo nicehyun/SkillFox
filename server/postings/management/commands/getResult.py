@@ -26,8 +26,6 @@ class Command(BaseCommand):
             for job_type, codes in job_type_code_counts.items()
         }
 
-        print(top_codes_by_job_type)
-
         # 결과 포맷팅 및 출력
         formatted_data = {}
 

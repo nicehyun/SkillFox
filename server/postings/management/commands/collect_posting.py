@@ -3,12 +3,11 @@ import os
 import re
 import time
 
+import environ
 import requests
 from bs4 import BeautifulSoup, NavigableString
 from django.core.management.base import BaseCommand
 from django.utils import timezone
-from geopy.exc import GeocoderQuotaExceeded, GeocoderTimedOut
-from geopy.geocoders import Nominatim
 from postings.models import JobPosting
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -23,8 +22,8 @@ class Command(BaseCommand):
             self.style.SUCCESS("Starting the browser and fetching links...")
         )
 
-        keyword = "데이터엔지니어"
-        classification = "DE"
+        keyword = "데이터분석"
+        classification = "DA"
         links = self.fetch_links_with_scroll(keyword)
 
         for url in links:  # 수집한 링크들을 순회
@@ -206,10 +205,17 @@ class Command(BaseCommand):
 
     # -------------------------------- 지역 변환
     def extract_top_and_second_level_region(self, address):
+        env = environ.Env()
+        root = environ.Path(__file__) - 2
+        environ.Env.read_env(env_file=root(".env"))
+        KAKAO_API_SECRET_KEY = env(
+            "KAKAO_API_SECRET_KEY", default=os.getenv("KAKAO_API_SECRET_KEY")
+        )
+
         simplified_address = " ".join(address.split()[:4])
         # geopy의 Nominatim 객체 생성
         url = "https://dapi.kakao.com/v2/local/search/address.json"  # 요청할 url 주소
-        headers = {"Authorization": "KakaoAK {}".format(self.KAKAO_API_KEY)}
+        headers = {"Authorization": "KakaoAK {}".format(self.KAKAO_API_SECRET_KEY)}
 
         query = {"query": simplified_address}
         response = requests.get(url, headers=headers, params=query)
