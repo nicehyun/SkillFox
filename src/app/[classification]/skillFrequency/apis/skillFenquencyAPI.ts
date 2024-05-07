@@ -1,12 +1,9 @@
 export const skillFenquencyAPI = {
   getSkillFenquencyAnalysis: async (classification: string) => {
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/${classification}/skillFrequency`,
-        {
-          next: { revalidate: 0 },
-        },
-      );
+      const response = await fetch(`/api/${classification}/skillFrequency`, {
+        next: { revalidate: 0 },
+      });
 
       if (!response.ok) {
         throw new Error("데이터를 가져오기를 실패했습니다.");

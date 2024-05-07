@@ -2,7 +2,7 @@ export const educationFenquencyAPI = {
   getEducationFenquencyAnalysis: async (classification: string) => {
     try {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/${classification}/educationFrequency`,
+        `/api/${classification}/educationFrequency`,
         {
           next: { revalidate: 0 },
         },
