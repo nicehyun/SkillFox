@@ -33,7 +33,7 @@ const ExperienceRangeContoller = ({
       <h3 className="text-small text-gray1">경력 범위 조절</h3>
 
       <div className="flex h-[60px] items-center">
-        <div className="flex grow-0 flex-col">
+        <div className="flex w-[400px] grow-0 flex-col sm:w-full md:w-full">
           <DynamicDualRangeSlider
             min={0}
             max={20}
@@ -41,7 +41,7 @@ const ExperienceRangeContoller = ({
             currentMax={experienceCurrentMax}
             onChangeMinValue={onChangeExperienceMinValue}
             onChangeMaxValue={onChangeExperienceMaxValue}
-            className="mt-8 flex w-[400px] items-center justify-center sm:w-full md:w-full"
+            className="mt-8  w-full"
           />
           <p className="mt-2 w-full sm:text-small md:text-small">
             <span>🚀 경력 : </span>
