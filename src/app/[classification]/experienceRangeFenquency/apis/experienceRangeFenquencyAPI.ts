@@ -6,7 +6,7 @@ export const experienceRangeFenquencyAPI = {
   ) => {
     try {
       const response = await fetch(
-        `/api/${classification}/experienceRangeFrequency`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/${classification}/experienceRangeFrequency`,
         {
           headers: {
             "Content-Type": "application/json",
