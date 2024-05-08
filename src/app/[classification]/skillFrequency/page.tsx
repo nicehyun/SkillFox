@@ -20,8 +20,6 @@ export default async function SkillFrequencyPage({
       await skillFenquencyAPI.getSkillFenquencyAnalysis(classification),
   });
 
-  // const dehydratedState = dehydrate(queryClient);
-
   const translatedClassification = translateClassification(classification);
 
   if (!translatedClassification) {

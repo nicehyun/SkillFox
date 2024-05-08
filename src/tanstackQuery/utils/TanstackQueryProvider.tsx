@@ -17,7 +17,6 @@ const TanstackQueryProvider = ({ children }: IReactQueryProvider) => {
           refetchOnWindowFocus: false,
           retryOnMount: true,
           refetchOnReconnect: false,
-          retry: false,
         },
       },
     }),
@@ -27,7 +26,7 @@ const TanstackQueryProvider = ({ children }: IReactQueryProvider) => {
     <QueryClientProvider client={queryClient}>
       {children}
       <ReactQueryDevtools
-        initialIsOpen={process.env.NEXT_PUBLIC_MODE === "local"}
+        initialIsOpen={process.env.NEXT_PUBLIC_MODE === "development"}
       />
     </QueryClientProvider>
   );
