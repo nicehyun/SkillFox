@@ -6,13 +6,11 @@ export async function GET(
 ) {
   const { classification } = params;
 
-  console.log("api route");
-
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_BE_URL}/api/skill-frequency/?classification=${classification}`,
       {
-        next: { revalidate: 0 },
+        next: { revalidate: 60 * 60 * 24 * 7 },
       },
     );
 

@@ -43,7 +43,7 @@ export default function Home() {
         {links.map((link) => (
           <Link
             key={`link-${link.id}`}
-            className={` flexCenter w-full rounded-[5px] border-[2px] border-orange py-4 text-small font-bold shadow`}
+            className={`flexCenter w-full rounded-[5px] border-[2px] border-orange py-4 text-small font-bold shadow`}
             href={`/${link.id}/skillFrequency`}
           >
             <Icon icon={link.icon} className="mr-2" size="normal" />{" "}
