@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { getQueryClient } from "@/tanstackQuery/utils/getQueryClient";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 import { experienceRangeFenquencyAPI } from "./apis/experienceRangeFenquencyAPI";
@@ -24,8 +26,6 @@ export default async function IndustryFrequencyPage({
       ),
   });
 
-  const dehydratedState = dehydrate(queryClient);
-
   const translatedClassification = translateClassification(classification);
 
   if (!translatedClassification) {
@@ -33,7 +33,7 @@ export default async function IndustryFrequencyPage({
   }
 
   return (
-    <HydrationBoundary state={dehydratedState}>
+    <HydrationBoundary state={dehydrate(queryClient)}>
       <AnlaysisNavigationProvider>
         <EducationFenquencySection />
       </AnlaysisNavigationProvider>

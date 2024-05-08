@@ -1,4 +1,5 @@
 export const dynamic = "force-dynamic";
+
 import { skillFenquencyAPI } from "@/app/[classification]/skillFrequency/apis/skillFenquencyAPI";
 import SkillFrequencySection from "@/app/[classification]/skillFrequency/components/organisms/SkillFrequencySection";
 import AnlaysisNavigationProvider from "@/app/common/utils/AnlaysisNavigationProvider";
@@ -30,10 +31,6 @@ export default async function SkillFrequencyPage({
     queryFn: async () =>
       await skillFenquencyAPI.getSkillFenquencyAnalysis(classification),
   });
-
-  const time =
-    await skillFenquencyAPI.getSkillFenquencyAnalysis(classification);
-  console.log(time);
 
   const classifications = ["FE", "BE", "DE", "DA", "ML"];
   const dataPromises = classifications.map(async (classification) => {
