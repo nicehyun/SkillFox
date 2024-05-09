@@ -4,13 +4,12 @@ import ChartLayout, { IChartLayoutProps } from "./ChartLayout";
 const meta: Meta<IChartLayoutProps> = {
   title: "Common/Atoms/ChartLayout",
   component: ChartLayout,
+  tags: ["autodocs"],
 };
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
-
-export const Default: Story = {
+export const Default: StoryObj<typeof meta> = {
   args: {
     children: <div>Sample Chart Content</div>,
   },

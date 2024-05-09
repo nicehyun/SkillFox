@@ -4,13 +4,12 @@ import Button, { IButtonProps } from "./Button";
 const meta: Meta<IButtonProps> = {
   title: "Common/Atoms/Button",
   component: Button,
+  tags: ["autodocs"],
 };
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
-
-export const Default: Story = {
+export const Default: StoryObj<typeof meta> = {
   args: {
     id: "default button",
     content: "Default Button",

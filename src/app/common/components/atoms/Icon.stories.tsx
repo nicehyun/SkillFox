@@ -6,6 +6,7 @@ import { BsFillAlarmFill } from "react-icons/bs"; // 예시로 사용할 아이�
 export default {
   title: "Common/Atoms/Icon",
   component: Icon,
+  tags: ["autodocs"],
   argTypes: {
     size: {
       control: { type: "select", options: ["small", "normal", "large"] },

@@ -4,6 +4,7 @@ import SkeletonUI, { ISkeletonUiProps } from "./SkeletonUI";
 const meta: Meta<ISkeletonUiProps> = {
   title: "Common/Atoms/SkeletonUI",
   component: SkeletonUI,
+  tags: ["autodocs"],
   argTypes: {
     className: {
       control: "text",

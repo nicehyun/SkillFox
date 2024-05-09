@@ -5,6 +5,7 @@ import { BsFillAlarmFill } from "react-icons/bs";
 export default {
   title: "Common/Atoms/IconButton",
   component: IconButton,
+  tags: ["autodocs"],
   argTypes: {
     iconSize: {
       control: { type: "select", options: ["small", "normal", "large"] },
