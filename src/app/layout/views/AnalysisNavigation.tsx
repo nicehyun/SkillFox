@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useGetClassification } from "../../common/hooks/useGetClassification";
 import { usePathname } from "next/navigation";
 import { useAppSelector } from "@/redux/hooks";
 import { selectShowNavigationState } from "@/redux/features/layoutSlice";
+import { useGetClassification } from "@/app/common/hooks/useGetClassification";
 
 const AnalysisNavigation = () => {
   const showNavigationState = useAppSelector(selectShowNavigationState);

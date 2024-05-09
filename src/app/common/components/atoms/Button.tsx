@@ -1,18 +1,16 @@
 import { ReactNode } from "react";
-import { bgColorClasses } from "../../utils/classes";
-import { IColorProps } from "../../types";
 
-export interface IButtonProps extends IColorProps {
+export interface IButtonProps {
   id: string;
   type?: "button" | "submit" | "reset";
   onClick: () => void;
   content: ReactNode;
   className?: string;
   disabled?: boolean;
-  testId?: string;
-  // 버튼의 기능을 명확하게 설명
-  ariaLabel?: string;
-  // 이 속성은 사용자가 버튼을 활성화하면 팝업 (대화상자, 메뉴 등)이 나타나는 것을 예상
+  dataCy?: string;
+  // 버튼의 기능
+  ariaLabel: string;
+  // 버튼이 띄우는 팝업 종류
   ariaHaspopup?:
     | "true"
     | "false"
@@ -27,12 +25,11 @@ export interface IButtonProps extends IColorProps {
 
 const Button = ({
   id,
-  color = "gray",
   content,
   onClick,
   type = "button",
   className,
-  testId,
+  dataCy,
   ariaLabel,
   ariaControls,
   ariaHaspopup,
@@ -45,9 +42,9 @@ const Button = ({
       aria-haspopup={ariaHaspopup}
       id={`button-${id}`}
       type={type}
-      className={`${className} ${color === "gray" ? "" : "border-[1px] border-border"} ${bgColorClasses[color]} w-full rounded-[5px] p-[5px] text-xs font-bold text-black2 disabled:cursor-not-allowed`}
+      className={`${className} w-full rounded-[5px] bg-border p-[5px] text-xs font-bold text-black2 disabled:cursor-not-allowed`}
       onClick={onClick}
-      data-cy={testId}
+      data-cy={dataCy}
       disabled={disabled}
     >
       {content}
