@@ -1,19 +1,22 @@
 import React, { ReactElement } from "react";
-import Icon from "./Icon";
+import Icon, { IconSize } from "./Icon";
 
-interface IIconButtonProps {
+export interface IIconButtonProps {
   icon: ReactElement;
   onClick: () => void;
   className?: string;
+  iconSize?: IconSize;
 }
 
-const IconButton = ({ icon, onClick, className = "" }: IIconButtonProps) => {
+const IconButton = ({
+  icon,
+  onClick,
+  className = "",
+  iconSize = "small",
+}: IIconButtonProps) => {
   return (
-    <button
-      onClick={onClick}
-      className={`${className} h-[32px] w-[32px] rounded-[5px]`}
-    >
-      <Icon icon={icon} />
+    <button onClick={onClick} className={`${className}`}>
+      <Icon icon={icon} size={iconSize} />
     </button>
   );
 };

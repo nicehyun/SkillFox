@@ -1,9 +1,11 @@
 import { ReactElement, cloneElement } from "react";
 
+export type IconSize = "small" | "normal" | "large";
+
 export interface IIconProps {
   icon: ReactElement;
   className?: string;
-  size?: "small" | "normal" | "large";
+  size?: IconSize;
 }
 
 const Icon = ({ icon, className, size = "small" }: IIconProps) => {
