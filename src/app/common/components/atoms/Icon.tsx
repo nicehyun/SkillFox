@@ -13,7 +13,7 @@ const Icon = ({ icon, className, size = "small" }: IIconProps) => {
 
   return (
     <span
-      className={`${className} flexCenter ${size === "small" ? "min-h-[20px] min-w-[20px]" : ""} ${size === "normal" ? "min-h-[24px] min-w-[24px]" : ""} ${size === "large" ? "min-h-[26px] min-w-[26px]" : ""} p-[2px]`}
+      className={`${className} flexCenter inline-block ${size === "small" ? "h-[20px] w-[20px]" : ""} ${size === "normal" ? "h-[24px] w-[24px]" : ""} ${size === "large" ? "h-[26px] w-[26px]" : ""} p-[2px]`}
     >
       {cloneIcon}
     </span>

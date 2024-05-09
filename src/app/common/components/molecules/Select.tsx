@@ -65,6 +65,8 @@ export const CustomSelect = ({
         <Icon icon={<FaAngleDown />} />
       </div>
 
+      <Icon icon={<FaAngleDown />} />
+
       {isOpen && (
         <div className="absolute z-20 mt-2 w-full rounded-[5px] bg-white text-xs shadow">
           {options.map((option, index) => (
