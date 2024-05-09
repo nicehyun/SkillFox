@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-interface IChartLayoutProps {
+export interface IChartLayoutProps {
   className?: string;
   children: ReactNode;
 }
