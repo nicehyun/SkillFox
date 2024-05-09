@@ -29,3 +29,9 @@ export interface ResponseChartData<T> {
   data: T[];
   count: number;
 }
+
+export type Aria = {
+  ariaLabel: string;
+  ariaHasPopup: "dialog" | "menu" | "listbox" | "tree" | "grid" | boolean;
+  ariaControls: string;
+};

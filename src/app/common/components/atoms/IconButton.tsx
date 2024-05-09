@@ -1,7 +1,10 @@
 import React, { ReactElement } from "react";
 import Icon, { IconSize } from "./Icon";
+import { Aria } from "../../types";
 
-export interface IIconButtonProps {
+export interface IIconButtonProps
+  extends Pick<Aria, "ariaLabel" | "ariaControls" | "ariaHasPopup"> {
+  id: string;
   icon: ReactElement;
   onClick: () => void;
   className?: string;
@@ -9,13 +12,25 @@ export interface IIconButtonProps {
 }
 
 const IconButton = ({
+  id,
   icon,
   onClick,
   className = "",
   iconSize = "small",
+  ariaControls,
+  ariaHasPopup,
+  ariaLabel,
 }: IIconButtonProps) => {
   return (
-    <button onClick={onClick} className={`${className}`}>
+    <button
+      id={id}
+      aria-haspopup={ariaHasPopup}
+      aria-controls={ariaControls}
+      aria-label={ariaLabel}
+      data-cy={id}
+      onClick={onClick}
+      className={`${className}`}
+    >
       <Icon icon={icon} size={iconSize} />
     </button>
   );
