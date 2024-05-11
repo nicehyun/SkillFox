@@ -1,15 +1,16 @@
-"use client";
-
-import { useAppSelector } from "@/redux/hooks";
 import { getPreviousMonth } from "../../utils/date";
 import TooltipExampleCurrentChart from "./TooltipExampleCurrentChart";
 import TooltipExamplePrevChart from "./TooltipExamplePrevChart";
-import { selectTooltipModalState } from "@/redux/features/layoutSlice";
 
-const TooltipModalContent = () => {
-  const { currentTooltipPage } = useAppSelector(selectTooltipModalState);
-  const handleTooltipModalContent = () => {
-    switch (currentTooltipPage) {
+export interface ITooltipModalContentProps {
+  currentTooltipPage: number;
+}
+
+const TooltipModalContent = ({
+  currentTooltipPage,
+}: ITooltipModalContentProps) => {
+  const handleTooltipModalContent = (tooltipPage: number) => {
+    switch (tooltipPage) {
       case 1:
         return (
           <p>
@@ -58,7 +59,7 @@ const TooltipModalContent = () => {
 
   return (
     <div className="mb-10 grow space-y-6 overflow-y-scroll border-b-[1px] border-border pb-6 pr-2">
-      {handleTooltipModalContent()}
+      {handleTooltipModalContent(currentTooltipPage)}
 
       <p>
         🍳 <strong>{getPreviousMonth(0)}</strong>에 수집된 채용 공고를 기반으로

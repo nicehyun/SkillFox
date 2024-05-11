@@ -2,9 +2,7 @@ import React, { ReactElement } from "react";
 import Icon, { IconSize } from "./Icon";
 import { Aria } from "../../types";
 
-export interface IIconButtonProps
-  extends Pick<Aria, "ariaLabel" | "ariaControls" | "ariaHasPopup">,
-    Partial<Pick<Aria, "ariaExpanded">> {
+export interface IIconButtonProps extends Aria {
   id: string;
   icon: ReactElement;
   onClick: () => void;

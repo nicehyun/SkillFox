@@ -1,18 +1,19 @@
-import { getPreviousMonth } from "../../utils/date";
+import TooltipExampleChartLayout from "./TooltipExampleChartLayout";
 
 const TooltipExampleCurrentChart = () => {
+  const exampleCurrentDatas = [
+    {
+      value: 150,
+      ChartColor: "bg-currentMonthChart",
+    },
+  ];
+
   return (
-    <div className="flex items-center text-small">
-      <span className="mr-4 text-black3">react</span>
-      <div className="grow">
-        <span className="flexCenter inline-block w-full text-black3">
-          {getPreviousMonth(0)}
-        </span>
-        <span className="flexCenter inline-block h-6 w-full bg-currentMonthChart font-bold text-white">
-          150
-        </span>
-      </div>
-    </div>
+    <TooltipExampleChartLayout
+      id="current"
+      exampleChartDatas={exampleCurrentDatas}
+      skillName="react"
+    />
   );
 };
 
