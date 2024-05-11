@@ -9,13 +9,14 @@ import { useTooltipModalController } from "@/app/common/hooks/useTooltipModalCon
 
 const EducationFenquencySection = () => {
   const { data } = useGetEducationFrequencyQuery();
-  const { showTooltipModal } = useTooltipModalController();
+  const { showTooltipModal, isShowTooltipModal } = useTooltipModalController();
 
   return (
     <AnalysisSectionLayout
       analysisTitle="학력별 기술 빈도 분석"
       onClickAnalysisTypeToolTip={() => showTooltipModal(3)}
       postingCount={data?.count ?? 0}
+      isShowTooltipModal={isShowTooltipModal}
     >
       <ChartWrapper<EducationChartData[]> chartData={data?.data}>
         {data?.data.map((educationChart, index) => (

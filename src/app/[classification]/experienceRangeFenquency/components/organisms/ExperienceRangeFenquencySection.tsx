@@ -11,7 +11,7 @@ import { useTooltipModalController } from "@/app/common/hooks/useTooltipModalCon
 const ExperienceRangeFenquencySection = () => {
   const { data, isLoading, onClickExperienceRangeApply } =
     useGetExperienceRangeFrequencyQuery();
-  const { showTooltipModal } = useTooltipModalController();
+  const { showTooltipModal, isShowTooltipModal } = useTooltipModalController();
 
   return (
     <>
@@ -19,6 +19,7 @@ const ExperienceRangeFenquencySection = () => {
         analysisTitle="경력별 기술 분석"
         onClickAnalysisTypeToolTip={() => showTooltipModal(4)}
         postingCount={data?.count ?? 0}
+        isShowTooltipModal={isShowTooltipModal}
       >
         <ExperienceRangeContoller
           isDisabled={isLoading}

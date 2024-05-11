@@ -9,13 +9,14 @@ import { useTooltipModalController } from "@/app/common/hooks/useTooltipModalCon
 
 const ResionFrequencySection = () => {
   const { data } = useGetResion1FrequencyQuery();
-  const { showTooltipModal } = useTooltipModalController();
+  const { showTooltipModal, isShowTooltipModal } = useTooltipModalController();
 
   return (
     <AnalysisSectionLayout
       analysisTitle="지역별 기술 빈도 분석"
       onClickAnalysisTypeToolTip={() => showTooltipModal(2)}
       postingCount={data?.count ?? 0}
+      isShowTooltipModal={isShowTooltipModal}
     >
       <ChartWrapper<RegionChartData[]> chartData={data?.data}>
         {data?.data.map((resionChart, index) => (

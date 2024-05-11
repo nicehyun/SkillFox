@@ -32,7 +32,6 @@ export const Small: StoryObj<IIconProps> = {
     size: "small",
     className: "",
   },
-  storyName: "Small Icon",
 };
 
 export const Normal: StoryObj<IIconProps> = {
@@ -41,7 +40,6 @@ export const Normal: StoryObj<IIconProps> = {
     size: "normal",
     className: "",
   },
-  storyName: "Normal Icon",
 };
 
 export const Large: StoryObj<IIconProps> = {
@@ -50,5 +48,4 @@ export const Large: StoryObj<IIconProps> = {
     size: "large",
     className: "",
   },
-  storyName: "Large Icon",
 };

@@ -19,5 +19,4 @@ export const Default: StoryObj<ISkeletonUiProps> = {
   args: {
     className: "w-full",
   },
-  storyName: "Default SkeletonUI",
 };

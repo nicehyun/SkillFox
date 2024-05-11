@@ -27,27 +27,27 @@ export default {
 
 export const Small: StoryObj<IIconButtonProps> = {
   args: {
+    id: "icon-small",
     icon: <BsFillAlarmFill />,
     iconSize: "small",
     className: "",
   },
-  storyName: "Small Icon",
 };
 
 export const Normal: StoryObj<IIconButtonProps> = {
   args: {
+    id: "icon-normal",
     icon: <BsFillAlarmFill />,
     iconSize: "normal",
     className: "",
   },
-  storyName: "Normal Icon",
 };
 
 export const Large: StoryObj<IIconButtonProps> = {
   args: {
+    id: "icon-large",
     icon: <BsFillAlarmFill />,
     iconSize: "large",
     className: "",
   },
-  storyName: "Large Icon",
 };

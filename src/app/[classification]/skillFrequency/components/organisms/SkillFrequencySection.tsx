@@ -9,13 +9,14 @@ import { useTooltipModalController } from "@/app/common/hooks/useTooltipModalCon
 
 const SkillFrequencySection = () => {
   const { data } = useGetSkillFrequencyQuery();
-  const { showTooltipModal } = useTooltipModalController();
+  const { showTooltipModal, isShowTooltipModal } = useTooltipModalController();
 
   return (
     <AnalysisSectionLayout
       analysisTitle="기술 빈도 분석"
       onClickAnalysisTypeToolTip={() => showTooltipModal(1)}
       postingCount={data?.count ?? 0}
+      isShowTooltipModal={isShowTooltipModal}
     >
       <ChartWrapper<MonthlyChartData[]> chartData={data?.data}>
         <DynamicSelectShowCountMonthlyBarChart

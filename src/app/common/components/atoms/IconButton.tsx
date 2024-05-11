@@ -3,12 +3,14 @@ import Icon, { IconSize } from "./Icon";
 import { Aria } from "../../types";
 
 export interface IIconButtonProps
-  extends Pick<Aria, "ariaLabel" | "ariaControls" | "ariaHasPopup"> {
+  extends Pick<Aria, "ariaLabel" | "ariaControls" | "ariaHasPopup">,
+    Partial<Pick<Aria, "ariaExpanded">> {
   id: string;
   icon: ReactElement;
   onClick: () => void;
   className?: string;
   iconSize?: IconSize;
+  iconClassName?: string;
 }
 
 const IconButton = ({
@@ -20,6 +22,7 @@ const IconButton = ({
   ariaControls,
   ariaHasPopup,
   ariaLabel,
+  iconClassName = "",
 }: IIconButtonProps) => {
   return (
     <button
@@ -31,7 +34,7 @@ const IconButton = ({
       onClick={onClick}
       className={`${className}`}
     >
-      <Icon icon={icon} size={iconSize} />
+      <Icon icon={icon} size={iconSize} className={iconClassName} />
     </button>
   );
 };

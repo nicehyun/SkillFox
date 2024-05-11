@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import ToolTip from "../molecules/ToolTip";
+import ToolTip from "../molecules/ToolTipButton";
 import InteractiveSection from "./InteractiveSection";
 
 export interface IAnalysisSectionLayoutProps {
@@ -7,6 +7,7 @@ export interface IAnalysisSectionLayoutProps {
   children: ReactNode;
   postingCount: number;
   onClickAnalysisTypeToolTip: () => void;
+  isShowTooltipModal: boolean;
 }
 
 const AnalysisSectionLayout = ({
@@ -14,6 +15,7 @@ const AnalysisSectionLayout = ({
   children,
   postingCount,
   onClickAnalysisTypeToolTip,
+  isShowTooltipModal,
 }: IAnalysisSectionLayoutProps) => {
   return (
     <InteractiveSection>
@@ -22,7 +24,8 @@ const AnalysisSectionLayout = ({
           {analysisTitle}
         </h1>
         <ToolTip
-          ariaLabel={`${analysisTitle} 툴팁`}
+          analysisClassification={`${analysisTitle}`}
+          isOpen={isShowTooltipModal}
           onClick={onClickAnalysisTypeToolTip}
         />
       </div>
