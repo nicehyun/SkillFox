@@ -22,6 +22,10 @@ export default {
       },
       control: false,
     },
+    ariaLabel: {
+      description: "다른 요소를 직접적으로 제어한다는 것을 나타냅니다.",
+      control: false,
+    },
   },
 } as Meta<IIconButtonProps>;
 
@@ -31,6 +35,7 @@ export const Small: StoryObj<IIconButtonProps> = {
     icon: <BsFillAlarmFill />,
     iconSize: "small",
     className: "",
+    ariaLabel: "small icon button",
   },
 };
 
@@ -40,6 +45,7 @@ export const Normal: StoryObj<IIconButtonProps> = {
     icon: <BsFillAlarmFill />,
     iconSize: "normal",
     className: "",
+    ariaLabel: "normal icon button",
   },
 };
 
@@ -48,6 +54,7 @@ export const Large: StoryObj<IIconButtonProps> = {
     id: "icon-large",
     icon: <BsFillAlarmFill />,
     iconSize: "large",
+    ariaLabel: "large icon button",
     className: "",
   },
 };

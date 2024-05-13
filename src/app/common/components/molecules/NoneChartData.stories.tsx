@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import NoneChartData from "./NoneChartData";
 
 const meta: Meta = {
-  title: "Common/molecules/NoneChartData",
+  title: "Common/Molecules/NoneChartData",
   component: NoneChartData,
   tags: ["autodocs"],
 };

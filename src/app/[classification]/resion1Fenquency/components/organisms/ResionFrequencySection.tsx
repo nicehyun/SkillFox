@@ -3,7 +3,7 @@
 import AnalysisSectionLayout from "@/app/common/components/organisms/AnalysisSectionLayout";
 import { useGetResion1FrequencyQuery } from "../../hooks/useGetResion1FrequencyQuery";
 import IndividualBarChart from "@/app/common/components/organisms/IndividualBarChart";
-import ChartWrapper from "@/app/common/components/organisms/ChartWrapper";
+import ChartWrapper from "@/app/common/utils/ChartWrapper";
 import { RegionChartData } from "@/app/common/types";
 import { useTooltipModalController } from "@/app/common/hooks/useTooltipModalController";
 

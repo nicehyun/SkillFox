@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import SkeletonShowCountMonthlyBarChart from "./SkeletonShowCountMonthlyBarChart";
+import SkeletonShowCountMonthlyBarChart from "../components/organisms/SkeletonShowCountMonthlyBarChart";
 
 const DynamicSelectShowCountMonthlyBarChart = dynamic(
   () =>

@@ -3,7 +3,7 @@ import { CustomSelect, ICustomSelectProps } from "./CustomSelect";
 import { useState } from "react";
 
 const meta: Meta<ICustomSelectProps> = {
-  title: "Common/molecules/CustomSelect",
+  title: "Common/Molecules/CustomSelect",
   component: CustomSelect,
   tags: ["autodocs"],
   argTypes: {

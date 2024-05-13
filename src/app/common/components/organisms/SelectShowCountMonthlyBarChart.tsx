@@ -8,10 +8,8 @@ import ChartLayout from "../atoms/ChartLayout";
 import ReactApexChart from "react-apexcharts";
 import { ApexOptions } from "apexcharts";
 import { extractMonthlyChartData } from "../../utils/charData";
-import SkeletonShowCountMonthlyBarChart from "./SkeletonShowCountMonthlyBarChart";
-import dynamic from "next/dynamic";
 
-interface ISelectShowCountBarChartProps extends IMonthlyBarChartProps {
+export interface ISelectShowCountBarChartProps extends IMonthlyBarChartProps {
   id: string;
 }
 

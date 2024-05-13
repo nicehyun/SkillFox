@@ -2,7 +2,7 @@ import { Meta, StoryObj } from "@storybook/react";
 import TooltipExampleCurrentChart from "./TooltipExampleCurrentChart";
 
 const meta: Meta = {
-  title: "Common/molecules/TooltipExampleCurrentChart",
+  title: "Common/Molecules/TooltipExampleCurrentChart",
   component: TooltipExampleCurrentChart,
   tags: ["autodocs"],
 };

@@ -1,45 +1,35 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { RootState } from "../types/store";
+import { Meta, StoryObj } from "@storybook/react";
+import TooltipModal, { ITooltipModalProps } from "./TooltipModal";
+import { PayloadAction, configureStore, createSlice } from "@reduxjs/toolkit";
+import { IShowTooltipPayload } from "@/redux/features/layoutSlice";
+import { Provider } from "react-redux";
 
-export interface IShowTooltipPayload {
-  page: number;
-}
-
-type TootipModal = {
-  isShowTooltipModal: boolean;
-  currentTooltipPage: number;
-  isFirstPage: boolean;
-  isLastPage: boolean;
-};
-
-type InitialLayoutState = {
-  showNavigation: boolean;
-  tootipModalState: TootipModal;
-};
-
-const initialLayoutState: InitialLayoutState = {
-  showNavigation: false,
-  tootipModalState: {
-    currentTooltipPage: 1,
-    isShowTooltipModal: false,
-    isFirstPage: false,
-    isLastPage: false,
+const meta: Meta<ITooltipModalProps> = {
+  title: "Common/Organisms/TooltipModal",
+  component: TooltipModal,
+  tags: ["autodocs"],
+  argTypes: {
+    closeIconSize: {
+      control: "radio",
+      defaultValue: "small",
+      description: "close 아이콘의 사이즈를 결정합니다.",
+    },
   },
 };
 
+export default meta;
+
 const layoutSlice = createSlice({
   name: "layout",
-  initialState: initialLayoutState,
+  initialState: {
+    tootipModalState: {
+      currentTooltipPage: 1,
+      isShowTooltipModal: true,
+      isFirstPage: false,
+      isLastPage: false,
+    },
+  },
   reducers: {
-    showNavigation(state) {
-      state.showNavigation = true;
-    },
-    hideNavigation(state) {
-      state.showNavigation = false;
-    },
-    toggleShowNavigation(state) {
-      state.showNavigation = !state.showNavigation;
-    },
     showTooltipModal(state, actions: PayloadAction<IShowTooltipPayload>) {
       state.tootipModalState.isShowTooltipModal = true;
 
@@ -87,20 +77,12 @@ const layoutSlice = createSlice({
   },
 });
 
-export const {
-  showNavigation,
-  hideNavigation,
-  toggleShowNavigation,
-  showTooltipModal,
-  hideTooltipModal,
-  prevTooltipPage,
-  nextTooltipPage,
-} = layoutSlice.actions;
+const store = configureStore({
+  reducer: {
+    layoutSlice: layoutSlice.reducer,
+  },
+});
 
-export const selectShowNavigationState = (state: RootState) =>
-  state.layoutSlice.showNavigation;
-
-export const selectTooltipModalState = (state: RootState) =>
-  state.layoutSlice.tootipModalState;
-
-export default layoutSlice.reducer;
+export const Default: StoryObj<ITooltipModalProps> = {
+  decorators: (story) => <Provider store={store}>{story()}</Provider>,
+};

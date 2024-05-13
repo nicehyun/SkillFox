@@ -7,7 +7,7 @@ export interface IColorProps {
 
 export type MonthlyChartData = {
   name: string;
-  months_value: { [key: number]: number }[];
+  months_value: { [key: string]: number }[];
 };
 
 export interface IMonthlyBarChartProps {

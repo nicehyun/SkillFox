@@ -10,7 +10,7 @@ import TooltipModalTitle from "../atoms/TooltipModalTitle";
 import { useTooltipModalController } from "../../hooks/useTooltipModalController";
 import { IconSize } from "../atoms/Icon";
 
-interface ITooltipModalProps {
+export interface ITooltipModalProps {
   closeIconSize?: IconSize;
 }
 
@@ -25,7 +25,6 @@ const TooltipModal = ({ closeIconSize = "small" }: ITooltipModalProps) => {
       {isShowTooltipModal && (
         <section
           id="modal-tooltip"
-          aria-expanded={isShowTooltipModal}
           onClick={hideTooltipModal}
           className="flexCenter fixed inset-0 z-40 cursor-default bg-border bg-opacity-50"
         >
@@ -40,6 +39,7 @@ const TooltipModal = ({ closeIconSize = "small" }: ITooltipModalProps) => {
               iconSize={closeIconSize}
               onClick={hideTooltipModal}
               className="absolute right-6"
+              ariaLabel="close tooltip modal"
             />
 
             <TooltipModalTitle />

@@ -58,7 +58,10 @@ const TooltipModalContent = ({
   };
 
   return (
-    <div className="mb-10 grow space-y-6 overflow-y-scroll border-b-[1px] border-border pb-6 pr-2">
+    <div
+      tabIndex={0}
+      className="mb-10 grow space-y-6 overflow-y-scroll border-b-[1px] border-border pb-6 pr-2"
+    >
       {handleTooltipModalContent(currentTooltipPage)}
 
       <p>

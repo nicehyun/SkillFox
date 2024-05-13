@@ -2,7 +2,7 @@ import SkeletonUI from "../atoms/SkeletonUI";
 
 const SkeletonShowCountMonthlyBarChart = () => {
   return (
-    <>
+    <div aria-busy="true" role="progressbar" aria-label="Loading chart data">
       <div className="flex justify-end">
         <SkeletonUI className="mb-2 w-[130px]" />
       </div>
@@ -15,6 +15,8 @@ const SkeletonShowCountMonthlyBarChart = () => {
             <div
               key={`skeleton-bar-chart__${index}`}
               className="flex items-center"
+              role="progressbar"
+              aria-label={`Loading monthly chart data ${index + 1}`}
             >
               <SkeletonUI className="mr-2 w-24" />
 
@@ -35,7 +37,7 @@ const SkeletonShowCountMonthlyBarChart = () => {
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

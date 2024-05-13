@@ -4,7 +4,7 @@ import TooltipModalContent, {
 import { Meta, StoryObj } from "@storybook/react";
 
 const meta: Meta<ITooltipModalContentProps> = {
-  title: "Common/molecules/TooltipModalContent",
+  title: "Common/Molecules/TooltipModalContent",
   component: TooltipModalContent,
   argTypes: {
     currentTooltipPage: {

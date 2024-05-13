@@ -3,7 +3,7 @@ import TooltipModalPageController from "./TooltipModalPageController";
 import ReduxProvider from "@/redux/utils/ReduxProvider";
 
 const meta: Meta = {
-  title: "Common/molecules/TooltipModalPageController",
+  title: "Common/Molecules/TooltipModalPageController",
   component: TooltipModalPageController,
   tags: ["autodocs"],
 };

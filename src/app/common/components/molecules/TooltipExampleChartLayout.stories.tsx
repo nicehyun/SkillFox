@@ -4,13 +4,12 @@ import TooltipExampleChartLayout, {
 } from "./TooltipExampleChartLayout";
 
 const meta: Meta<ITooltipExampleChartLayoutProps> = {
-  title: "Common/molecules/TooltipExampleChartLayout",
+  title: "Common/Molecules/TooltipExampleChartLayout",
   component: TooltipExampleChartLayout,
   tags: ["autodocs"],
   argTypes: {
     id: {
       control: "radio",
-      defaultValue: "current",
       description:
         "id 값은 'current' 또는 'prev'로만 설정이 가능하며, 해당 값을 사용해 차트의 월을 결정합니다.",
     },
@@ -39,6 +38,7 @@ export default meta;
 
 export const Defalut: StoryObj<ITooltipExampleChartLayoutProps> = {
   args: {
+    id: "current",
     skillName: "skill",
     exampleChartDatas: [
       {

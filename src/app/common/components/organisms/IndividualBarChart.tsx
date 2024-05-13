@@ -1,9 +1,10 @@
 "use client";
 
 import { IMonthlyBarChartProps } from "@/app/common/types";
-import DynamicSelectShowCountMonthlyBarChart from "./DynamicSelectShowCountMonthlyBarChart";
+import DynamicSelectShowCountMonthlyBarChart from "../../utils/DynamicSelectShowCountMonthlyBarChart";
+import IndividualBarChartTitle from "../atoms/IndividualBarChartTitle";
 
-interface IIndividualBarChartProps extends IMonthlyBarChartProps {
+export interface IIndividualBarChartProps extends IMonthlyBarChartProps {
   id: string;
   chartTitle: string;
   className?: string;
@@ -18,9 +19,7 @@ const IndividualBarChart = ({
 }: IIndividualBarChartProps) => {
   return (
     <article className={className}>
-      <div className="mb-2 flex items-center">
-        <h3 className="mr-2 text-small font-bold text-black1">{chartTitle}</h3>
-      </div>
+      <IndividualBarChartTitle title={chartTitle} />
 
       <DynamicSelectShowCountMonthlyBarChart
         id={id}

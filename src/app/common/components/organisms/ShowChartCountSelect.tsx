@@ -5,7 +5,7 @@ import {
 } from "@/redux/features/showChartCountSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 
-interface IShowChartCountSelectProps {
+export interface IShowChartCountSelectProps {
   id: string;
 }
 
@@ -15,7 +15,7 @@ const ShowChartCountSelect = ({ id }: IShowChartCountSelectProps) => {
 
   return (
     <CustomSelect
-      id={`${id}-count`}
+      id={`select-${id}-count`}
       onChangeSelectValue={(value: number) =>
         dispatch(selcetShowBarChartCount({ count: +value }))
       }

@@ -1,6 +1,9 @@
 import { ReactNode } from "react";
 import ToolTip from "../molecules/ToolTipButton";
-import InteractiveSection from "./InteractiveSection";
+import InteractiveSection from "../../utils/InteractiveSection";
+import AnalysisSectionTitle from "../atoms/AnalysisSectionTitle";
+import JobPostingCountInfo from "../atoms/JobPostingCountInfo";
+import { IconSize } from "../atoms/Icon";
 
 export interface IAnalysisSectionLayoutProps {
   analysisTitle: string;
@@ -8,6 +11,7 @@ export interface IAnalysisSectionLayoutProps {
   postingCount: number;
   onClickAnalysisTypeToolTip: () => void;
   isShowTooltipModal: boolean;
+  ToolTipIconSize?: IconSize;
 }
 
 const AnalysisSectionLayout = ({
@@ -16,24 +20,21 @@ const AnalysisSectionLayout = ({
   postingCount,
   onClickAnalysisTypeToolTip,
   isShowTooltipModal,
+  ToolTipIconSize = "small",
 }: IAnalysisSectionLayoutProps) => {
   return (
     <InteractiveSection>
       <div className="mb-2 flex items-center">
-        <h1 className="mr-2 text-medium font-bold sm:text-small md:text-normal">
-          {analysisTitle}
-        </h1>
+        <AnalysisSectionTitle title={analysisTitle} className="mr-2" />
         <ToolTip
           analysisClassification={`${analysisTitle}`}
           isOpen={isShowTooltipModal}
           onClick={onClickAnalysisTypeToolTip}
+          iconSize={ToolTipIconSize}
         />
       </div>
 
-      <span className="mb-14 inline-block text-small text-gray1">
-        채용 공고 <strong className="text-black3">{postingCount}</strong>건을
-        분석한 결과입니다.
-      </span>
+      <JobPostingCountInfo postingCount={postingCount} className="mb-14" />
 
       {children}
     </InteractiveSection>

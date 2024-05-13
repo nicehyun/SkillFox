@@ -1,8 +1,8 @@
 import { ReactNode } from "react";
-import NoneChartData from "../molecules/NoneChartData";
-import SkeletonShowCountMonthlyBarChart from "./SkeletonShowCountMonthlyBarChart";
+import NoneChartData from "../components/molecules/NoneChartData";
+import SkeletonShowCountMonthlyBarChart from "../components/organisms/SkeletonShowCountMonthlyBarChart";
 
-interface IChartWrapperProps<T> {
+export interface IChartWrapperProps<T> {
   chartData: T | undefined;
   isLoading?: boolean;
   children: ReactNode;
