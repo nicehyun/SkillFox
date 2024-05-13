@@ -1,7 +1,7 @@
 import { Noto_Sans_KR } from "next/font/google";
 import "./globals.css";
-import Footer from "./layout/views/Footer";
-import Header from "./layout/views/Header";
+import Footer from "./layout/components/organisms/Footer";
+import Header from "./layout/components/organisms/Header";
 import Providers from "./common/utils/Providers";
 
 const notoSansKr = Noto_Sans_KR({

@@ -25,7 +25,7 @@ const layoutSlice = createSlice({
     tootipModalState: {
       currentTooltipPage: 1,
       isShowTooltipModal: true,
-      isFirstPage: false,
+      isFirstPage: true,
       isLastPage: false,
     },
   },

@@ -17,7 +17,7 @@ const dummyChartData: MonthlyChartData = {
   ],
 };
 
-const dummyChartDatas: MonthlyChartData[] = Array.from({ length: 10 }, () =>
+const dummyChartDatas: MonthlyChartData[] = Array.from({ length: 20 }, () =>
   JSON.parse(JSON.stringify(dummyChartData)),
 );
 

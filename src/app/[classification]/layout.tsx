@@ -1,8 +1,8 @@
 export const dynamic = "force-dynamic";
 
 import { ReactNode } from "react";
-import AnalysisNavigation from "../layout/views/AnalysisNavigation";
-import PageLayout from "../layout/views/PageLayout";
+import AnalysisNavigation from "../layout/components/organisms/AnalysisNavigation";
+import PageLayout from "../layout/components/molecules/PageLayout";
 import TooltipModal from "../common/components/organisms/TooltipModal";
 
 interface IAnalysisLayoutProps {
