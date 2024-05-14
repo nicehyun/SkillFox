@@ -1,12 +1,12 @@
 import Link from "next/link";
 
-interface INavigationItemProps {
+export interface INavigationLinkProps {
   children: string;
   href: string;
   isActive: boolean;
 }
 
-const NavigationLink = ({ children, href, isActive }: INavigationItemProps) => {
+const NavigationLink = ({ children, href, isActive }: INavigationLinkProps) => {
   return (
     <Link
       className={`inline-block w-full p-2`}

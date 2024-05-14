@@ -1,5 +1,9 @@
-const LogoDescription = () => {
-  return <span className="text-gray1">채용 공고 기술 분석</span>;
+export interface ILogoDescriptionProps {
+  children: string;
+}
+
+const LogoDescription = ({ children }: ILogoDescriptionProps) => {
+  return <span className="text-black3">{children}</span>;
 };
 
 export default LogoDescription;
