@@ -8,7 +8,10 @@ import { translateClassification } from "@/app/common/utils/translate";
 import AnlaysisNavigationProvider from "@/app/common/utils/AnlaysisNavigationProvider";
 import { Job } from "@/app/common/types";
 import { Metadata } from "next";
-import { convertJobCodeToDescription } from "@/app/common/utils/classification";
+import {
+  convertJobCodeToDescription,
+  createJobClassificationArray,
+} from "@/app/common/utils/classification";
 
 export async function generateMetadata({
   params,
@@ -24,13 +27,7 @@ export async function generateMetadata({
 }
 
 export function generateStaticParams() {
-  return [
-    { classification: "FE" },
-    { classification: "BE" },
-    { classification: "DE" },
-    { classification: "DA" },
-    { classification: "ML" },
-  ];
+  return createJobClassificationArray();
 }
 
 export default async function IndustryFrequencyPage({

@@ -7,6 +7,10 @@ type JobDescription =
   | "데이터 분석가"
   | "머신러닝 엔지니어";
 
+type JobClassificationArray = {
+  classification: Job;
+}[];
+
 export const convertJobCodeToDescription = (job: Job): JobDescription => {
   const jobs: { key: Job; description: JobDescription }[] = [
     { key: "FE", description: "프론트엔드" },
@@ -16,9 +20,19 @@ export const convertJobCodeToDescription = (job: Job): JobDescription => {
     { key: "ML", description: "머신러닝 엔지니어" },
   ];
 
-  const roleObj = jobs.find((r) => r.key === job);
-  if (!roleObj) {
+  const jobObj = jobs.find((jobEl) => jobEl.key === job);
+  if (!jobObj) {
     throw new Error("Invalid role");
   }
-  return roleObj.description;
+  return jobObj.description;
+};
+
+export const createJobClassificationArray = (): JobClassificationArray => {
+  return [
+    { classification: "FE" },
+    { classification: "BE" },
+    { classification: "DE" },
+    { classification: "DA" },
+    { classification: "ML" },
+  ];
 };

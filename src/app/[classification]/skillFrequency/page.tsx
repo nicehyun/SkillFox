@@ -4,7 +4,10 @@ import { skillFenquencyAPI } from "@/app/[classification]/skillFrequency/apis/sk
 import SkillFrequencySection from "@/app/[classification]/skillFrequency/components/organisms/SkillFrequencySection";
 import { Job } from "@/app/common/types";
 import AnlaysisNavigationProvider from "@/app/common/utils/AnlaysisNavigationProvider";
-import { convertJobCodeToDescription } from "@/app/common/utils/classification";
+import {
+  convertJobCodeToDescription,
+  createJobClassificationArray,
+} from "@/app/common/utils/classification";
 import { translateClassification } from "@/app/common/utils/translate";
 import { getQueryClient } from "@/tanstackQuery/utils/getQueryClient";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
@@ -24,13 +27,7 @@ export async function generateMetadata({
 }
 
 export function generateStaticParams() {
-  return [
-    { classification: "FE" },
-    { classification: "BE" },
-    { classification: "DE" },
-    { classification: "DA" },
-    { classification: "ML" },
-  ];
+  return createJobClassificationArray();
 }
 
 export default async function SkillFrequencyPage({
