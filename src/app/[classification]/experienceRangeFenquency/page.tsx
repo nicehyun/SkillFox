@@ -4,11 +4,10 @@ import { getQueryClient } from "@/tanstackQuery/utils/getQueryClient";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 import { experienceRangeFenquencyAPI } from "./apis/experienceRangeFenquencyAPI";
 import EducationFenquencySection from "./components/organisms/ExperienceRangeFenquencySection";
-import { translateClassification } from "@/app/common/utils/translate";
 import AnlaysisNavigationProvider from "@/app/common/utils/AnlaysisNavigationProvider";
 import { Metadata } from "next";
 import { convertJobCodeToDescription } from "@/app/common/utils/classification";
-import { Job } from "@/app/common/types";
+import { Job, MonthlyChartData } from "@/app/common/types";
 
 export async function generateMetadata({
   params,
@@ -17,16 +16,34 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const classification = params.classification;
 
+  const monthlyChartData =
+    await experienceRangeFenquencyAPI.getExperienceRangeFenquencyAnalysis(
+      classification,
+      0,
+      20,
+    );
+
   return {
     title: `${convertJobCodeToDescription(classification)} 채용공고 경력별 기술 빈도 분석`,
     description: `${convertJobCodeToDescription(classification)} 채용공고 경력별 자격 요건 기술 스택 분석`,
+    keywords: [
+      `${convertJobCodeToDescription(classification)}`,
+      "채용 공고",
+      "자격요건",
+      "기술",
+      "분석",
+      "경력별",
+      ...monthlyChartData.data.map(
+        (chartData: MonthlyChartData) => chartData.name,
+      ),
+    ],
   };
 }
 
 export default async function IndustryFrequencyPage({
   params,
 }: {
-  params: { classification: string };
+  params: { classification: Job };
 }) {
   const queryClient = getQueryClient();
 
@@ -42,7 +59,7 @@ export default async function IndustryFrequencyPage({
       ),
   });
 
-  const translatedClassification = translateClassification(classification);
+  const translatedClassification = convertJobCodeToDescription(classification);
 
   if (!translatedClassification) {
     return;

@@ -72,3 +72,17 @@ export const extractMonthlyChartData = (
 
   return result.reverse();
 };
+
+export const extractAllNamesFromChartData = <
+  T extends { data: MonthlyChartData[] },
+>(
+  chartData: T[],
+): string[] => {
+  const allSkillName = chartData.flatMap((dataEl) =>
+    dataEl.data.map((monthlyData) => monthlyData.name),
+  );
+
+  const uniqueAllSkillName = Array.from(new Set(allSkillName));
+
+  return uniqueAllSkillName;
+};

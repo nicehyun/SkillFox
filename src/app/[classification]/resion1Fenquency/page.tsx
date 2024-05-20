@@ -3,15 +3,15 @@ export const dynamic = "force-dynamic";
 import { getQueryClient } from "@/tanstackQuery/utils/getQueryClient";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 import { resionFenquencyAPI } from "./apis/resionFenquencyAPI";
-import { translateClassification } from "@/app/common/utils/translate";
 import AnlaysisNavigationProvider from "@/app/common/utils/AnlaysisNavigationProvider";
 import ResionFrequencySection from "./components/organisms/ResionFrequencySection";
 import { Metadata } from "next";
-import { Job } from "@/app/common/types";
+import { Job, MonthlyChartData, RegionChartData } from "@/app/common/types";
 import {
   convertJobCodeToDescription,
   createJobClassificationArray,
 } from "@/app/common/utils/classification";
+import { extractAllNamesFromChartData } from "@/app/common/utils/charData";
 
 export async function generateMetadata({
   params,
@@ -20,9 +20,21 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const classification = params.classification;
 
+  const monthlyChartData =
+    await resionFenquencyAPI.getResion1FenquencyAnalysis(classification);
+
   return {
     title: `${convertJobCodeToDescription(classification)} 채용공고 지역별 기술 빈도 분석`,
     description: `${convertJobCodeToDescription(classification)} 채용공고 지역별 자격 요건 기술 스택 분석`,
+    keywords: [
+      `${convertJobCodeToDescription(classification)}`,
+      "채용 공고",
+      "자격요건",
+      "기술",
+      "분석",
+      "지역별",
+      ...extractAllNamesFromChartData(monthlyChartData.data),
+    ],
   };
 }
 
@@ -33,7 +45,7 @@ export function generateStaticParams() {
 export default async function ResionFenquencyPage({
   params,
 }: {
-  params: { classification: string };
+  params: { classification: Job };
 }) {
   const queryClient = getQueryClient();
 
@@ -58,7 +70,7 @@ export default async function ResionFenquencyPage({
 
   await Promise.all(dataPromises);
 
-  const translatedClassification = translateClassification(classification);
+  const translatedClassification = convertJobCodeToDescription(classification);
 
   if (!translatedClassification) {
     return;

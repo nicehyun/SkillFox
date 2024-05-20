@@ -2,13 +2,12 @@ export const dynamic = "force-dynamic";
 
 import { skillFenquencyAPI } from "@/app/[classification]/skillFrequency/apis/skillFenquencyAPI";
 import SkillFrequencySection from "@/app/[classification]/skillFrequency/components/organisms/SkillFrequencySection";
-import { Job } from "@/app/common/types";
+import { Job, MonthlyChartData } from "@/app/common/types";
 import AnlaysisNavigationProvider from "@/app/common/utils/AnlaysisNavigationProvider";
 import {
   convertJobCodeToDescription,
   createJobClassificationArray,
 } from "@/app/common/utils/classification";
-import { translateClassification } from "@/app/common/utils/translate";
 import { getQueryClient } from "@/tanstackQuery/utils/getQueryClient";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 import { Metadata } from "next";
@@ -20,9 +19,22 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const classification = params.classification;
 
+  const monthlyChartData =
+    await skillFenquencyAPI.getSkillFenquencyAnalysis(classification);
+
   return {
     title: `${convertJobCodeToDescription(classification)} 채용공고 기술 빈도 분석`,
     description: `${convertJobCodeToDescription(classification)} 채용공고 자격 요건 기술 스택 분석`,
+    keywords: [
+      `${convertJobCodeToDescription(classification)}`,
+      "채용 공고",
+      "자격요건",
+      "기술",
+      "분석",
+      ...monthlyChartData.data.map(
+        (chartData: MonthlyChartData) => chartData.name,
+      ),
+    ],
   };
 }
 
@@ -33,7 +45,7 @@ export function generateStaticParams() {
 export default async function SkillFrequencyPage({
   params,
 }: {
-  params: { classification: string };
+  params: { classification: Job };
 }) {
   const queryClient = getQueryClient();
 
@@ -55,7 +67,7 @@ export default async function SkillFrequencyPage({
 
   await Promise.all(dataPromises);
 
-  const translatedClassification = translateClassification(classification);
+  const translatedClassification = convertJobCodeToDescription(classification);
 
   if (!translatedClassification) {
     return;
