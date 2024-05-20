@@ -6,6 +6,22 @@ import { educationFenquencyAPI } from "./apis/educationFenquencyAPI";
 import EducationFenquencySection from "./components/organisms/EducationFenquencySection";
 import { translateClassification } from "@/app/common/utils/translate";
 import AnlaysisNavigationProvider from "@/app/common/utils/AnlaysisNavigationProvider";
+import { Job } from "@/app/common/types";
+import { Metadata } from "next";
+import { convertJobCodeToDescription } from "@/app/common/utils/classification";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { classification: Job };
+}): Promise<Metadata> {
+  const classification = params.classification;
+
+  return {
+    title: `${convertJobCodeToDescription(classification)} 채용공고 학력별 기술 빈도 분석`,
+    description: `${convertJobCodeToDescription(classification)} 채용공고 학력별 자격 요건 기술 스택 분석`,
+  };
+}
 
 export function generateStaticParams() {
   return [

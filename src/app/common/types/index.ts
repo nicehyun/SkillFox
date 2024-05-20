@@ -1,3 +1,5 @@
+export type Job = "FE" | "BE" | "DE" | "DA" | "ML";
+
 export type Color = "primary" | "secondary" | "gray";
 export type Size = "small" | "medium" | "normal";
 

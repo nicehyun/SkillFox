@@ -4,32 +4,34 @@ import Icon from "../common/components/atoms/Icon";
 import { SiApache, SiTensorflow } from "react-icons/si";
 import { LuServer } from "react-icons/lu";
 import { IoStatsChartOutline } from "react-icons/io5";
+import { convertJobCodeToDescription } from "../common/utils/classification";
+import { Job } from "../common/types";
+
+type HomeLinks = {
+  id: Job;
+  icon: JSX.Element;
+}[];
 
 export default function Home() {
-  const links = [
+  const links: HomeLinks = [
     {
       id: "FE",
-      content: "프론트엔드",
       icon: <TbBrandReactNative />,
     },
     {
       id: "BE",
-      content: "백엔드・서버",
       icon: <LuServer />,
     },
     {
       id: "DE",
-      content: "데이터 엔지니어",
       icon: <SiApache />,
     },
     {
       id: "DA",
-      content: "데이터 분석가",
       icon: <IoStatsChartOutline />,
     },
     {
       id: "ML",
-      content: "머신러닝 엔지니어",
       icon: <SiTensorflow />,
     },
   ];
@@ -47,7 +49,7 @@ export default function Home() {
             href={`/${link.id}/skillFrequency`}
           >
             <Icon icon={link.icon} className="mr-2" size="normal" />{" "}
-            {link.content}
+            {convertJobCodeToDescription(link.id)}
           </Link>
         ))}
       </div>
