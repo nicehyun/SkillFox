@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    images: "/public/images/logo.webp",
+    images: "/images/logo.webp",
   },
   title: {
     default: "SkillFox | 채용공고 기술 분석",
