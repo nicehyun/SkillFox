@@ -39,6 +39,9 @@ export const metadata: Metadata = {
     template: "SkillFox | %s",
   },
   description: "채용공고 자격 요건 기술 스택 분석",
+  icons: {
+    icon: "/images/favicon.png",
+  },
 };
 
 export default function RootLayout({
