@@ -40,7 +40,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function IndustryFrequencyPage({
+export default async function ExperienceRangeFenquencyPage({
   params,
 }: {
   params: { classification: Job };
