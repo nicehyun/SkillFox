@@ -4,7 +4,6 @@ import Footer from "./layout/components/organisms/Footer";
 import Header from "./layout/components/organisms/Header";
 import Providers from "./common/utils/Providers";
 import { Metadata } from "next";
-import Head from "next/head";
 
 const notoSansKr = Noto_Sans_KR({
   subsets: ["latin"],
