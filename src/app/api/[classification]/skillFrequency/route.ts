@@ -10,8 +10,9 @@ export async function GET(
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_BE_URL}/api/skill-frequency/?classification=${classification}`,
       {
+        cache: "no-store",
         // next: { revalidate: 60 * 60 * 24 * 7 },
-        next: { revalidate: 5 },
+        // next: { revalidate: 0 },
       },
     );
 
