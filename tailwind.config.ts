@@ -13,6 +13,25 @@ const config: Config = {
       boxShadow: {
         DEFAULT: "2px 2px 8px rgba(43, 46, 74, 0.5)",
       },
+      animation: {
+        bar1: "barAnimation1 2s ease-in-out infinite",
+        bar2: "barAnimation2 2.5s ease-in-out infinite",
+        bar3: "barAnimation3 3s ease-in-out infinite",
+      },
+      keyframes: {
+        barAnimation1: {
+          "0%, 100%": { transform: "translateX(0) scaleX(1)" },
+          "50%": { transform: "translateX(50%) scaleX(0.5)" },
+        },
+        barAnimation2: {
+          "0%, 100%": { transform: "translateX(0) scaleX(1)" },
+          "50%": { transform: "translateX(50%) scaleX(0.5)" },
+        },
+        barAnimation3: {
+          "0%, 100%": { transform: "translateX(0) scaleX(1)" },
+          "50%": { transform: "translateX(50%) scaleX(0.5)" },
+        },
+      },
     },
 
     fontSize: {

@@ -5,7 +5,11 @@ export interface IPageLayoutProps {
 }
 
 const PageLayout = ({ children }: IPageLayoutProps) => {
-  return <div className="mx-auto max-w-[1000px] px-4 py-10">{children}</div>;
+  return (
+    <div className="mx-auto min-h-[1000px] max-w-[1000px] px-4 py-10">
+      {children}
+    </div>
+  );
 };
 
 export default PageLayout;
