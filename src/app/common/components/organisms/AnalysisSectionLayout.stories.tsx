@@ -16,11 +16,7 @@ const meta: Meta<IAnalysisSectionLayoutProps> = {
       control: false,
       description: "AnalysisSectionLayout의 하위 요소입니다.",
     },
-    isShowTooltipModal: {
-      control: "boolean",
-      description: "aria-expanded의 값입니다.",
-      defaultValue: true,
-    },
+
     postingCount: {
       control: "number",
       description: "분석에 사용된 채용 공고의 수입니다.",
@@ -45,7 +41,6 @@ export const Defalut: StoryObj<IAnalysisSectionLayoutProps> = {
         AnalysisSectionLayout의 하위 요소
       </div>
     ),
-    isShowTooltipModal: true,
   },
 
   decorators: [(story) => <ReduxProvider>{story()}</ReduxProvider>],

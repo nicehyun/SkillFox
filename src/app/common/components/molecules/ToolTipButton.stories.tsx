@@ -6,11 +6,6 @@ const meta: Meta<IToolTipProps> = {
   component: ToolTipButton,
   tags: ["autodocs"],
   argTypes: {
-    isOpen: {
-      control: "boolean",
-      description: "aria-expanded의 값입니다.",
-      defaultValue: true,
-    },
     analysisClassification: {
       control: "text",
       description: "aria-label의 값입니다.",
@@ -28,7 +23,6 @@ export default meta;
 export const Small: StoryObj<IToolTipProps> = {
   args: {
     analysisClassification: "small tooltip button",
-    isOpen: true,
   },
 };
 
@@ -36,7 +30,6 @@ export const Normal: StoryObj<IToolTipProps> = {
   args: {
     iconSize: "normal",
     analysisClassification: "normal tooltip button",
-    isOpen: true,
   },
 };
 
@@ -44,6 +37,5 @@ export const Large: StoryObj<IToolTipProps> = {
   args: {
     iconSize: "large",
     analysisClassification: "large tooltip button",
-    isOpen: true,
   },
 };
