@@ -6,20 +6,23 @@ import ExperienceRangeContoller from "../molecules/ExperienceRangeContoller";
 import ChartWrapper from "@/app/common/utils/ChartWrapper";
 import { MonthlyChartData } from "@/app/common/types";
 import DynamicSelectShowCountMonthlyBarChart from "@/app/common/utils/DynamicSelectShowCountMonthlyBarChart";
-import { useTooltipModalController } from "@/app/common/hooks/useTooltipModalController";
+import { useAppDispatch } from "@/redux/hooks";
+import { showTooltipModal } from "@/redux/features/layoutSlice";
 
 const ExperienceRangeFenquencySection = () => {
   const { data, isLoading, onClickExperienceRangeApply } =
     useGetExperienceRangeFrequencyQuery();
-  const { showTooltipModal, isShowTooltipModal } = useTooltipModalController();
+
+  const dispatch = useAppDispatch();
 
   return (
     <>
       <AnalysisSectionLayout
         analysisTitle="경력별 기술 분석"
-        onClickAnalysisTypeToolTip={() => showTooltipModal(4)}
+        onClickAnalysisTypeToolTip={() =>
+          dispatch(showTooltipModal({ page: 4 }))
+        }
         postingCount={data?.count ?? 0}
-        isShowTooltipModal={isShowTooltipModal}
       >
         <ExperienceRangeContoller
           isDisabled={isLoading}

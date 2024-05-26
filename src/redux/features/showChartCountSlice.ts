@@ -28,7 +28,7 @@ const ShowChartCountSlice = createSlice({
 
 export const { selcetShowBarChartCount } = ShowChartCountSlice.actions;
 
-export const selectShowBarChartCountState = (state: RootState) =>
+export const showBarChartCountState = (state: RootState) =>
   state.showChartCount.showBarChartCount;
 
 export default ShowChartCountSlice.reducer;

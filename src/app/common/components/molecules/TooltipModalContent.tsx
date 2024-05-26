@@ -1,14 +1,16 @@
+"use client";
+
+import { useAppSelector } from "@/redux/hooks";
 import { getPreviousMonth } from "../../utils/date";
 import TooltipExampleCurrentChart from "./TooltipExampleCurrentChart";
 import TooltipExamplePrevChart from "./TooltipExamplePrevChart";
+import { currentTooltipPageState } from "@/redux/features/layoutSlice";
 
-export interface ITooltipModalContentProps {
-  currentTooltipPage: number;
-}
+export interface ITooltipModalContentProps {}
 
-const TooltipModalContent = ({
-  currentTooltipPage,
-}: ITooltipModalContentProps) => {
+const TooltipModalContent = ({}: ITooltipModalContentProps) => {
+  const currentTooltipPage = useAppSelector(currentTooltipPageState);
+
   const handleTooltipModalContent = (tooltipPage: number) => {
     switch (tooltipPage) {
       case 1:

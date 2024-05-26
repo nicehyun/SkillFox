@@ -3,13 +3,13 @@
 import { IoBarChart } from "react-icons/io5";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
-  selectShowNavigationState,
+  isShowNavigationState,
   toggleShowNavigation,
 } from "@/redux/features/layoutSlice";
 import IconButton from "@/app/common/components/atoms/IconButton";
 
 const AnalysisNavigationController = () => {
-  const showNavigationState = useAppSelector(selectShowNavigationState);
+  const isShowNavigation = useAppSelector(isShowNavigationState);
   const dispatch = useAppDispatch();
 
   return (
@@ -17,11 +17,11 @@ const AnalysisNavigationController = () => {
       iconSize="large"
       ariaLabel="navigation toggle"
       ariaControls="navigation-analysis-menu"
-      ariaExpanded={showNavigationState}
+      ariaExpanded={isShowNavigation}
       icon={<IoBarChart />}
       id="button-navigation-controller"
       onClick={() => dispatch(toggleShowNavigation())}
-      className={`flexCenter ${showNavigationState ? "bg-orange/20 text-black3" : "hover:bg-border"} h-[32px] w-[32px] rounded-[5px] transition duration-100`}
+      className={`flexCenter ${isShowNavigation ? "bg-orange/20 text-black3" : "hover:bg-border"} h-[32px] w-[32px] rounded-[5px] transition duration-100`}
     />
   );
 };

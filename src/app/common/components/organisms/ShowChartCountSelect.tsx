@@ -1,7 +1,7 @@
 import { CustomSelect } from "@/app/common/components/molecules/CustomSelect";
 import {
   selcetShowBarChartCount,
-  selectShowBarChartCountState,
+  showBarChartCountState,
 } from "@/redux/features/showChartCountSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 
@@ -11,7 +11,7 @@ export interface IShowChartCountSelectProps {
 
 const ShowChartCountSelect = ({ id }: IShowChartCountSelectProps) => {
   const dispatch = useAppDispatch();
-  const showBarChartCount = useAppSelector(selectShowBarChartCountState);
+  const showBarChartCount = useAppSelector(showBarChartCountState);
 
   return (
     <CustomSelect

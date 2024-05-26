@@ -2,13 +2,13 @@
 
 import { useAppSelector } from "@/redux/hooks";
 import { IMonthlyBarChartProps } from "../../types";
-import { selectShowBarChartCountState } from "@/redux/features/showChartCountSlice";
 import ShowChartCountSelect from "@/app/common/components/organisms/ShowChartCountSelect";
 import ChartLayout from "../atoms/ChartLayout";
 import ReactApexChart from "react-apexcharts";
 import { ApexOptions } from "apexcharts";
 import { extractMonthlyChartData } from "../../utils/charData";
 import { memo } from "react";
+import { showBarChartCountState } from "@/redux/features/showChartCountSlice";
 
 export interface ISelectShowCountBarChartProps extends IMonthlyBarChartProps {
   id: string;
@@ -18,7 +18,7 @@ const SelectShowCountMonthlyBarChart = ({
   id,
   chartData,
 }: ISelectShowCountBarChartProps) => {
-  const showBarChartCount = useAppSelector(selectShowBarChartCountState);
+  const showBarChartCount = useAppSelector(showBarChartCountState);
 
   const handleBarChartHeightControl = (showCount: number) => {
     switch (showCount) {

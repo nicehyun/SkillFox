@@ -5,18 +5,19 @@ import { useGetResion1FrequencyQuery } from "../../hooks/useGetResion1FrequencyQ
 import IndividualBarChart from "@/app/common/components/organisms/IndividualBarChart";
 import ChartWrapper from "@/app/common/utils/ChartWrapper";
 import { RegionChartData } from "@/app/common/types";
-import { useTooltipModalController } from "@/app/common/hooks/useTooltipModalController";
+import { useAppDispatch } from "@/redux/hooks";
+import { showTooltipModal } from "@/redux/features/layoutSlice";
 
 const ResionFrequencySection = () => {
   const { data } = useGetResion1FrequencyQuery();
-  const { showTooltipModal, isShowTooltipModal } = useTooltipModalController();
+
+  const dispatch = useAppDispatch();
 
   return (
     <AnalysisSectionLayout
       analysisTitle="지역별 기술 빈도 분석"
-      onClickAnalysisTypeToolTip={() => showTooltipModal(2)}
+      onClickAnalysisTypeToolTip={() => dispatch(showTooltipModal({ page: 4 }))}
       postingCount={data?.count ?? 0}
-      isShowTooltipModal={isShowTooltipModal}
     >
       <ChartWrapper<RegionChartData[]> chartData={data?.data}>
         {data?.data.map((resionChart, index) => (

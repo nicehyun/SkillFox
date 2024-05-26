@@ -13,12 +13,12 @@ type TootipModal = {
 };
 
 type InitialLayoutState = {
-  showNavigation: boolean;
+  isShowNavigation: boolean;
   tootipModalState: TootipModal;
 };
 
 const initialLayoutState: InitialLayoutState = {
-  showNavigation: false,
+  isShowNavigation: false,
   tootipModalState: {
     currentTooltipPage: 1,
     isShowTooltipModal: false,
@@ -32,13 +32,13 @@ const layoutSlice = createSlice({
   initialState: initialLayoutState,
   reducers: {
     showNavigation(state) {
-      state.showNavigation = true;
+      state.isShowNavigation = true;
     },
     hideNavigation(state) {
-      state.showNavigation = false;
+      state.isShowNavigation = false;
     },
     toggleShowNavigation(state) {
-      state.showNavigation = !state.showNavigation;
+      state.isShowNavigation = !state.isShowNavigation;
     },
     showTooltipModal(state, actions: PayloadAction<IShowTooltipPayload>) {
       state.tootipModalState.isShowTooltipModal = true;
@@ -97,8 +97,8 @@ export const {
   nextTooltipPage,
 } = layoutSlice.actions;
 
-export const selectShowNavigationState = (state: RootState) =>
-  state.layoutSlice.showNavigation;
+export const isShowNavigationState = (state: RootState) =>
+  state.layoutSlice.isShowNavigation;
 
 export const isShowTooltipModalState = (state: RootState) =>
   state.layoutSlice.tootipModalState.isShowTooltipModal;
