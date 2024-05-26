@@ -16,7 +16,8 @@ export async function GET(
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_BE_URL}/api/experience-range-frequency/?classification=${classification}${fommattedExperienceMinPath}${fommattedExperienceMaxPath}`,
       {
-        next: { revalidate: 0 },
+        cache: "no-store",
+        // next: { revalidate: 0 },
       },
     );
 
