@@ -6,7 +6,7 @@ import { resionFenquencyAPI } from "./apis/resionFenquencyAPI";
 import AnlaysisNavigationProvider from "@/app/common/utils/AnlaysisNavigationProvider";
 import ResionFrequencySection from "./components/organisms/ResionFrequencySection";
 import { Metadata } from "next";
-import { Job, MonthlyChartData, RegionChartData } from "@/app/common/types";
+import { Job } from "@/app/common/types";
 import {
   convertJobCodeToDescription,
   createJobClassificationArray,
@@ -35,6 +35,9 @@ export async function generateMetadata({
       "지역별",
       ...extractAllNamesFromChartData(monthlyChartData.data),
     ],
+    alternates: {
+      canonical: `/${classification}/resion1Fenquency`,
+    },
   };
 }
 

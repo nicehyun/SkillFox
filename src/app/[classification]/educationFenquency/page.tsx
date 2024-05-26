@@ -35,6 +35,9 @@ export async function generateMetadata({
       "학력별",
       ...extractAllNamesFromChartData(monthlyChartData.data),
     ],
+    alternates: {
+      canonical: `/${classification}/educationFenquency`,
+    },
   };
 }
 

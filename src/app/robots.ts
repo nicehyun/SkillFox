@@ -1,11 +1,13 @@
 import { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
+  const baseUrl = `${process.env.NEXT_PUBLIC_BASE_URL}`;
   return {
     rules: {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: `${process.env.NODE_ENV === "production" ? "https://skill-analysis-fe.vercel.app" : "http://localhost:3000"}`,
+    sitemap: `${baseUrl}/sitemap.xml`,
+    host: `${baseUrl}`,
   };
 }

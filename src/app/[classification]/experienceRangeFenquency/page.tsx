@@ -37,6 +37,9 @@ export async function generateMetadata({
         (chartData: MonthlyChartData) => chartData.name,
       ),
     ],
+    alternates: {
+      canonical: `/${classification}/experienceRangeFenquency`,
+    },
   };
 }
 

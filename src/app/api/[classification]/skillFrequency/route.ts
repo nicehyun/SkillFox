@@ -27,6 +27,8 @@ export async function GET(
 
     return new NextResponse(JSON.stringify(data), { status: 200 });
   } catch (error) {
+    console.error("Failed to fetch skill frequency analysis data:", error);
+
     return new NextResponse(
       JSON.stringify({ error: "An unexpected error occurred" }),
       { status: 500 },
