@@ -2,7 +2,10 @@
 
 import { IoMdClose } from "react-icons/io";
 import { useAppSelector } from "@/redux/hooks";
-import { selectTooltipModalState } from "@/redux/features/layoutSlice";
+import {
+  currentTooltipPageState,
+  isShowTooltipModalState,
+} from "@/redux/features/layoutSlice";
 import IconButton from "../atoms/IconButton";
 import TooltipModalPageController from "../molecules/TooltipModalPageController";
 import TooltipModalContent from "../molecules/TooltipModalContent";
@@ -15,9 +18,9 @@ export interface ITooltipModalProps {
 }
 
 const TooltipModal = ({ closeIconSize = "small" }: ITooltipModalProps) => {
-  const { isShowTooltipModal, currentTooltipPage } = useAppSelector(
-    selectTooltipModalState,
-  );
+  const isShowTooltipModal = useAppSelector(isShowTooltipModalState);
+  const currentTooltipPage = useAppSelector(currentTooltipPageState);
+
   const { hideTooltipModal } = useTooltipModalController();
 
   return (

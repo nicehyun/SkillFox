@@ -1,5 +1,7 @@
 import ReduxProvider from "@/redux/utils/ReduxProvider";
 import TanstackQueryProvider from "@/tanstackQuery/utils/TanstackQueryProvider";
+import { Profiler } from "react";
+import ReactProfilerProvider from "./ReactProfilerProvider";
 
 interface IProviders {
   children: React.ReactNode;
@@ -8,7 +10,9 @@ interface IProviders {
 const Providers = ({ children }: IProviders) => {
   return (
     <TanstackQueryProvider>
-      <ReduxProvider>{children}</ReduxProvider>
+      <ReduxProvider>
+        <ReactProfilerProvider>{children} </ReactProfilerProvider>
+      </ReduxProvider>
     </TanstackQueryProvider>
   );
 };

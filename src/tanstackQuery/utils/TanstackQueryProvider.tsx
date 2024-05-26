@@ -26,7 +26,7 @@ const TanstackQueryProvider = ({ children }: IReactQueryProvider) => {
     <QueryClientProvider client={queryClient}>
       {children}
       <ReactQueryDevtools
-        initialIsOpen={process.env.NEXT_PUBLIC_MODE === "development"}
+        initialIsOpen={process.env.NODE_ENV === "development"}
       />
     </QueryClientProvider>
   );

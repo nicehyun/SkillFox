@@ -1,10 +1,10 @@
 "use client";
 
-import { selectTooltipModalState } from "@/redux/features/layoutSlice";
+import { currentTooltipPageState } from "@/redux/features/layoutSlice";
 import { useAppSelector } from "@/redux/hooks";
 
 const TooltipModalTitle = () => {
-  const { currentTooltipPage } = useAppSelector(selectTooltipModalState);
+  const currentTooltipPage = useAppSelector(currentTooltipPageState);
 
   const handleTooltipModalTitle = () => {
     switch (currentTooltipPage) {

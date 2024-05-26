@@ -4,15 +4,17 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import IconButton from "../atoms/IconButton";
 import { FaCaretLeft, FaCaretRight } from "react-icons/fa";
 import {
+  currentTooltipPageState,
+  isFirstPageState,
+  isLastPageState,
   nextTooltipPage,
   prevTooltipPage,
-  selectTooltipModalState,
 } from "@/redux/features/layoutSlice";
 
 const TooltipModalPageController = () => {
-  const { currentTooltipPage, isFirstPage, isLastPage } = useAppSelector(
-    selectTooltipModalState,
-  );
+  const currentTooltipPage = useAppSelector(currentTooltipPageState);
+  const isFirstPage = useAppSelector(isFirstPageState);
+  const isLastPage = useAppSelector(isLastPageState);
 
   const dispatch = useAppDispatch();
   return (

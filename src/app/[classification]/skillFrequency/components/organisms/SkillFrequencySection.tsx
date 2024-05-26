@@ -5,18 +5,19 @@ import AnalysisSectionLayout from "@/app/common/components/organisms/AnalysisSec
 import ChartWrapper from "@/app/common/utils/ChartWrapper";
 import { MonthlyChartData } from "@/app/common/types";
 import DynamicSelectShowCountMonthlyBarChart from "@/app/common/utils/DynamicSelectShowCountMonthlyBarChart";
-import { useTooltipModalController } from "@/app/common/hooks/useTooltipModalController";
+
+import { showTooltipModal } from "@/redux/features/layoutSlice";
+import { useAppDispatch } from "@/redux/hooks";
 
 const SkillFrequencySection = () => {
   const { data } = useGetSkillFrequencyQuery();
-  const { showTooltipModal, isShowTooltipModal } = useTooltipModalController();
+  const dispatch = useAppDispatch();
 
   return (
     <AnalysisSectionLayout
       analysisTitle="기술 빈도 분석"
-      onClickAnalysisTypeToolTip={() => showTooltipModal(1)}
+      onClickAnalysisTypeToolTip={() => dispatch(showTooltipModal({ page: 1 }))}
       postingCount={data?.count ?? 0}
-      isShowTooltipModal={isShowTooltipModal}
     >
       <ChartWrapper<MonthlyChartData[]> chartData={data?.data}>
         <DynamicSelectShowCountMonthlyBarChart

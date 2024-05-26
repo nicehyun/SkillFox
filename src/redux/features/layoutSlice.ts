@@ -100,7 +100,16 @@ export const {
 export const selectShowNavigationState = (state: RootState) =>
   state.layoutSlice.showNavigation;
 
-export const selectTooltipModalState = (state: RootState) =>
-  state.layoutSlice.tootipModalState;
+export const isShowTooltipModalState = (state: RootState) =>
+  state.layoutSlice.tootipModalState.isShowTooltipModal;
+
+export const currentTooltipPageState = (state: RootState) =>
+  state.layoutSlice.tootipModalState.currentTooltipPage;
+
+export const isFirstPageState = (state: RootState) =>
+  state.layoutSlice.tootipModalState.isFirstPage;
+
+export const isLastPageState = (state: RootState) =>
+  state.layoutSlice.tootipModalState.isLastPage;
 
 export default layoutSlice.reducer;

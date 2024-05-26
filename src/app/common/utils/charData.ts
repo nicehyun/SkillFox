@@ -1,6 +1,6 @@
 import { MonthlyChartData } from "../types";
 
-type SeriesItem = {
+export type SeriesItem = {
   name: string;
   group: "budget" | "actual";
   data: number[];

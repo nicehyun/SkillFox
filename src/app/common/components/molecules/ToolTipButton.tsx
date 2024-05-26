@@ -1,20 +1,23 @@
+"use client";
+
 import { IconSize } from "../atoms/Icon";
 import { FaRegQuestionCircle } from "react-icons/fa";
 import IconButton from "../atoms/IconButton";
+import { useAppSelector } from "@/redux/hooks";
+import { isShowTooltipModalState } from "@/redux/features/layoutSlice";
 
 export interface IToolTipProps {
-  isOpen: boolean;
   analysisClassification: string;
   onClick: () => void;
   iconSize?: IconSize;
 }
 
 const ToolTipButton = ({
-  isOpen,
   analysisClassification,
   onClick,
   iconSize = "small",
 }: IToolTipProps) => {
+  const isShowToolTipModal = useAppSelector(isShowTooltipModalState);
   return (
     <IconButton
       id="button-tooltip"
@@ -25,7 +28,7 @@ const ToolTipButton = ({
       iconSize={iconSize}
       iconClassName="text-gray1"
       onClick={onClick}
-      ariaExpanded={isOpen}
+      ariaExpanded={isShowToolTipModal}
     />
   );
 };

@@ -10,7 +10,6 @@ export interface IAnalysisSectionLayoutProps {
   children: ReactNode;
   postingCount: number;
   onClickAnalysisTypeToolTip: () => void;
-  isShowTooltipModal: boolean;
   ToolTipIconSize?: IconSize;
 }
 
@@ -19,7 +18,6 @@ const AnalysisSectionLayout = ({
   children,
   postingCount,
   onClickAnalysisTypeToolTip,
-  isShowTooltipModal,
   ToolTipIconSize = "small",
 }: IAnalysisSectionLayoutProps) => {
   return (
@@ -28,7 +26,6 @@ const AnalysisSectionLayout = ({
         <AnalysisSectionTitle title={analysisTitle} className="mr-2" />
         <ToolTip
           analysisClassification={`${analysisTitle}`}
-          isOpen={isShowTooltipModal}
           onClick={onClickAnalysisTypeToolTip}
           iconSize={ToolTipIconSize}
         />

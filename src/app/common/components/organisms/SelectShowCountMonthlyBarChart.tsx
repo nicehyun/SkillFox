@@ -8,6 +8,7 @@ import ChartLayout from "../atoms/ChartLayout";
 import ReactApexChart from "react-apexcharts";
 import { ApexOptions } from "apexcharts";
 import { extractMonthlyChartData } from "../../utils/charData";
+import { memo } from "react";
 
 export interface ISelectShowCountBarChartProps extends IMonthlyBarChartProps {
   id: string;
@@ -106,4 +107,4 @@ const SelectShowCountMonthlyBarChart = ({
   );
 };
 
-export default SelectShowCountMonthlyBarChart;
+export default memo(SelectShowCountMonthlyBarChart);
