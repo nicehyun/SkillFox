@@ -2,8 +2,7 @@ import type { Config } from "tailwindcss";
 
 const config: Config = {
   mode: "jit",
-  content: ["./src/**/*.{js,ts,jsx,tsx}"],
-  purge: ["./app/**/*.{js,ts,jsx,tsx}"],
+  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
     extend: {
       fontFamily: {
