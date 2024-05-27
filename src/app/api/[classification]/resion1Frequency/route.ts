@@ -10,8 +10,8 @@ export async function GET(
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_BE_URL}/api/region1-frequency/?classification=${classification}`,
       {
-        // next: { revalidate: 60 * 60 * 24 * 7 },
-        next: { revalidate: 0 },
+        next: { revalidate: 60 * 60 * 24 * 7 },
+        // next: { revalidate: 0 },
       },
     );
 
