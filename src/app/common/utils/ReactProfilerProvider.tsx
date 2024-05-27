@@ -3,10 +3,14 @@
 import { Profiler, ReactNode } from "react";
 
 interface IReactProfilerProviderProps {
+  id: string;
   children: ReactNode;
 }
 
-const ReactProfilerProvider = ({ children }: IReactProfilerProviderProps) => {
+const ReactProfilerProvider = ({
+  children,
+  id,
+}: IReactProfilerProviderProps) => {
   function onRenderCallback(
     id: string, // "RootLayout"
     phase: "mount" | "update" | "nested-update",
@@ -28,7 +32,7 @@ const ReactProfilerProvider = ({ children }: IReactProfilerProviderProps) => {
     });
   }
   return (
-    <Profiler id="ProfilerWrapper" onRender={onRenderCallback}>
+    <Profiler id={id} onRender={onRenderCallback}>
       {children}
     </Profiler>
   );

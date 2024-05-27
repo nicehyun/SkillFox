@@ -11,7 +11,7 @@ const SkeletonShowCountMonthlyBarChart = () => {
           <div className="flexCenter mb-4 h-10">
             <SkeletonUI className="w-1/3 sm:w-1/2 md:w-1/2" />
           </div>
-          {[...Array(8)].map((_, index) => (
+          {[...Array(19)].map((_, index) => (
             <div
               key={`skeleton-bar-chart__${index}`}
               className="flex items-center"
