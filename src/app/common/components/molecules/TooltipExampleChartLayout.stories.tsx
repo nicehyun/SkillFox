@@ -14,7 +14,7 @@ const meta: Meta<ITooltipExampleChartLayoutProps> = {
         "id 값은 'current' 또는 'prev'로만 설정이 가능하며, 해당 값을 사용해 차트의 월을 결정합니다.",
     },
     skillName: {
-      control: "false",
+      control: undefined,
 
       description: "차트가 나타내는 기술의 값입니다.",
     },

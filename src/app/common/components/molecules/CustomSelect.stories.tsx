@@ -9,7 +9,7 @@ const meta: Meta<ICustomSelectProps> = {
   argTypes: {
     id: { control: "text" },
     options: {
-      control: "array",
+      control: "text",
       description:
         "사용자에게 제공될 옵션들의 배열입니다. 각 옵션은 숫자로 표현됩니다.",
     },
