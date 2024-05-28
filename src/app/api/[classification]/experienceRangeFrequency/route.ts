@@ -1,3 +1,5 @@
+import { MonthlyChartData, ResponseChartData } from "@/app/common/types";
+import { formatMonthlyChartData } from "@/app/common/utils/charData";
 import { NextResponse } from "next/server";
 
 export async function GET(
@@ -29,9 +31,19 @@ export async function GET(
     }
 
     const data = await response.json();
+    const monthlyChartData: MonthlyChartData[] = data.data;
 
-    return new NextResponse(JSON.stringify(data), { status: 200 });
+    const formattedMonthlyChartData: ResponseChartData = {
+      count: data.count,
+      ...formatMonthlyChartData(monthlyChartData),
+    };
+
+    return new NextResponse(JSON.stringify(formattedMonthlyChartData), {
+      status: 200,
+    });
   } catch (error) {
+    console.error("Failed to fetch experience frequency analysis data:", error);
+
     return new NextResponse(
       JSON.stringify({ error: "An unexpected error occurred" }),
       { status: 500 },

@@ -1,4 +1,4 @@
-import { MonthlyChartData } from "../types";
+import { BarChartData, MonthlyChartData } from "../types";
 
 export type SeriesItem = {
   name: string;
@@ -43,6 +43,64 @@ export const extractMonthArray = (
   return monthlyChatdatas[0].months_value.map(
     (months_value) => Object.keys(months_value)[0],
   );
+};
+
+export const formatMonthlyChartData = (
+  monthlyChartData: MonthlyChartData[],
+) => {
+  const colors = [
+    "#008FFB",
+    "#00E396",
+    "#FEB019",
+    "#FF4560",
+    "#775DD0",
+    "#F46036",
+  ];
+
+  const [currentMonth, ...prevMonths] = extractMonthArray(monthlyChartData);
+  const skillNames = monthlyChartData.map((skill) => skill.name);
+
+  // Data for previous months chart
+  const previousMonthsData: BarChartData = {
+    labels: skillNames,
+    datasets: prevMonths
+      .map((month, index) => ({
+        label: `${month}월`,
+        data: monthlyChartData.map((chartData) => {
+          const monthData = chartData.months_value.find((monthlyValue) =>
+            monthlyValue.hasOwnProperty(month),
+          );
+          return monthData ? monthData[month] : 0;
+        }),
+        backgroundColor: colors[index],
+        stack: "previous",
+      }))
+      .reverse(),
+  };
+
+  const currentMonthData: BarChartData = {
+    labels: skillNames,
+    datasets: [
+      {
+        label: `${currentMonth}월`,
+        data: monthlyChartData.map((chartData) => {
+          const monthData = chartData.months_value.find((monthlyValue) =>
+            monthlyValue.hasOwnProperty(currentMonth),
+          );
+          return monthData ? monthData[currentMonth] : 0;
+        }),
+        backgroundColor: colors[5],
+        stack: "current",
+      },
+    ],
+  };
+
+  const combinedChartData: BarChartData = {
+    labels: skillNames,
+    datasets: [...previousMonthsData.datasets, ...currentMonthData.datasets],
+  };
+
+  return combinedChartData;
 };
 
 // export const extractMonthlyChartData = (

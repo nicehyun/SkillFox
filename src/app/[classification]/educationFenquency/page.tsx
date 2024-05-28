@@ -11,7 +11,7 @@ import {
   convertJobCodeToDescription,
   createJobClassificationArray,
 } from "@/app/common/utils/classification";
-import { extractAllNamesFromChartData } from "@/app/common/utils/charData";
+import { creactMetaData } from "@/app/common/utils/metaData";
 
 export async function generateMetadata({
   params,
@@ -23,22 +23,17 @@ export async function generateMetadata({
   const monthlyChartData =
     await educationFenquencyAPI.getEducationFenquencyAnalysis(classification);
 
-  return {
-    title: `${convertJobCodeToDescription(classification)} 채용공고 학력별 기술 빈도 분석`,
-    description: `${convertJobCodeToDescription(classification)} 채용공고 학력별 자격 요건 기술 스택 분석`,
-    keywords: [
-      `${convertJobCodeToDescription(classification)}`,
-      "채용 공고",
-      "자격요건",
-      "기술",
-      "분석",
-      "학력별",
-      ...extractAllNamesFromChartData(monthlyChartData.data),
-    ],
-    alternates: {
-      canonical: `/${classification}/educationFenquency`,
-    },
-  };
+  const labels = monthlyChartData.chartData
+    .map((data) => data.labels ?? "")
+    .flat();
+
+  const metaData = creactMetaData({
+    keywords: labels,
+    classification,
+    id: "educationFrequency",
+  });
+
+  return metaData;
 }
 
 export function generateStaticParams() {

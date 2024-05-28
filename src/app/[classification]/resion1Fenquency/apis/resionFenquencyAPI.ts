@@ -1,5 +1,12 @@
+import {
+  RegionBarChartData,
+  ResponseSeveralChartData,
+} from "@/app/common/types";
+
 export const resionFenquencyAPI = {
-  getResion1FenquencyAnalysis: async (classification: string) => {
+  getResion1FenquencyAnalysis: async (
+    classification: string,
+  ): Promise<ResponseSeveralChartData<RegionBarChartData>> => {
     try {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/${classification}/resion1Frequency`,

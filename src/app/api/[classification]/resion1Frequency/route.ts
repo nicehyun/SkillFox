@@ -1,3 +1,9 @@
+import {
+  RegionBarChartData,
+  RegionChartData,
+  ResponseSeveralChartData,
+} from "@/app/common/types";
+import { formatMonthlyChartData } from "@/app/common/utils/charData";
 import { NextResponse } from "next/server";
 
 export async function GET(
@@ -24,9 +30,25 @@ export async function GET(
     }
 
     const data = await response.json();
+    const regionChartData: RegionChartData[] = data.data;
 
-    return new NextResponse(JSON.stringify(data), { status: 200 });
+    const formattedMonthlyChartData: ResponseSeveralChartData<RegionBarChartData> =
+      {
+        count: data.count,
+        chartData: regionChartData.map((region) => {
+          return {
+            region: region.region,
+            ...formatMonthlyChartData(region.chartData),
+          };
+        }),
+      };
+
+    return new NextResponse(JSON.stringify(formattedMonthlyChartData), {
+      status: 200,
+    });
   } catch (error) {
+    console.error("Failed to fetch region frequency analysis data:", error);
+
     return new NextResponse(
       JSON.stringify({ error: "An unexpected error occurred" }),
       { status: 500 },

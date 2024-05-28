@@ -1,9 +1,11 @@
+import { ResponseChartData } from "@/app/common/types";
+
 export const experienceRangeFenquencyAPI = {
   getExperienceRangeFenquencyAnalysis: async (
     classification: string,
     experienceMin: number | null,
     experienceMax: number | null,
-  ) => {
+  ): Promise<ResponseChartData> => {
     try {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/${classification}/experienceRangeFrequency`,
@@ -22,11 +24,8 @@ export const experienceRangeFenquencyAPI = {
       }
 
       return await response.json();
-    } catch (error) {
-      return {
-        data: [],
-        count: 0,
-      };
+    } catch (error: any) {
+      throw new Error(error);
     }
   },
 };

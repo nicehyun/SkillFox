@@ -14,29 +14,49 @@ export type MonthlyChartData = {
   months_value: { [key: string]: number }[];
 };
 
-// Define the type for the combined chart data
-export interface BarChartData extends ChartData<"bar", number[], string> {
-  datasets: Array<ChartDataset<"bar", number[]>>;
-}
-
-export interface ResponseChartData extends BarChartData {
-  count: number;
-}
-
-export interface IMonthlyBarChartProps {
+export type RegionChartData = {
+  region: string;
   chartData: MonthlyChartData[];
-  count: number;
-}
+};
 
 export type EducationChartData = {
   education: string;
   data: MonthlyChartData[];
 };
 
-export type RegionChartData = {
+// Define the type for the combined chart data
+export interface BarChartData extends ChartData<"bar", number[], string> {
+  datasets: Array<ChartDataset<"bar", number[]>>;
+}
+
+export interface RegionBarChartData extends BarChartData {
   region: string;
-  data: MonthlyChartData[];
+}
+
+export interface EducationBarChartData extends BarChartData {
+  education: string;
+}
+
+export type CommonBarChartData =
+  | BarChartData
+  | RegionBarChartData
+  | EducationBarChartData;
+
+export type ExcludeBarChartData = Exclude<CommonBarChartData, BarChartData>;
+
+export interface ResponseChartData extends BarChartData {
+  count: number;
+}
+
+export type ResponseSeveralChartData<T> = {
+  count: number;
+  chartData: T[];
 };
+
+export type CommonResponseBarChartData =
+  | ResponseChartData
+  | ResponseSeveralChartData<RegionBarChartData>
+  | ResponseSeveralChartData<EducationBarChartData>;
 
 type Role =
   | "alert"

@@ -11,7 +11,7 @@ import {
   convertJobCodeToDescription,
   createJobClassificationArray,
 } from "@/app/common/utils/classification";
-import { extractAllNamesFromChartData } from "@/app/common/utils/charData";
+import { creactMetaData } from "@/app/common/utils/metaData";
 
 export async function generateMetadata({
   params,
@@ -23,22 +23,17 @@ export async function generateMetadata({
   const monthlyChartData =
     await resionFenquencyAPI.getResion1FenquencyAnalysis(classification);
 
-  return {
-    title: `${convertJobCodeToDescription(classification)} 채용공고 지역별 기술 빈도 분석`,
-    description: `${convertJobCodeToDescription(classification)} 채용공고 지역별 자격 요건 기술 스택 분석`,
-    keywords: [
-      `${convertJobCodeToDescription(classification)}`,
-      "채용 공고",
-      "자격요건",
-      "기술",
-      "분석",
-      "지역별",
-      ...extractAllNamesFromChartData(monthlyChartData.data),
-    ],
-    alternates: {
-      canonical: `/${classification}/resion1Fenquency`,
-    },
-  };
+  const labels = monthlyChartData.chartData
+    .map((data) => data.labels ?? "")
+    .flat();
+
+  const metaData = creactMetaData({
+    keywords: labels,
+    classification,
+    id: "resion1Fenquency",
+  });
+
+  return metaData;
 }
 
 export function generateStaticParams() {

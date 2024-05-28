@@ -1,5 +1,12 @@
+import {
+  EducationBarChartData,
+  ResponseSeveralChartData,
+} from "@/app/common/types";
+
 export const educationFenquencyAPI = {
-  getEducationFenquencyAnalysis: async (classification: string) => {
+  getEducationFenquencyAnalysis: async (
+    classification: string,
+  ): Promise<ResponseSeveralChartData<EducationBarChartData>> => {
     try {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_BASE_URL}/api/${classification}/educationFrequency`,
@@ -13,11 +20,8 @@ export const educationFenquencyAPI = {
       }
 
       return await response.json();
-    } catch (error) {
-      return {
-        data: [],
-        count: 0,
-      };
+    } catch (error: any) {
+      throw new Error(error);
     }
   },
 };

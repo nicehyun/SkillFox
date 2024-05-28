@@ -1,17 +1,32 @@
-import { useQuery } from "@tanstack/react-query";
-import { MonthlyChartData } from "../../../common/types";
+import { QueryCache, QueryClient, useQuery } from "@tanstack/react-query";
+import { ResponseChartData } from "../../../common/types";
 import { useGetClassification } from "@/app/common/hooks/useGetClassification";
 import { experienceRangeFenquencyAPI } from "../apis/experienceRangeFenquencyAPI";
 import { useState } from "react";
 
-type ResponseChartData = {
-  data: MonthlyChartData[];
-  count: number;
-};
-
 export type Range = { min: number; max: number };
 
 export const useGetExperienceRangeFrequencyQuery = () => {
+  const queryClient = new QueryClient({
+    queryCache: new QueryCache({
+      onError: (error) => {
+        queryClient.setQueryData<ResponseChartData>(
+          [
+            "experienceRangeFrequency",
+            classification,
+            experienceMin,
+            experienceMax,
+          ],
+          {
+            labels: [],
+            count: 0,
+            datasets: [],
+          },
+        );
+      },
+    }),
+  });
+
   const { classification } = useGetClassification();
 
   const [experienceMax, setExperienceMax] = useState(20);
@@ -30,6 +45,7 @@ export const useGetExperienceRangeFrequencyQuery = () => {
         experienceMin,
         experienceMax,
       ),
+
     gcTime: 60 * 60 * 1000,
   });
 

@@ -1,9 +1,5 @@
-import {
-  BarChartData,
-  MonthlyChartData,
-  ResponseChartData,
-} from "@/app/common/types";
-import { extractMonthArray } from "@/app/common/utils/charData";
+import { MonthlyChartData, ResponseChartData } from "@/app/common/types";
+import { formatMonthlyChartData } from "@/app/common/utils/charData";
 import { NextResponse } from "next/server";
 
 export async function GET(
@@ -31,60 +27,15 @@ export async function GET(
 
     const data = await response.json();
     const monthlyChartData: MonthlyChartData[] = data.data;
-    const colors = [
-      "#008FFB",
-      "#00E396",
-      "#FEB019",
-      "#FF4560",
-      "#775DD0",
-      "#F46036",
-    ];
 
-    const [currentMonth, ...prevMonths] = extractMonthArray(monthlyChartData);
-    const skillNames = monthlyChartData.map((skill) => skill.name);
-
-    // Data for previous months chart
-    const previousMonthsData: BarChartData = {
-      labels: skillNames,
-      datasets: prevMonths
-        .map((month, index) => ({
-          label: `${month}월`,
-          data: monthlyChartData.map((chartData) => {
-            const monthData = chartData.months_value.find((monthlyValue) =>
-              monthlyValue.hasOwnProperty(month),
-            );
-            return monthData ? monthData[month] : 0;
-          }),
-          backgroundColor: colors[index],
-          stack: "previous",
-        }))
-        .reverse(),
-    };
-
-    const currentMonthData: BarChartData = {
-      labels: skillNames,
-      datasets: [
-        {
-          label: `${currentMonth}월`,
-          data: monthlyChartData.map((chartData) => {
-            const monthData = chartData.months_value.find((monthlyValue) =>
-              monthlyValue.hasOwnProperty(currentMonth),
-            );
-            return monthData ? monthData[currentMonth] : 0;
-          }),
-          backgroundColor: colors[5],
-          stack: "current",
-        },
-      ],
-    };
-
-    const combinedChartData: ResponseChartData = {
+    const formattedMonthlyChartData: ResponseChartData = {
       count: data.count,
-      labels: skillNames,
-      datasets: [...previousMonthsData.datasets, ...currentMonthData.datasets],
+      ...formatMonthlyChartData(monthlyChartData),
     };
 
-    return new NextResponse(JSON.stringify(combinedChartData), { status: 200 });
+    return new NextResponse(JSON.stringify(formattedMonthlyChartData), {
+      status: 200,
+    });
   } catch (error) {
     console.error("Failed to fetch skill frequency analysis data:", error);
 

@@ -1,13 +1,14 @@
 "use client";
 
-import { IMonthlyBarChartProps } from "@/app/common/types";
-import DynamicSelectShowCountMonthlyBarChart from "../../utils/DynamicSelectShowCountMonthlyBarChart";
+import { ExcludeBarChartData } from "@/app/common/types";
 import IndividualBarChartTitle from "../atoms/IndividualBarChartTitle";
+import DynamicSelectShowCountMonthlyBarChartWrapper from "../../utils/DynamicSelectShowCountMonthlyBarChartWrapper";
 
-export interface IIndividualBarChartProps extends IMonthlyBarChartProps {
+export interface IIndividualBarChartProps {
   id: string;
   chartTitle: string;
   className?: string;
+  chartData: ExcludeBarChartData;
 }
 
 const IndividualBarChart = ({
@@ -15,16 +16,16 @@ const IndividualBarChart = ({
   chartData,
   chartTitle,
   className,
-  count,
 }: IIndividualBarChartProps) => {
+  console.log(chartData);
+
   return (
     <article className={className}>
       <IndividualBarChartTitle title={chartTitle} />
 
-      <DynamicSelectShowCountMonthlyBarChart
+      <DynamicSelectShowCountMonthlyBarChartWrapper
         id={id}
         chartData={chartData}
-        count={count}
       />
     </article>
   );

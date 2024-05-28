@@ -1,7 +1,7 @@
 "use client";
 
 import { useAppSelector } from "@/redux/hooks";
-import { BarChartData } from "../../types";
+import { CommonBarChartData } from "../../types";
 import ShowChartCountSelect from "@/app/common/components/organisms/ShowChartCountSelect";
 import ChartLayout from "../atoms/ChartLayout";
 import { showBarChartCountState } from "@/redux/features/showChartCountSlice";
@@ -27,7 +27,7 @@ ChartJS.register(
 
 export interface ISelectShowCountBarChartProps {
   id: string;
-  chartData: BarChartData;
+  chartData: CommonBarChartData;
 }
 
 const SelectShowCountMonthlyBarChart = ({
