@@ -1,12 +1,7 @@
 import { QueryCache, QueryClient, useQuery } from "@tanstack/react-query";
-import { MonthlyChartData } from "../../../common/types";
+import { ResponseChartData } from "../../../common/types";
 import { skillFenquencyAPI } from "../apis/skillFenquencyAPI";
 import { useGetClassification } from "../../../common/hooks/useGetClassification";
-
-type ResponseChartData = {
-  data: MonthlyChartData[];
-  count: number;
-};
 
 export const useGetSkillFrequencyQuery = () => {
   const queryClient = new QueryClient({
@@ -15,8 +10,9 @@ export const useGetSkillFrequencyQuery = () => {
         queryClient.setQueryData<ResponseChartData>(
           ["skillFrequency", classification],
           {
-            data: [],
+            labels: [],
             count: 0,
+            datasets: [],
           },
         );
       },

@@ -1,3 +1,5 @@
+import { ChartData, ChartDataset } from "chart.js";
+
 export type Job = "FE" | "BE" | "DE" | "DA" | "ML";
 
 export type Color = "primary" | "secondary" | "gray";
@@ -11,6 +13,15 @@ export type MonthlyChartData = {
   name: string;
   months_value: { [key: string]: number }[];
 };
+
+// Define the type for the combined chart data
+export interface BarChartData extends ChartData<"bar", number[], string> {
+  datasets: Array<ChartDataset<"bar", number[]>>;
+}
+
+export interface ResponseChartData extends BarChartData {
+  count: number;
+}
 
 export interface IMonthlyBarChartProps {
   chartData: MonthlyChartData[];
@@ -26,11 +37,6 @@ export type RegionChartData = {
   region: string;
   data: MonthlyChartData[];
 };
-
-export interface ResponseChartData<T> {
-  data: T[];
-  count: number;
-}
 
 type Role =
   | "alert"

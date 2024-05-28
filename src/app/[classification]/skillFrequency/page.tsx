@@ -22,6 +22,8 @@ export async function generateMetadata({
   const monthlyChartData =
     await skillFenquencyAPI.getSkillFenquencyAnalysis(classification);
 
+  const labels = monthlyChartData.labels ?? [];
+
   return {
     title: `${convertJobCodeToDescription(classification)} 채용공고 기술 빈도 분석`,
     description: `${convertJobCodeToDescription(classification)} 채용공고 자격 요건 기술 스택 분석`,
@@ -31,9 +33,7 @@ export async function generateMetadata({
       "자격요건",
       "기술",
       "분석",
-      ...monthlyChartData.data.map(
-        (chartData: MonthlyChartData) => chartData.name,
-      ),
+      ...labels,
     ],
     alternates: {
       canonical: `/${classification}/skillFrequency`,
