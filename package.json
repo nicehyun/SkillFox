@@ -10,6 +10,9 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
+  "engines": {
+    "node": "18.17"
+  },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.2",
     "@tanstack/query-core": "^5.35.1",
