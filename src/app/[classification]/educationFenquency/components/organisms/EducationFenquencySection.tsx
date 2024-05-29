@@ -5,6 +5,14 @@ import { useGetEducationFrequencyQuery } from "../../hooks/useGetEducationFreque
 import IndividualBarChart from "@/app/common/components/organisms/IndividualBarChart";
 import { useAppDispatch } from "@/redux/hooks";
 import { showTooltipModal } from "@/redux/features/layoutSlice";
+import dynamic from "next/dynamic";
+
+const DynamicIndividualBarChart = dynamic(
+  () => import("@/app/common/components/organisms/IndividualBarChart"),
+  {
+    ssr: false,
+  },
+);
 
 const EducationFenquencySection = () => {
   const { data } = useGetEducationFrequencyQuery();
@@ -17,15 +25,25 @@ const EducationFenquencySection = () => {
       onClickAnalysisTypeToolTip={() => dispatch(showTooltipModal({ page: 3 }))}
       postingCount={data?.count ?? 0}
     >
-      {data?.chartData.map((resionChart, index) => (
-        <IndividualBarChart
-          key={`education-Frenquency__${index}`}
-          id={`education-Frenquency__${index}`}
-          chartData={resionChart}
-          chartTitle={resionChart.education}
-          className={index !== 0 ? "mt-20" : ""}
-        />
-      ))}
+      {data?.chartData.map((resionChart, index) =>
+        index === 0 ? (
+          <IndividualBarChart
+            key={`education-Frenquency__${index}`}
+            id={`education-Frenquency__${index}`}
+            chartData={resionChart}
+            chartTitle={resionChart.education}
+            className={index !== 0 ? "mt-20" : ""}
+          />
+        ) : (
+          <DynamicIndividualBarChart
+            key={`education-Frenquency__${index}`}
+            id={`education-Frenquency__${index}`}
+            chartData={resionChart}
+            chartTitle={resionChart.education}
+            className={index !== 0 ? "mt-20" : ""}
+          />
+        ),
+      )}
     </AnalysisSectionLayout>
   );
 };
