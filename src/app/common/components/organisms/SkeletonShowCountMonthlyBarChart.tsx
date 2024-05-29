@@ -14,7 +14,7 @@ const SkeletonShowCountMonthlyBarChart = () => {
           {[...Array(19)].map((_, index) => (
             <div
               key={`skeleton-bar-chart__${index}`}
-              className="flex items-center"
+              className="flex h-[70px] items-center overflow-hidden"
               role="progressbar"
               aria-label={`Loading monthly chart data ${index + 1}`}
             >

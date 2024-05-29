@@ -4,10 +4,13 @@ import Footer from "./layout/components/organisms/Footer";
 import Header from "./layout/components/organisms/Header";
 import Providers from "./common/utils/Providers";
 import { Metadata } from "next";
+import localFont from "next/font/local";
 
-const notoSansKr = Noto_Sans_KR({
-  subsets: ["latin"],
+const pretendard = localFont({
+  src: "../../fonts/PretendardVariable.woff2",
   display: "swap",
+  weight: "45 920",
+  variable: "--font-pretendard",
 });
 
 export const metadata: Metadata = {
@@ -50,7 +53,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={`${notoSansKr.className}`}>
+      <body className={`${pretendard.className}`}>
         <Providers>
           <main>
             <Header />

@@ -4,9 +4,6 @@ const config: Config = {
   content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
     extend: {
-      fontFamily: {
-        notoSans: ["Noto Sans KR", "sans-serif"],
-      },
       backdropBlur: {
         xs: "2px",
       },
