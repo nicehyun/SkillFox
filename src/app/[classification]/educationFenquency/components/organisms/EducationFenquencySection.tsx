@@ -5,14 +5,7 @@ import { useGetEducationFrequencyQuery } from "../../hooks/useGetEducationFreque
 import IndividualBarChart from "@/app/common/components/organisms/IndividualBarChart";
 import { useAppDispatch } from "@/redux/hooks";
 import { showTooltipModal } from "@/redux/features/layoutSlice";
-import dynamic from "next/dynamic";
-
-const DynamicIndividualBarChart = dynamic(
-  () => import("@/app/common/components/organisms/IndividualBarChart"),
-  {
-    ssr: false,
-  },
-);
+import DynamicIndividualBarChart from "@/app/common/utils/DynamicIndividualBarChart";
 
 const EducationFenquencySection = () => {
   const { data } = useGetEducationFrequencyQuery();

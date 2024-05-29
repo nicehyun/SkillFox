@@ -23,8 +23,6 @@ export async function generateMetadata({
   const monthlyChartData =
     await resionFenquencyAPI.getResion1FenquencyAnalysis(classification);
 
-  console.log(monthlyChartData);
-
   const labels = monthlyChartData.chartData
     .map((data) => data.labels ?? "")
     .flat();
