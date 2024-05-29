@@ -65,16 +65,19 @@ export const CustomSelect = ({
       ref={wrapperRef}
       className={`${className} relative inline-block`}
       aria-labelledby={`select-label-${id}`}
-      role="listbox" // combobox를 listbox로 변경
-      aria-busy="true"
+      role="combobox"
+      aria-expanded={isOpen}
+      aria-controls={`select-list-${id}`}
+      tabIndex={0}
+      onKeyDown={(event) => handleEnterKeyDown(event, handleSelectToggle)}
     >
       <div
         className="flex w-full items-center justify-between rounded-[5px] border-[1px] border-border bg-border p-[5px] text-xs text-black2 shadow hover:cursor-pointer focus:border-primary focus:outline-none"
         onClick={handleSelectToggle}
         id={`select-label-${id}`}
-        tabIndex={0}
-        onKeyDown={(event) => handleEnterKeyDown(event, handleSelectToggle)}
-        // 키보드 접근성 추가
+        role="button"
+        aria-haspopup="listbox"
+        tabIndex={-1}
       >
         {`${defalutSelectContent} : `}
         <strong>{selectValue}</strong>
@@ -85,7 +88,7 @@ export const CustomSelect = ({
         <div
           className="absolute z-20 mt-2 w-full rounded-[5px] bg-white text-xs shadow"
           id={`select-list-${id}`}
-          aria-controls={`select-list-${id}`} // combobox 제어하는 목록 식별
+          role="listbox"
         >
           {options.map((option, index) => (
             <div
@@ -97,7 +100,7 @@ export const CustomSelect = ({
               }
               role="option"
               id={`select-option-${id}-${option}`}
-              aria-selected={selectValue === option} // 현재 선택된 옵션 표시
+              aria-selected={selectValue === option}
               tabIndex={0}
             >
               {`${option}개 표시하기`}
