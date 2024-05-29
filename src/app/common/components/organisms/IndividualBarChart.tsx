@@ -1,6 +1,6 @@
 "use client";
 
-import { ExcludeBarChartData } from "@/app/common/types";
+import { IndividualBarChartData } from "@/app/common/types";
 import IndividualBarChartTitle from "../atoms/IndividualBarChartTitle";
 import DynamicSelectShowCountMonthlyBarChartWrapper from "../../utils/DynamicSelectShowCountMonthlyBarChartWrapper";
 
@@ -8,7 +8,7 @@ export interface IIndividualBarChartProps {
   id: string;
   chartTitle: string;
   className?: string;
-  chartData: ExcludeBarChartData;
+  chartData: IndividualBarChartData;
 }
 
 const IndividualBarChart = ({
@@ -17,8 +17,6 @@ const IndividualBarChart = ({
   chartTitle,
   className,
 }: IIndividualBarChartProps) => {
-  console.log(chartData);
-
   return (
     <article className={className}>
       <IndividualBarChartTitle title={chartTitle} />

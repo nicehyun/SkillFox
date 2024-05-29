@@ -24,9 +24,16 @@ export type EducationChartData = {
   data: MonthlyChartData[];
 };
 
-// Define the type for the combined chart data
+export type BarChartStack = "previous" | "current";
+
+interface ExtendedChartDataset extends ChartDataset<"bar", number[]> {
+  backgroundColor: string;
+  stack: BarChartStack;
+}
+
+// 기존 BarChartData 타입 수정
 export interface BarChartData extends ChartData<"bar", number[], string> {
-  datasets: Array<ChartDataset<"bar", number[]>>;
+  datasets: Array<ExtendedChartDataset>;
 }
 
 export interface RegionBarChartData extends BarChartData {
@@ -42,7 +49,7 @@ export type CommonBarChartData =
   | RegionBarChartData
   | EducationBarChartData;
 
-export type ExcludeBarChartData = Exclude<CommonBarChartData, BarChartData>;
+export type IndividualBarChartData = RegionBarChartData | EducationBarChartData;
 
 export interface ResponseChartData extends BarChartData {
   count: number;

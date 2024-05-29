@@ -1,4 +1,4 @@
-import { BarChartData, MonthlyChartData } from "../types";
+import { BarChartData, BarChartStack, MonthlyChartData } from "../types";
 
 export type SeriesItem = {
   name: string;
@@ -73,7 +73,7 @@ export const formatMonthlyChartData = (
           return monthData ? monthData[month] : 0;
         }),
         backgroundColor: colors[index],
-        stack: "previous",
+        stack: "previous" as BarChartStack,
       }))
       .reverse(),
   };
