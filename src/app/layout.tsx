@@ -1,16 +1,21 @@
-import { Noto_Sans_KR } from "next/font/google";
 import "./globals.css";
 import Footer from "./layout/components/organisms/Footer";
 import Header from "./layout/components/organisms/Header";
 import Providers from "./common/utils/Providers";
 import { Metadata } from "next";
-import localFont from "next/font/local";
+import { Noto_Sans_KR } from "next/font/google";
+import dynamic from "next/dynamic";
 
-const pretendard = localFont({
-  src: "../../fonts/PretendardVariable.woff2",
+const DynamicFooter = dynamic(
+  () => import("./layout/components/organisms/Footer"),
+  { ssr: false },
+);
+
+const notoSans = Noto_Sans_KR({
+  subsets: ["latin"],
+  weight: ["400", "500"],
   display: "swap",
-  weight: "45 920",
-  variable: "--font-pretendard",
+  style: "normal",
 });
 
 export const metadata: Metadata = {
@@ -53,15 +58,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={`${pretendard.variable} font-pretendard`}>
+      <body className={notoSans.className}>
         <Providers>
+          <Header />
           <main>
-            <Header />
-
             <div className="min-w-[320px] pb-24 pt-20">{children}</div>
-
-            <Footer />
           </main>
+          <DynamicFooter />
         </Providers>
       </body>
     </html>
