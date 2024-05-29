@@ -38,7 +38,7 @@ export async function GET(
         chartData: regionChartData.map((region) => {
           return {
             region: region.region,
-            ...formatMonthlyChartData(region.chartData),
+            ...formatMonthlyChartData(region.data),
           };
         }),
       };

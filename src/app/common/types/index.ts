@@ -16,7 +16,7 @@ export type MonthlyChartData = {
 
 export type RegionChartData = {
   region: string;
-  chartData: MonthlyChartData[];
+  data: MonthlyChartData[];
 };
 
 export type EducationChartData = {
