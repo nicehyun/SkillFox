@@ -53,7 +53,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={`${pretendard.className}`}>
+      <body className={`${pretendard.variable} font-pretendard`}>
         <Providers>
           <main>
             <Header />
